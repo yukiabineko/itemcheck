@@ -1,30 +1,47 @@
 package com.example.item;
 
+import android.app.Activity;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
+import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 
-public class UploadTask extends AsyncTask<String, Void, String> {
+public class UploadTask extends AsyncTask<String, Void, StringBuilder> {
 
-    private Listener listener;
+    private Activity mActivity;
+
+    public UploadTask(Activity activity) {
+        mActivity = activity;
+    }
+
 
     // 非同期処理
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    protected String doInBackground(String... params) {
+    protected StringBuilder doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://192.168.1.9/index2.php";
+        String urlSt = "http://192.168.1.9/textPost.php";
 
-        HttpURLConnection httpConn = null;
-        String result = null;
-        String word = "name="+params[0] + "&price="+params[1];
+        HttpURLConnection httpConn;
 
-        try{
+        String word = "itemsName=" + params[0] + "&price=" + params[1];
+        StringBuilder sb = new StringBuilder();
+
+        try {
             // URL設定
             URL url = new URL(urlSt);
 
@@ -47,52 +64,36 @@ public class UploadTask extends AsyncTask<String, Void, String> {
             // 接続
             httpConn.connect();
 
-            try(// POSTデータ送信処理
-                OutputStream outStream = httpConn.getOutputStream()) {
-                outStream.write( word.getBytes(StandardCharsets.UTF_8));
+            try (// POSTデータ送信処理
+                 OutputStream outStream = httpConn.getOutputStream()) {
+                outStream.write(word.getBytes(StandardCharsets.UTF_8));
                 outStream.flush();
-                Log.d("debug","flush");
-            } catch (IOException e) {
-                // POST送信エラー
-                e.printStackTrace();
-                result = "POST送信エラー";
-            }
+                Log.d("debug", "flush");
 
-            final int status = httpConn.getResponseCode();
-            if (status == HttpURLConnection.HTTP_OK) {
-                // レスポンスを受け取る処理等
-                result="HTTP_OK";
-            }
-
-            else{
-                result="status="+String.valueOf(status);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (httpConn != null) {
-                httpConn.disconnect();
-            }
+                // データを受け取る
+                InputStream is = httpConn.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                String line;
+                while ((line = reader.readLine()) != null)
+                    sb.append(line);
+                is.close();
+            } catch (IOException e) {}
         }
-        return result;
+        catch (IOException e){}
+        return sb;
     }
-
     // 非同期処理が終了後、結果をメインスレッドに返す
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
+    public void onPostExecute(StringBuilder result){
 
-        if (listener != null) {
-            listener.onSuccess(result);
-        }
+        // 戻り値をViewにセット
+        TextView textView = mActivity.findViewById(R.id.textView);
+        textView.setTextColor(Color.WHITE);
+
+        textView.setBackgroundColor(Color.GREEN);
+        textView.setTextSize(16);
+        textView.setHeight(20);
+        textView.setText(result);
+
     }
 
-    void setListener(Listener listener) {
-        this.listener = listener;
-    }
-
-    interface Listener {
-        void onSuccess(String result);
-    }
 }

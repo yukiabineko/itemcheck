@@ -1,11 +1,8 @@
 package com.example.item;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.widget.TextView;
-
 import androidx.annotation.RequiresApi;
 
 import java.io.BufferedOutputStream;
@@ -19,22 +16,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class PostBmpAsyncHttpRequest extends AsyncTask <Param, Void, String> {
+public class PostBmpAsyncHttpRequest extends AsyncTask<Param, Void, StringBuilder> {
 
-    private Activity mActivity;
 
-    public PostBmpAsyncHttpRequest(Activity activity) {
-        mActivity = activity;
-    }
 
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    protected String doInBackground(Param... params) {
+    protected StringBuilder doInBackground(Param... params) {
         Param param = params[0];
         HttpURLConnection connection = null;
         StringBuilder sb = new StringBuilder();
+
         try {
             // 画像をjpeg形式でstreamに保存
             ByteArrayOutputStream jpg = new ByteArrayOutputStream();
@@ -68,15 +62,15 @@ public class PostBmpAsyncHttpRequest extends AsyncTask <Param, Void, String> {
             while ((line = reader.readLine()) != null)
                 sb.append(line);
             is.close();
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return sb.toString();
+        return sb;
     }
-    public void onPostExecute(String string) {
-        // 戻り値をViewにセット
-        TextView textView = (TextView) mActivity.findViewById(R.id.textView);
-        textView.setText(string);
+    public void onPostExecute(StringBuilder string) {
+
     }
 
 
