@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Item</string>
+    <string name="title">商品登録</string>
+    <string name="item">商品名</string>
+    <string name="add_edit">商品名を入力してください。</string>
+    <string name="price">価格</string>
+    <string name="add_price">価格を入力してください。</string>
+    <string name="image">画像選択</string>
+    <string name="add">登録</string>
+    <string name="imageview">参考画像</string>
+    <string name="mainmove1">商品登録</string>
+    <string name="itemList">商品欄</string>
+</resources>
