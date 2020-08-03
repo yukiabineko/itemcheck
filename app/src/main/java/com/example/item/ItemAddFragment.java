@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -71,7 +71,9 @@ public class ItemAddFragment extends Fragment
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                editText.setText("");
+                editText2.setText("");
+                imageView.setImageBitmap(null);
             }
         });
     }

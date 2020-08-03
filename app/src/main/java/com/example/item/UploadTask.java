@@ -89,7 +89,7 @@ public class UploadTask extends AsyncTask<String, Void, StringBuilder> {
         TextView textView = mActivity.findViewById(R.id.textView);
         textView.setTextColor(Color.WHITE);
 
-        textView.setBackgroundColor(Color.GREEN);
+
         textView.setTextSize(16);
         textView.setHeight(20);
         textView.setText(result);

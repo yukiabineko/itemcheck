@@ -11,4 +11,5 @@
     <string name="mainmove1">商品登録</string>
     <string name="itemList">商品欄</string>
     <string name="itemViewTitle">商品表示</string>
+    <string name="api_button">更新</string>
 </resources>
