@@ -33,7 +33,7 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
         try{
             System.out.println("1");
 
-            URL url = new URL("http://192.168.1.6/viewJson.php");
+            URL url = new URL("http://yukiabineko.sakura.ne.jp/items/viewJson.php");
             HttpURLConnection http = (HttpURLConnection)url.openConnection();
             http.setRequestMethod("GET");
             http.connect();

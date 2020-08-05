@@ -34,7 +34,7 @@ public class UploadTask extends AsyncTask<String, Void, StringBuilder> {
     protected StringBuilder doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://192.168.1.6/textPost.php";
+        String urlSt = "http://yukiabineko.sakura.ne.jp/items/textPost.php";
 
         HttpURLConnection httpConn;
 

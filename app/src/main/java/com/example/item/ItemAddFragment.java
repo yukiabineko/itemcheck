@@ -27,7 +27,7 @@ public class ItemAddFragment extends Fragment
     private static final int READ_REQUEST_CODE = 42;
     ImageView imageView;
     private com.example.item.UploadTask task;
-
+    private  Bitmap customise;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,20 +51,13 @@ public class ItemAddFragment extends Fragment
             @Override
             public void onClick(View view) {
 
-                String param0 = editText.getText().toString();
-                String param1 = editText2.getText().toString();
-                String param2 = editText3.getText().toString();
-
 
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
 
                 startActivityForResult(intent, READ_REQUEST_CODE);
 
-                if(param0.length() != 0){
-                    task = new com.example.item.UploadTask(getActivity());
-                    task.execute(param0, param1,param2);
-                }
+
 
 
             }
@@ -73,6 +66,15 @@ public class ItemAddFragment extends Fragment
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String param0 = editText.getText().toString();
+                String param1 = editText2.getText().toString();
+                String param2 = editText3.getText().toString();
+                if(param0.length() != 0){
+                    task = new com.example.item.UploadTask(getActivity());
+                    task.execute(param0, param1,param2);
+                }
+                new PostBmpAsyncHttpRequest().execute(new Param("http://yukiabineko.sakura.ne.jp/items/imagePost.php", customise));
+
                 editText.setText("");
                 editText2.setText("");
                 editText3.setText("");
@@ -92,10 +94,9 @@ public class ItemAddFragment extends Fragment
                 uri = resultData.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), uri);
-                    imageView.setImageBitmap(bitmap);
+                    customise  = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth()/3, bitmap.getHeight()/3, true);
+                    imageView.setImageBitmap(customise);
 
-
-                    new PostBmpAsyncHttpRequest().execute(new Param("http://192.168.1.6/imagePost.php", bitmap));
 
                 } catch (IOException e) {
                     e.printStackTrace();

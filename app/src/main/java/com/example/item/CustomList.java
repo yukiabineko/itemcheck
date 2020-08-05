@@ -1,21 +1,19 @@
 package com.example.item;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 import java.util.List;
 
 public class CustomList extends ArrayAdapter<ViewItemParam>
@@ -39,7 +37,7 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
         }
 
         ImageView imageView =convertView.findViewById(R.id.item_image);
-        String url = "http://192.168.1.6/" + list.getBitmap();
+        String url = "http://yukiabineko.sakura.ne.jp/items/" + list.getBitmap();
         Picasso.get().load(url).into(imageView);
 
 
@@ -48,6 +46,19 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
 
         TextView price = convertView.findViewById(R.id.price_cont);
         price.setText(list.getPrice());
+
+
+        Button deleteButton = convertView.findViewById(R.id.item_delete);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("削除確認")
+                        .setMessage("")
+                        .setPositiveButton("削除",null).show();
+            }
+        });
+
 
 
         return  convertView;
