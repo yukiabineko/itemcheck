@@ -12,4 +12,6 @@
     <string name="itemList">商品欄</string>
     <string name="itemViewTitle">商品表示</string>
     <string name="api_button">更新</string>
+    <string name="item_show">詳細</string>
+    <string name="item_delete">削除</string>
 </resources>

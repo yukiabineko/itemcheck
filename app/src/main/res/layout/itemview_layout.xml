@@ -24,10 +24,35 @@
         android:layout_gravity="right"
         android:layout_height="60dp"
         android:text="@string/api_button"/>
+    <LinearLayout
+        android:id="@+id/table-header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="イメージ"
+            android:textColor="#fff" />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="40dp"
+            android:text="商品"
+            android:textColor="#fff" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+
+    </ListView>
 
 </LinearLayout>

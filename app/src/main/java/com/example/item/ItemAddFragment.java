@@ -33,7 +33,7 @@ public class ItemAddFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        return inflater.inflate(R.layout.layout1, container, false);
+        return inflater.inflate(R.layout.layout, container, false);
     }
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -43,6 +43,7 @@ public class ItemAddFragment extends Fragment
         imageView = view.findViewById(R.id.show_image);
         final EditText editText = view.findViewById(R.id.name_edit);
         final EditText editText2 = view.findViewById(R.id.price_edit);
+        final EditText editText3 = view.findViewById(R.id.item_comment);
 
 
 
@@ -52,6 +53,7 @@ public class ItemAddFragment extends Fragment
 
                 String param0 = editText.getText().toString();
                 String param1 = editText2.getText().toString();
+                String param2 = editText3.getText().toString();
 
 
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -61,7 +63,7 @@ public class ItemAddFragment extends Fragment
 
                 if(param0.length() != 0){
                     task = new com.example.item.UploadTask(getActivity());
-                    task.execute(param0, param1);
+                    task.execute(param0, param1,param2);
                 }
 
 
@@ -73,6 +75,7 @@ public class ItemAddFragment extends Fragment
             public void onClick(View view) {
                 editText.setText("");
                 editText2.setText("");
+                editText3.setText("");
                 imageView.setImageBitmap(null);
             }
         });
@@ -92,7 +95,7 @@ public class ItemAddFragment extends Fragment
                     imageView.setImageBitmap(bitmap);
 
 
-                    new PostBmpAsyncHttpRequest().execute(new Param("http://192.168.1.9/imagePost.php", bitmap));
+                    new PostBmpAsyncHttpRequest().execute(new Param("http://192.168.1.6/imagePost.php", bitmap));
 
                 } catch (IOException e) {
                     e.printStackTrace();

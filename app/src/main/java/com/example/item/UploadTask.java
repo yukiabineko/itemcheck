@@ -34,11 +34,11 @@ public class UploadTask extends AsyncTask<String, Void, StringBuilder> {
     protected StringBuilder doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://192.168.1.9/textPost.php";
+        String urlSt = "http://192.168.1.6/textPost.php";
 
         HttpURLConnection httpConn;
 
-        String word = "itemsName=" + params[0] + "&price=" + params[1];
+        String word = "itemsName=" + params[0] + "&price=" + params[1] + "&memo=" + params[2];
         StringBuilder sb = new StringBuilder();
 
         try {

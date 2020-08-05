@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -16,8 +17,9 @@ import java.util.List;
 public class ItemViewFragment extends Fragment
 {
 
-    CustomList customList;
-    List<ViewItemParam> list =new ArrayList<>();
+     CustomList customList;
+     List<ViewItemParam> list =new ArrayList<>();
+     private Button button;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -27,10 +29,11 @@ public class ItemViewFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        button = view.findViewById(R.id.api_button);
+
         ViewItemParam param = new ViewItemParam();
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.a);
-        param.setBitmap(bitmap);
+
         param.setName("コーヒー");
         param.setPrice("200");
         list.add(param);
@@ -40,7 +43,13 @@ public class ItemViewFragment extends Fragment
         ListView listView = view.findViewById(R.id.listView);
         listView.setAdapter(customList);
 
-
+         button.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 ListgetData task = new ListgetData(customList,list);
+                 task.execute();
+             }
+         });
 
 
     }

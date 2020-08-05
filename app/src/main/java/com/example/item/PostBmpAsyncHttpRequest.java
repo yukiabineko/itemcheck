@@ -19,9 +19,6 @@ import java.nio.charset.StandardCharsets;
 public class PostBmpAsyncHttpRequest extends AsyncTask<Param, Void, StringBuilder> {
 
 
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected StringBuilder doInBackground(Param... params) {

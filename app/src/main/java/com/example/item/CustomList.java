@@ -1,6 +1,8 @@
 package com.example.item;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 public class CustomList extends ArrayAdapter<ViewItemParam>
@@ -31,7 +39,9 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
         }
 
         ImageView imageView =convertView.findViewById(R.id.item_image);
-        imageView.setImageBitmap(list.getBitmap());
+        String url = "http://192.168.1.6/" + list.getBitmap();
+        Picasso.get().load(url).into(imageView);
+
 
         TextView name = convertView.findViewById(R.id.name_cont);
         name.setText(list.getName());
