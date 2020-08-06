@@ -1,7 +1,8 @@
 package com.example.item;
 
+import android.app.Activity;
 import android.os.AsyncTask;
-
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,11 +17,14 @@ import java.util.List;
 
 public class ListgetData extends AsyncTask<Void, Void, String > {
 
+    private  Activity  activity;
     private  CustomList customList;
     private List<ViewItemParam> list;
 
-    public ListgetData(CustomList customList, List<ViewItemParam> list){
+
+    public ListgetData(Activity activity,CustomList customList, List<ViewItemParam> list){
         super();
+        this.activity = activity;
         this.customList = customList;
         this.list = list;
     }
@@ -65,17 +69,19 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
         super.onPostExecute(data);
 
         if(data != null){
-            customList.clear();
+
             try {
                 JSONArray jsonArray = new JSONArray(data);
                 for(int i=0; i<jsonArray.length();i++){
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String id =   jsonObject.getString("id");
                     String path = jsonObject.getString("path");
                     String name = jsonObject.getString("name");
                     String price = jsonObject.getString("price");
 
 
                     ViewItemParam param = new ViewItemParam();
+                    param.setId(Integer.parseInt(id));
                     param.setBitmap(path);
                     param.setName(name);
                     param.setPrice(price);
@@ -83,13 +89,23 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
 
                     customList.notifyDataSetChanged();
                 }
+                if(jsonArray.length() == 0 || jsonArray==null){
+                    customList.clear();
+                    customList.notifyDataSetChanged();
+                    activity.findViewById(R.id.table_header).setVisibility(View.INVISIBLE);
+                    activity.findViewById(R.id.not_data).setVisibility(View.VISIBLE);
+                }
+                else {
+                    activity.findViewById(R.id.table_header).setVisibility(View.VISIBLE);
+                    activity.findViewById(R.id.not_data).setVisibility(View.INVISIBLE);
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }else{
-
+           activity.findViewById(R.id.table_header).setVisibility(View.INVISIBLE);
         }
     }
 }
