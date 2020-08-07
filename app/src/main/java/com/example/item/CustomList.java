@@ -22,6 +22,7 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
 
     public interface CustomListener{
         void deleteItem(int itemNumber);
+        void showItem(int itemNumber);
     }
 
     public void setListener(CustomListener listener){
@@ -64,6 +65,16 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
             public void onClick(View view) {
                 int itemNumber = (int) view.getTag();
                 listener.deleteItem(itemNumber);
+            }
+        });
+
+        Button showButton = convertView.findViewById(R.id.item_show);
+        showButton.setTag(position);
+        showButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int itemNumber = (int) view.getTag();
+                listener.showItem(itemNumber);
             }
         });
 

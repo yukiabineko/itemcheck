@@ -1,18 +1,17 @@
 package com.example.item;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.fragment.app.Fragment;
 
@@ -28,6 +27,7 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
      LinearLayout main,header;
      ListView listView;
      TextView textView;
+     View dialogLayout;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -77,6 +77,8 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
                      task.execute();
                  }
          });
+         LayoutInflater layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+         dialogLayout = layoutInflater.inflate(R.layout.show_dialog,(ViewGroup)view.findViewById(R.id.dialog_main));
 
     }
     public void deleteItem(int itemNumber){
@@ -93,6 +95,14 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
                 })
                 .setNegativeButton("キャンセル",null).show();
         customList.notifyDataSetChanged();
+    }
+    public void showItem(int itemNumber){
+        new AlertDialog.Builder(getActivity())
+                .setTitle("商品")
+                .setView(dialogLayout)
+                .setNegativeButton("閉じる",null).show();
+
+
     }
 
 

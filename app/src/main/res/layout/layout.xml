@@ -85,9 +85,16 @@
             <EditText
                 android:id="@+id/item_comment"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
+                android:background="@drawable/bg_border_black"
+                android:gravity="top"
                 android:hint="説明をお書きください。"
-                android:background="@drawable/bg_border_black"/>
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:padding="15dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical" />
+
             <Button
                 android:id="@+id/image_button"
                 android:layout_width="match_parent"

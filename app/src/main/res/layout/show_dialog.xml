@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="#000"
+        android:text="商品画像" />
+
+    <ImageView
+        android:id="@+id/dialog_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/a"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="#000"
+        android:text="商品説明" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#000"
+        android:background="@drawable/bg_border_black"
+         />
+
+</LinearLayout>
