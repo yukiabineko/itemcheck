@@ -1,9 +1,6 @@
 package com.example.item;
 
-import android.app.AlertDialog;
 import android.content.Context;
-
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +18,15 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
 {
     private  List<ViewItemParam> mist;
     private LayoutInflater layoutInflater;
-    private  View m_view;
+    private CustomListener listener;
+
+    public interface CustomListener{
+        void deleteItem(int itemNumber);
+    }
+
+    public void setListener(CustomListener listener){
+        this.listener = listener;
+    }
 
     public CustomList(Context context, int i, List<ViewItemParam> list){
         super(context, i, list);
@@ -39,8 +44,6 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
         }
 
 
-        m_view = convertView;
-        final int id = list.getId();
 
         ImageView imageView =convertView.findViewById(R.id.item_image);
         String url = "http://yukiabineko.sakura.ne.jp/items/" + list.getBitmap();
@@ -56,11 +59,11 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
 
         Button deleteButton = convertView.findViewById(R.id.item_delete);
         deleteButton.setTag(position);
-      deleteButton.setOnClickListener(new View.OnClickListener() {
+        deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DeleteData task =new DeleteData(m_view);
-                task.execute(String.valueOf(id));
+                int itemNumber = (int) view.getTag();
+                listener.deleteItem(itemNumber);
             }
         });
 

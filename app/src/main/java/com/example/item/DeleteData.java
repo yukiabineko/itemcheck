@@ -1,14 +1,17 @@
 package com.example.item;
 
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import androidx.annotation.RequiresApi;
+import androidx.fragment.app.FragmentActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,9 +25,9 @@ import java.nio.charset.StandardCharsets;
 
 public class DeleteData extends AsyncTask<String, Void, StringBuilder> {
 
-    private View mActivity;
+    private Activity mActivity;
 
-    public DeleteData(View activity) {
+    public DeleteData(Activity activity) {
         mActivity = activity;
     }
 
@@ -39,7 +42,7 @@ public class DeleteData extends AsyncTask<String, Void, StringBuilder> {
 
         HttpURLConnection httpConn;
 
-        String word = "id=90";
+        String word = "id=" + params[0];
         StringBuilder sb = new StringBuilder();
 
         try {
@@ -85,9 +88,8 @@ public class DeleteData extends AsyncTask<String, Void, StringBuilder> {
     }
     // 非同期処理が終了後、結果をメインスレッドに返す
     public void onPostExecute(StringBuilder result){
-        Button bt = mActivity.findViewById(R.id.item_delete);
 
-        bt.setText(result.toString());
+        Toast.makeText(mActivity, result.toString(),Toast.LENGTH_LONG).show();
 
 
     }

@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemViewFragment extends Fragment
+public class ItemViewFragment extends Fragment implements CustomList.CustomListener
 {
 
      CustomList customList;
@@ -43,6 +43,7 @@ public class ItemViewFragment extends Fragment
         textView = view.findViewById(R.id.not_data);
 
         customList = new CustomList(getContext(),0,list);
+        customList.setListener(this);
 
         if(customList.isEmpty()){
             header.setVisibility(View.INVISIBLE);
@@ -77,7 +78,22 @@ public class ItemViewFragment extends Fragment
                  }
          });
 
-
-
     }
+    public void deleteItem(int itemNumber){
+        final ViewItemParam list = customList.getItem(itemNumber);
+        new AlertDialog.Builder(getActivity())
+                .setTitle("")
+                .setMessage(list.getName() + "削除しますか？")
+                .setPositiveButton("削除", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        DeleteData task = new DeleteData(getActivity());
+                        task.execute(String.valueOf(list.getId()));
+                    }
+                })
+                .setNegativeButton("キャンセル",null).show();
+        customList.notifyDataSetChanged();
+    }
+
+
 }
