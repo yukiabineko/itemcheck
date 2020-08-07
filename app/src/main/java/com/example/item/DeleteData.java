@@ -3,10 +3,16 @@ package com.example.item;
 
 import android.os.AsyncTask;
 import android.os.Build;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
 
 import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -14,55 +20,76 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 
-public class DeleteData extends AsyncTask<String, Void, String> {
+public class DeleteData extends AsyncTask<String, Void, StringBuilder> {
+
+    private View mActivity;
+
+    public DeleteData(View activity) {
+        mActivity = activity;
+    }
 
 
+    // 非同期処理
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    protected String doInBackground(String... strings) {
+    protected StringBuilder doInBackground(String... params) {
 
+        // 使用するサーバーのURLに合わせる
         String urlSt = "http://yukiabineko.sakura.ne.jp/items/deletePost.php";
-        HttpURLConnection httpConn;
-        String line;
 
-        String word = "id=" + strings[0];
+        HttpURLConnection httpConn;
+
+        String word = "id=90";
         StringBuilder sb = new StringBuilder();
-        try{
+
+        try {
+            // URL設定
             URL url = new URL(urlSt);
+
+            // HttpURLConnection
             httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
+
+            // request POST
+            httpConn.setRequestMethod("POST");
+
+            // no Redirects
             httpConn.setInstanceFollowRedirects(false);
+
+            // データを書き込む
             httpConn.setDoOutput(true);
+
+            // 時間制限
             httpConn.setReadTimeout(10000);
             httpConn.setConnectTimeout(20000);
+
+            // 接続
             httpConn.connect();
-            try
-                (OutputStream outStream = httpConn.getOutputStream()){
-                    outStream.write(word.getBytes(StandardCharsets.UTF_8));
-                    outStream.flush();
 
-                InputStreamReader in = new InputStreamReader(httpConn.getInputStream(), "UTF-8");
-                BufferedReader br = new BufferedReader(in);
+            try (// POSTデータ送信処理
+                 OutputStream outStream = httpConn.getOutputStream()) {
+                outStream.write(word.getBytes(StandardCharsets.UTF_8));
+                outStream.flush();
+                Log.d("debug", "flush");
 
-                System.out.println("3");
-
-                while((line = br.readLine()) != null){
-                    System.out.println(line);
-                    if(sb.length() > 0) sb.append('\n');//追加
-                    sb.append(line);//追加
-                }
-
-                br.close();
-                in.close();
-                httpConn.disconnect();
-            }
-            catch (Exception e){}
+                // データを受け取る
+                InputStream is = httpConn.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                String line;
+                while ((line = reader.readLine()) != null)
+                    sb.append(line);
+                is.close();
+            } catch (IOException e) {}
         }
-        catch (Exception e){}
-
-        return sb.toString();
+        catch (IOException e){}
+        return sb;
     }
-    public void onPostExecute(String result){
+    // 非同期処理が終了後、結果をメインスレッドに返す
+    public void onPostExecute(StringBuilder result){
+        Button bt = mActivity.findViewById(R.id.item_delete);
+
+        bt.setText(result.toString());
+
 
     }
+
 }
