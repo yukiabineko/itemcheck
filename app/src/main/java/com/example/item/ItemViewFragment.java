@@ -1,9 +1,12 @@
 package com.example.item;
 
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,8 +80,7 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
                      task.execute();
                  }
          });
-         LayoutInflater layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-         dialogLayout = layoutInflater.inflate(R.layout.show_dialog,(ViewGroup)view.findViewById(R.id.dialog_main));
+
 
     }
     public void deleteItem(int itemNumber){
@@ -97,10 +99,43 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         customList.notifyDataSetChanged();
     }
     public void showItem(int itemNumber){
-        new AlertDialog.Builder(getActivity())
+        final ViewItemParam list = customList.getItem(itemNumber);
+        ShowData task = new ShowData(getActivity());
+        task.execute(String.valueOf(list.getId()));
+
+
+        LayoutInflater layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        dialogLayout = layoutInflater.inflate(R.layout.show_dialog,(ViewGroup)getActivity().findViewById(R.id.dialog_main));
+
+        //ダイアログのタイトル
+        TextView dialogtitle = new TextView(getActivity());
+        dialogtitle .setText("タイトル");
+        dialogtitle .setTextSize(24);
+        dialogtitle .setTextColor(Color.WHITE);
+        dialogtitle .setBackgroundColor(getResources().getColor(R.color.alertBlue));
+        dialogtitle .setPadding(20, 20, 20, 20);
+        dialogtitle.setGravity(Gravity.CENTER);
+
+
+
+        AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                .setCustomTitle(dialogtitle)
                 .setTitle("商品")
                 .setView(dialogLayout)
-                .setNegativeButton("閉じる",null).show();
+                .setPositiveButton("閉じる",null).show();
+
+        // ボタン
+        Button positiveButton =dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setWidth(5000);
+        positiveButton.setTextColor(Color.WHITE);
+        positiveButton.setGravity(Gravity.CENTER);
+        positiveButton.setBackgroundColor(getResources().getColor(R.color.alertBlue));
+
+        LinearLayout.LayoutParams positiveButtonLL = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
+        positiveButtonLL.gravity = Gravity.LEFT;
+        positiveButton.setLayoutParams(positiveButtonLL);
+
 
 
     }
