@@ -78,6 +78,7 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
                     String path = jsonObject.getString("path");
                     String name = jsonObject.getString("name");
                     String price = jsonObject.getString("price");
+                    String memo = jsonObject.getString("memo");
 
 
                     ViewItemParam param = new ViewItemParam();
@@ -85,6 +86,7 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
                     param.setBitmap(path);
                     param.setName(name);
                     param.setPrice(price);
+                    param.setMemo(memo);
                     list.add(param);
 
                     customList.notifyDataSetChanged();

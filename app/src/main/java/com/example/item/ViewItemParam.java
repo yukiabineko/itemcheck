@@ -7,6 +7,7 @@ public class ViewItemParam
     private String name;
     private String price;
     private String bitmap;
+    private String memo;
 
 
     public void setId(int i){
@@ -21,6 +22,7 @@ public class ViewItemParam
     public void setBitmap(String bitmap) {
         this.bitmap = bitmap;
     }
+    public void setMemo(String memo){this.memo = memo;}
 
     public int getId(){
         return id;
@@ -36,4 +38,6 @@ public class ViewItemParam
     public String getBitmap() {
         return bitmap;
     }
+
+    public  String getMemo(){return  memo;}
 }

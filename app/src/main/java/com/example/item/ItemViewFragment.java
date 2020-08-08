@@ -11,12 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
 import androidx.fragment.app.Fragment;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,10 +96,12 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
                     public void onClick(DialogInterface dialogInterface, int i) {
                         DeleteData task = new DeleteData(getActivity());
                         task.execute(String.valueOf(list.getId()));
+                        customList.remove(list);
+                        customList.notifyDataSetChanged();
                     }
                 })
                 .setNegativeButton("キャンセル",null).show();
-        customList.notifyDataSetChanged();
+
     }
     public void showItem(int itemNumber){
         final ViewItemParam list = customList.getItem(itemNumber);
@@ -104,9 +109,18 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         task.execute(String.valueOf(list.getId()));
 
 
-        LayoutInflater layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        /*LayoutInflater layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         dialogLayout = layoutInflater.inflate(R.layout.show_dialog,(ViewGroup)getActivity().findViewById(R.id.dialog_main));
+        ImageView dialogimageView =getActivity().findViewById(R.id.dialog_img);
+        String url = "http://yukiabineko.sakura.ne.jp/items/" + list.getBitmap();
+        Picasso.get().load(url).into(dialogimageView);
+
+
+        TextView dialogmemo = getActivity().findViewById(R.id.dialog_memo);
+        dialogmemo.setText(list.getName());
+
+
 
         //ダイアログのタイトル
         TextView dialogtitle = new TextView(getActivity());
@@ -121,7 +135,7 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
 
         AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setCustomTitle(dialogtitle)
-                .setTitle("商品")
+                .setTitle(list.getMemo() + "詳細")
                 .setView(dialogLayout)
                 .setPositiveButton("閉じる",null).show();
 
@@ -136,7 +150,7 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         positiveButtonLL.gravity = Gravity.LEFT;
         positiveButton.setLayoutParams(positiveButtonLL);
 
-
+        */
 
     }
 

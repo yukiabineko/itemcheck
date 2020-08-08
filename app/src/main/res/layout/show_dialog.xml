@@ -18,6 +18,7 @@
         android:background="@drawable/a"/>
 
     <TextView
+        android:id="@+id/dialog_memo"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textColor="#000"

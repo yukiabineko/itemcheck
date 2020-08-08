@@ -4,9 +4,14 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,28 +21,32 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
-public class ShowData extends AsyncTask<String, Void, StringBuilder> {
+public class ShowData extends AsyncTask<String, Void, String> {
 
-    private Activity mActivity;
+    private  Activity  activity;
+    private  CustomList customList;
+    private List<ViewItemParam> list;
 
     public ShowData(Activity activity) {
-        mActivity = activity;
+        this.activity = activity;
     }
 
 
     // 非同期処理
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    protected StringBuilder doInBackground(String... params) {
+    protected String doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
         String urlSt = "http://yukiabineko.sakura.ne.jp/items/showPost.php";
 
         HttpURLConnection httpConn;
 
-        String word = "id=" + params[0];
+        String word = "id=17";
         StringBuilder sb = new StringBuilder();
+
 
         try {
             // URL設定
@@ -79,14 +88,40 @@ public class ShowData extends AsyncTask<String, Void, StringBuilder> {
             }
         } catch (IOException e) {
         }
-        return sb;
+        return sb.toString();
     }
 
     // 非同期処理が終了後、結果をメインスレッドに返す
-    public void onPostExecute(StringBuilder result) {
+    public void onPostExecute(String result) {
+        String data = result.toString();
+        if(data != null){
+            Toast.makeText(activity,data,Toast.LENGTH_LONG).show();
+            try {
+                JSONArray jsonArray = new JSONArray(data);
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+                String id =   jsonObject.getString("id");
+                String path = jsonObject.getString("path");
+                String name = jsonObject.getString("name");
+                String price = jsonObject.getString("price");
+                String memo = jsonObject.getString("memo");
 
-        Toast.makeText(mActivity, result.toString(), Toast.LENGTH_LONG).show();
+
+                ViewItemParam param = new ViewItemParam();
+                param.setId(Integer.parseInt(id));
+                param.setBitmap(path);
+                param.setName(name);
+                param.setPrice(price);
+                param.setMemo(memo);
+                list.add(param);
+                customList.notifyDataSetChanged();
 
 
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }else{
+           Toast.makeText(activity, "失敗",Toast.LENGTH_LONG).show();
+        }
     }
 }
