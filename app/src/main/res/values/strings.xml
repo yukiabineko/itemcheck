@@ -15,4 +15,5 @@
     <string name="item_show">詳細</string>
     <string name="item_delete">削除</string>
     <string name="all_reset">リセット</string>
+    <string name="camera_start">カメラで取得</string>
 </resources>
