@@ -1,6 +1,5 @@
 package com.example.item;
 
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,10 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-
 import androidx.fragment.app.Fragment;
-
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -29,10 +25,10 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
 
      CustomList customList;
      List<ViewItemParam> list =new ArrayList<>();
-     private Button button;
-     LinearLayout main,header;
-     ListView listView;
-     TextView textView;
+     Button getbutton,resetbutton;
+     LinearLayout mainArea,header;
+     private ListView listView;
+     private TextView textView;
      View dialogLayout;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,9 +38,10 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
     }
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        main = view.findViewById(R.id.main);
+        mainArea = view.findViewById(R.id.main);
 
-        button = view.findViewById(R.id.api_button);
+        getbutton = view.findViewById(R.id.api_button);
+        resetbutton = view.findViewById(R.id.all_delete);
         header = view.findViewById(R.id.table_header);
         textView = view.findViewById(R.id.not_data);
 
@@ -64,7 +61,7 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         listView = view.findViewById(R.id.listView);
         listView.setAdapter(customList);
 
-         button.setOnClickListener(new View.OnClickListener() {
+         getbutton.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
                  header.setVisibility(View.INVISIBLE);
@@ -82,6 +79,23 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
                      ListgetData task = new ListgetData(getActivity(),customList,list);
                      task.execute();
                  }
+         });
+         resetbutton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 new AlertDialog.Builder(getActivity())
+                         .setTitle("確認")
+                         .setMessage("すべての商品を削除します。よろしいですか？")
+                         .setPositiveButton("全削除", new DialogInterface.OnClickListener() {
+                             @Override
+                             public void onClick(DialogInterface dialogInterface, int i) {
+                                 Allreset task = new Allreset(getActivity());
+                                 task.execute();
+                                 customList.clear();
+                                 customList.notifyDataSetChanged();
+                             }
+                         }).setNegativeButton("キャンセル",null).show();
+             }
          });
 
 
