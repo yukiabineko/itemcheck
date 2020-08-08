@@ -14,4 +14,5 @@
     <string name="api_button">更新</string>
     <string name="item_show">詳細</string>
     <string name="item_delete">削除</string>
+    <string name="all_reset">リセット</string>
 </resources>

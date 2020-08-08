@@ -93,11 +93,11 @@ public class ShowData extends AsyncTask<String, Void, String> {
 
     // 非同期処理が終了後、結果をメインスレッドに返す
     public void onPostExecute(String result) {
-        String data = result.toString();
-        if(data != null){
-            Toast.makeText(activity,data,Toast.LENGTH_LONG).show();
+
+        if(result != null){
+
             try {
-                JSONArray jsonArray = new JSONArray(data);
+                JSONArray jsonArray = new JSONArray(result);
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                 String id =   jsonObject.getString("id");
                 String path = jsonObject.getString("path");

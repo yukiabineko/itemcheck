@@ -109,22 +109,23 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         task.execute(String.valueOf(list.getId()));
 
 
-        /*LayoutInflater layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         dialogLayout = layoutInflater.inflate(R.layout.show_dialog,(ViewGroup)getActivity().findViewById(R.id.dialog_main));
-        ImageView dialogimageView =getActivity().findViewById(R.id.dialog_img);
+        ImageView dialogimageView =dialogLayout.findViewById(R.id.dialog_img);
+
         String url = "http://yukiabineko.sakura.ne.jp/items/" + list.getBitmap();
-        Picasso.get().load(url).into(dialogimageView);
+       Picasso.get().load(url).into(dialogimageView);
 
 
-        TextView dialogmemo = getActivity().findViewById(R.id.dialog_memo);
-        dialogmemo.setText(list.getName());
+        TextView dialogmemo = dialogLayout.findViewById(R.id.dialog_memo);
+        dialogmemo.setText(list.getMemo());
 
 
 
         //ダイアログのタイトル
         TextView dialogtitle = new TextView(getActivity());
-        dialogtitle .setText("タイトル");
+        dialogtitle .setText(list.getName() + "詳細");
         dialogtitle .setTextSize(24);
         dialogtitle .setTextColor(Color.WHITE);
         dialogtitle .setBackgroundColor(getResources().getColor(R.color.alertBlue));
@@ -150,7 +151,7 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         positiveButtonLL.gravity = Gravity.LEFT;
         positiveButton.setLayoutParams(positiveButtonLL);
 
-        */
+
 
     }
 

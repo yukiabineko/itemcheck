@@ -5,10 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -18,13 +15,32 @@
         android:textColor="#000"
         android:textSize="36sp"
         android:gravity="center_horizontal" />
-    <Button
-        android:id="@+id/api_button"
-        android:layout_marginTop="10dp"
-        android:layout_width="60dp"
-        android:layout_gravity="right"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="@string/api_button"/>
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/api_button"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="@string/api_button"
+            android:layout_gravity="right"/>
+
+        <Button
+            android:id="@+id/all_delete"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/all_reset"
+            android:layout_gravity="right"/>
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/table-header"
         android:layout_width="match_parent"
