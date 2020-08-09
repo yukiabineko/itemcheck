@@ -16,4 +16,7 @@
     <string name="item_delete">削除</string>
     <string name="all_reset">リセット</string>
     <string name="camera_start">カメラで取得</string>
+    <string name="icon_edit">&#xf044; 登録</string>
+    <string name="icon_picture">&#xf03e; 写真選択</string>
+    <string name="icon_camera">&#xf030; カメラから取得</string>
 </resources>

@@ -85,14 +85,7 @@ public class UploadTask extends AsyncTask<String, Void, StringBuilder> {
     // 非同期処理が終了後、結果をメインスレッドに返す
     public void onPostExecute(StringBuilder result){
 
-        // 戻り値をViewにセット
-        TextView textView = mActivity.findViewById(R.id.textView);
-        textView.setTextColor(Color.WHITE);
 
-
-        textView.setTextSize(16);
-        textView.setHeight(20);
-        textView.setText(result);
 
     }
 

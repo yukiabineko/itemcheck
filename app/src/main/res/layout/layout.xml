@@ -7,10 +7,6 @@
     tools:context=".ItemAdd">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"/>
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
@@ -25,11 +21,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="20dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/add_name"
                 android:text="@string/item"
-                android:textColor="#000"
+                android:textColor="@color/alertBlue"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="8dp"
@@ -46,7 +43,7 @@
             <TextView
                 android:id="@+id/add_price"
                 android:text="@string/price"
-                android:textColor="#000"
+                android:textColor="@color/alertBlue"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="8dp"
@@ -75,7 +72,7 @@
                 />
             <TextView
                 android:text="商品説明"
-                android:textColor="#000"
+                android:textColor="@color/alertBlue"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="8dp"
@@ -87,6 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/bg_border_black"
+                android:layout_marginBottom="10dp"
                 android:gravity="top"
                 android:hint="説明をお書きください。"
                 android:inputType="textMultiLine"
@@ -97,26 +95,41 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/image_button"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="60dp"
-                    android:text="@string/image"/>
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp"
+                    android:textSize="20sp"
+                    android:background="@color/alertBlue"
+                    android:text="@string/icon_picture"
+                    android:textColor="#fff"
+                    android:layout_marginEnd="5dp" />
+
                 <Button
                     android:id="@+id/image_picture"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="60dp"
-                    android:text="@string/camera_start"/>
+                    android:layout_weight="1"
+                    android:background="@color/alertBlue"
+                    android:text="@string/icon_camera"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    />
             </LinearLayout>
 
             <Button
                 android:id="@+id/add_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="@string/add"/>
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:background="@color/alertBlue"
+                android:text="@string/icon_edit"/>
         </LinearLayout>
 
 

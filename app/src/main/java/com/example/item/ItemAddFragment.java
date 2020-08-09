@@ -2,9 +2,10 @@ package com.example.item;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 
-import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,7 +27,6 @@ import java.util.Objects;
 public class ItemAddFragment extends Fragment
 {
     private static final int READ_REQUEST_CODE = 42;
-    static final int REQUEST_CAPTURE_IMAGE = 100;
     ImageView imageView;
     private com.example.item.UploadTask task;
     private  Bitmap customise;
@@ -40,9 +40,14 @@ public class ItemAddFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fontawesome-webfont.ttf");
+
         Button fileimage = view.findViewById(R.id.image_button);
         final Button cameraimage = view.findViewById(R.id.image_picture);
         Button button2 = view.findViewById(R.id.add_button);
+        fileimage.setTypeface(font);
+        cameraimage.setTypeface(font);
+        button2.setTypeface(font);
         imageView = view.findViewById(R.id.show_image);
         final EditText editText = view.findViewById(R.id.name_edit);
         final EditText editText2 = view.findViewById(R.id.price_edit);
@@ -98,6 +103,8 @@ public class ItemAddFragment extends Fragment
             }
         });
     }
+
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onActivityResult(int requestCode, int resultCode,
