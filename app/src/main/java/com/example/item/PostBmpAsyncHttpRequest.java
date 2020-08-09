@@ -29,7 +29,10 @@ public class PostBmpAsyncHttpRequest extends AsyncTask<Param, Void, StringBuilde
         try {
             // 画像をjpeg形式でstreamに保存
             ByteArrayOutputStream jpg = new ByteArrayOutputStream();
-            param.bmp.compress(Bitmap.CompressFormat.JPEG, 100, jpg);
+            if(param !=null){
+                param.bmp.compress(Bitmap.CompressFormat.JPEG, 100, jpg);
+            }
+
             String word = "word=abi";
 
 

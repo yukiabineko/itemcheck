@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import java.util.Objects;
 public class ItemAddFragment extends Fragment
 {
     private static final int READ_REQUEST_CODE = 42;
+    static final int REQUEST_CAPTURE_IMAGE = 100;
     ImageView imageView;
     private com.example.item.UploadTask task;
     private  Bitmap customise;
@@ -38,7 +40,8 @@ public class ItemAddFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button button1 = view.findViewById(R.id.image_button);
+        Button fileimage = view.findViewById(R.id.image_button);
+        final Button cameraimage = view.findViewById(R.id.image_picture);
         Button button2 = view.findViewById(R.id.add_button);
         imageView = view.findViewById(R.id.show_image);
         final EditText editText = view.findViewById(R.id.name_edit);
@@ -47,7 +50,7 @@ public class ItemAddFragment extends Fragment
 
 
 
-        button1.setOnClickListener(new View.OnClickListener() {
+        fileimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -62,6 +65,16 @@ public class ItemAddFragment extends Fragment
 
             }
         });
+        cameraimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(
+                        intent,
+                        READ_REQUEST_CODE);
+            }
+        });
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +86,10 @@ public class ItemAddFragment extends Fragment
                     task = new com.example.item.UploadTask(getActivity());
                     task.execute(param0, param1,param2);
                 }
-                new PostBmpAsyncHttpRequest().execute(new Param("http://yukiabineko.sakura.ne.jp/items/imagePost.php", customise));
+                if(customise !=null){
+                    new PostBmpAsyncHttpRequest().execute(new Param("http://yukiabineko.sakura.ne.jp/items/imagePost.php", customise));
+                }
+
 
                 editText.setText("");
                 editText2.setText("");
@@ -90,18 +106,28 @@ public class ItemAddFragment extends Fragment
         super.onActivityResult(requestCode, resultCode, resultData);
         if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Uri uri;
-            if (resultData != null) {
+            if(resultData.getExtras() != null &&
+            resultData.getExtras().get("data")!= null){
+                Bitmap capturedImage
+                        = (Bitmap) resultData.getExtras().get("data");
+                customise  = Bitmap.createScaledBitmap(capturedImage, capturedImage.getWidth()/3, capturedImage.getHeight()/3, true);
+                imageView.setImageBitmap(customise);
+                imageView.setImageBitmap(capturedImage);
+            }
+            else {
                 uri = resultData.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), uri);
-                    customise  = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth()/3, bitmap.getHeight()/3, true);
-                    imageView.setImageBitmap(customise);
-
+                    if(bitmap != null){
+                        customise  = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth()/3, bitmap.getHeight()/3, true);
+                        imageView.setImageBitmap(customise);
+                    }
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+
         }
     }
 
