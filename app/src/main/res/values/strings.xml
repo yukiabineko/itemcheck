@@ -19,4 +19,6 @@
     <string name="icon_edit">&#xf044; 登録</string>
     <string name="icon_picture">&#xf03e; 写真選択</string>
     <string name="icon_camera">&#xf030; カメラから取得</string>
+    <string name="icon_delete">&#xf1f8; 削除</string>
+    <string name="icon_show">&#xf00e; 詳細</string>
 </resources>

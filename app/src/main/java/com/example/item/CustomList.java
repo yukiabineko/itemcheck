@@ -1,6 +1,7 @@
 package com.example.item;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
     private  List<ViewItemParam> mist;
     private LayoutInflater layoutInflater;
     private CustomListener listener;
+    Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fontawesome-webfont.ttf");
 
     public interface CustomListener{
         void deleteItem(int itemNumber);
@@ -32,7 +34,7 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
     public CustomList(Context context, int i, List<ViewItemParam> list){
         super(context, i, list);
 
-
+        Typeface font = Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf");
         mist = list;
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -59,6 +61,7 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
 
 
         Button deleteButton = convertView.findViewById(R.id.item_delete);
+        deleteButton.setTypeface(font);
         deleteButton.setTag(position);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +73,7 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
 
         Button showButton = convertView.findViewById(R.id.item_show);
         showButton.setTag(position);
+        showButton.setTypeface(font);
         showButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

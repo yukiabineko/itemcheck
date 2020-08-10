@@ -9,18 +9,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <Button
-            android:id="@+id/bt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mainmove1"
-            />
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary">
         <Button
             android:id="@+id/bt2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#fff"
             android:text="@string/itemList"
+            />
+        <Button
+            android:id="@+id/bt"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"
+            android:text="@string/mainmove1"
             />
 
     </LinearLayout>
