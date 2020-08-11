@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -40,8 +41,13 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         super.onViewCreated(view, savedInstanceState);
         mainArea = view.findViewById(R.id.main);
 
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fontawesome-webfont.ttf");
+
+
         getbutton = view.findViewById(R.id.api_button);
+        getbutton.setTypeface(font);
         resetbutton = view.findViewById(R.id.all_delete);
+        resetbutton.setTypeface(font);
         header = view.findViewById(R.id.table_header);
         textView = view.findViewById(R.id.not_data);
 

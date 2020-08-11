@@ -82,6 +82,9 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
             }
         });
 
+        Button editButton = convertView.findViewById(R.id.item_edit_page);
+        editButton.setTag(position);
+        editButton.setTypeface(font);
 
 
         return  convertView;

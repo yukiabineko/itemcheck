@@ -29,7 +29,9 @@
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="60dp"
-            android:text="@string/api_button"
+            android:background="@drawable/button_primary"
+            android:textColor="#fff"
+            android:text="@string/icon_update"
             android:layout_gravity="right"/>
 
         <Button
@@ -38,13 +40,15 @@
             android:layout_weight="1"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
-            android:text="@string/all_reset"
+            android:background="@drawable/button_delete"
+            android:text="@string/icon_reset"
+            android:textColor="#fff"
             android:layout_gravity="right"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/table-header"
+        android:id="@+id/table_header"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#c0c0c0"
@@ -69,7 +73,9 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#fff"
+        >
 
 
     </ListView>

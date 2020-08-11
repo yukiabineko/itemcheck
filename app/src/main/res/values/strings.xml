@@ -21,4 +21,10 @@
     <string name="icon_camera">&#xf030; カメラから取得</string>
     <string name="icon_delete">&#xf1f8; 削除</string>
     <string name="icon_show">&#xf00e; 詳細</string>
+    <string name="icon_update">&#xf01e; 更新</string>
+    <string name="icon_reset">&#xf011; リセット</string>
+    <string name="icon_list">&#xf022; 商品一覧</string>
+    <string name="icon_new">&#xf067; 商品登録</string>
+    <string name="icon_edit_page">&#xf044; 商品編集</string>
+
 </resources>

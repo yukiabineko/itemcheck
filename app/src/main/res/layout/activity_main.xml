@@ -17,7 +17,7 @@
             android:layout_height="55dp"
             android:background="@color/colorPrimaryDark"
             android:textColor="#fff"
-            android:text="@string/itemList"
+            android:text="@string/icon_list"
             />
         <Button
             android:id="@+id/bt"
@@ -25,7 +25,7 @@
             android:layout_height="55dp"
             android:background="@color/colorPrimary"
             android:textColor="#fff"
-            android:text="@string/mainmove1"
+            android:text="@string/icon_new"
             />
 
     </LinearLayout>
