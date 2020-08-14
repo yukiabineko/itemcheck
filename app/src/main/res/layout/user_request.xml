@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/request_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/shop_requeset_title"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="36sp"
+        android:gravity="center_horizontal" />
+     <ScrollView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         >
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+
+
+             <ListView
+                 android:id="@+id/listView"
+                 android:layout_width="match_parent"
+                 android:layout_height="550dp"
+                 android:background="#fff">
+
+
+             </ListView>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="60dp"
+                 android:layout_marginBottom="5dp"
+                 android:layout_marginTop="20dp"
+                 android:orientation="horizontal">
+
+                 <Button
+                     android:id="@+id/request_up_button"
+                     android:layout_marginTop="10dp"
+                     android:layout_marginRight="10dp"
+                     android:layout_width="0dip"
+                     android:layout_weight="1"
+                     android:layout_height="60dp"
+                     android:background="@drawable/button_primary"
+                     android:textColor="#fff"
+                     android:text="@string/icon_update"
+                     android:layout_gravity="right"/>
+
+                 <Button
+                     android:id="@+id/request_all_delete"
+                     android:layout_width="0dip"
+                     android:layout_weight="1"
+                     android:layout_height="60dp"
+                     android:layout_marginTop="10dp"
+                     android:background="@drawable/button_delete"
+                     android:text="@string/icon_reset"
+                     android:textColor="#fff"
+                     android:layout_gravity="right"/>
+
+             </LinearLayout>
+
+         </LinearLayout>
+     </ScrollView>
+
+</LinearLayout>
