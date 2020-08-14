@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         bt.setTypeface(font);
         final Button bt2 = findViewById(R.id.bt2);
         bt2.setTypeface(font);
+        final Button bt3 = findViewById(R.id.bt3);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.ll, itemAddFragment).commit();
                 bt.setBackgroundColor(Color.parseColor("#3700B3"));
                 bt2.setBackgroundColor(Color.parseColor("#6200EE"));
+                bt3.setBackgroundColor(Color.parseColor("#6200EE"));
             }
         });
         bt2.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +46,19 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.ll, itemViewFragment).commit();
                 bt.setBackgroundColor(Color.parseColor("#6200EE"));
                 bt2.setBackgroundColor(Color.parseColor("#3700B3"));
+                bt3.setBackgroundColor(Color.parseColor("#6200EE"));
+            }
+        });
+
+        bt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserRequestFragment itemAddFragment = new UserRequestFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.ll, itemAddFragment).commit();
+                bt.setBackgroundColor(Color.parseColor("#6200EE"));
+                bt2.setBackgroundColor(Color.parseColor("#6200EE"));
+                bt3.setBackgroundColor(Color.parseColor("#3700B3"));
             }
         });
 

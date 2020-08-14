@@ -1,9 +1,7 @@
 package com.example.item;
 
-import android.app.Activity;
-import android.os.AsyncTask;
-import android.view.View;
 
+import android.os.AsyncTask;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,42 +10,36 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import java.util.List;
 
-public class ListgetData extends AsyncTask<Void, Void, String > {
+public class UserRequestTask extends AsyncTask<Void, Void, String >
+{
+    private  UserRequestList customList;
+    private List<userRequestParams> list;
 
-    private  Activity  activity;
-    private  CustomList customList;
-    private List<ViewItemParam> list;
-
-
-    public ListgetData(Activity activity,CustomList customList, List<ViewItemParam> list){
+    public UserRequestTask(UserRequestList customList, List<userRequestParams> list){
         super();
-        this.activity = activity;
         this.customList = customList;
         this.list = list;
     }
 
-    @Override
-    protected String doInBackground(Void ... v){
 
+    @Override
+    protected String doInBackground(Void ... v)
+    {
         String line;
         StringBuilder sb = new StringBuilder();//追加
         try{
-            System.out.println("1");
 
-            URL url = new URL("http://yukiabineko.sakura.ne.jp/items/viewJson.php");
+            URL url = new URL("http://yukiabineko.sakura.ne.jp/items/UserRequestJson.php");
             HttpURLConnection http = (HttpURLConnection)url.openConnection();
             http.setRequestMethod("GET");
             http.connect();
 
-            System.out.println("2");
 
             InputStreamReader in = new InputStreamReader(http.getInputStream(), "UTF-8");
             BufferedReader br = new BufferedReader(in);
 
-            System.out.println("3");
 
             while((line = br.readLine()) != null){
                 System.out.println(line);
@@ -64,7 +56,6 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
         }
         return sb.toString();//変更
     }
-
     protected void onPostExecute(String data){
         super.onPostExecute(data);
 
@@ -74,41 +65,28 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
                 for(int i=0; i<jsonArray.length();i++){
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String id =   jsonObject.getString("id");
-                    String path = jsonObject.getString("path");
                     String name = jsonObject.getString("name");
                     String price = jsonObject.getString("price");
+                    String number = jsonObject.getString("number");
                     String memo = jsonObject.getString("memo");
 
 
-                    ViewItemParam param = new ViewItemParam();
+                    userRequestParams param = new userRequestParams();
                     param.setId(Integer.parseInt(id));
-                    param.setBitmap(path);
                     param.setName(name);
                     param.setPrice(price);
+                    param.setNumber(number);
                     param.setMemo(memo);
                     list.add(param);
 
                     customList.notifyDataSetChanged();
-                }
-                if(jsonArray.length() == 0 || jsonArray==null){
-                    customList.clear();
-                    customList.notifyDataSetChanged();
-                    activity.findViewById(R.id.table_header).setVisibility(View.INVISIBLE);
-                    activity.findViewById(R.id.not_data).setVisibility(View.VISIBLE);
-                }
-                else {
-                    activity.findViewById(R.id.table_header).setVisibility(View.VISIBLE);
-                    activity.findViewById(R.id.not_data).setVisibility(View.INVISIBLE);
-                }
 
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }else{
-           activity.findViewById(R.id.table_header).setVisibility(View.INVISIBLE);
+
         }
     }
 }
-
-
