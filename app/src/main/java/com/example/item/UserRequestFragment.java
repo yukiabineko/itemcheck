@@ -30,21 +30,17 @@ public class UserRequestFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         LinearLayout mainContent = view.findViewById(R.id.request_content);
+        mainContent.setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.not_request_title).setVisibility(View.VISIBLE);
         userRequestList = new UserRequestList(getContext(),0,list);
 
-        final UserRequestTask task = new UserRequestTask(userRequestList, list);
+        final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list);
         task.execute();
 
 
         listView = view.findViewById(R.id.request_listView);
         listView.setAdapter(userRequestList);
 
-        if(userRequestList.isEmpty()){
-          mainContent.setVisibility(View.INVISIBLE);
-            Toast.makeText(getContext(), "データがありません。",Toast.LENGTH_LONG).show();
-        }
-        else{
-            mainContent.setVisibility(View.VISIBLE);
-        }
+
     }
 }
