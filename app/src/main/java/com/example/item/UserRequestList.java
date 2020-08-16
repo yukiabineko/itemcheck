@@ -22,6 +22,7 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
 
     public interface RequestListener{
         void confirmationView(int itemNumber);
+        void backconfirm(int itemNumber);
     }
 
     public void setListener(RequestListener listener){
@@ -87,6 +88,14 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
             public void onClick(View view) {
                 int itemNumber = (int) view.getTag();
                 listener.confirmationView(itemNumber);
+                
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int itemNumber = (int) view.getTag();
+                listener.backconfirm(itemNumber);
             }
         });
 

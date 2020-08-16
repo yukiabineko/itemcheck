@@ -52,7 +52,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         listView.setAdapter(userRequestList);
     }
     public void confirmationView(int i){
-        userRequestParams params = userRequestList.getItem(i);
+        final userRequestParams params = userRequestList.getItem(i);
 
         //ダイアログxml読み込み
         LayoutInflater layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -86,6 +86,16 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
                 .setPositiveButton("確定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                       ConfirmTask task = new ConfirmTask(getActivity());
+                       task.execute(String.valueOf(params.getId()), params.getConfirm());
+
+                        TextView confirm = listView.findViewById(R.id.request_confirm_cont);
+                        confirm.setText("確定");
+                        listView.findViewById(R.id.reuest_send).setVisibility(View.GONE);
+                        listView.findViewById(R.id.reuest_edit).setVisibility(View.VISIBLE);
+                        confirm.setGravity(Gravity.CENTER);
+                        confirm.setTextColor(Color.WHITE);
+                        confirm.setBackgroundColor(Color.parseColor("#6200EE"));
 
                     }
                 })
@@ -107,4 +117,17 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 
 
     }
+    public  void backconfirm(int i){
+        final userRequestParams params = userRequestList.getItem(i);
+        ConfirmTask task = new ConfirmTask(getActivity());
+        task.execute(String.valueOf(params.getId()), params.getConfirm());
+        listView.findViewById(R.id.reuest_send).setVisibility(View.VISIBLE);
+        listView.findViewById(R.id.reuest_edit).setVisibility(View.GONE);
+        TextView confirm = listView.findViewById(R.id.request_confirm_cont);
+        confirm.setText("未確定");
+        confirm.setGravity(Gravity.CENTER);
+        confirm.setTextColor(Color.WHITE);
+        confirm.setBackgroundColor(Color.RED);
+    }
+
 }

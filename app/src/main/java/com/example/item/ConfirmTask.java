@@ -1,9 +1,15 @@
 package com.example.item;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
@@ -15,15 +21,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-
-public class UploadTask extends AsyncTask<String, Void, StringBuilder> {
+public class ConfirmTask extends AsyncTask<String, Void, StringBuilder> {
 
     private Activity mActivity;
 
-    public UploadTask(Activity activity) {
+    public ConfirmTask(Activity activity) {
         mActivity = activity;
     }
-
 
     // 非同期処理
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -31,11 +35,11 @@ public class UploadTask extends AsyncTask<String, Void, StringBuilder> {
     protected StringBuilder doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://yukiabineko.sakura.ne.jp/items/textPost.php";
+        String urlSt = "http://yukiabineko.sakura.ne.jp/items/confirmChange.php";
 
         HttpURLConnection httpConn;
 
-        String word = "itemsName=" + params[0] + "&price=" + params[1] + "&memo=" + params[2];
+        String word = "id=" + params[0] + "&confirm=" + params[1];
         StringBuilder sb = new StringBuilder();
 
         try {
@@ -82,8 +86,23 @@ public class UploadTask extends AsyncTask<String, Void, StringBuilder> {
     // 非同期処理が終了後、結果をメインスレッドに返す
     public void onPostExecute(StringBuilder result){
 
-
-
+        if(result.toString().equals("発注数を確定しました。")){
+            /*mActivity.findViewById(R.id.reuest_send).setVisibility(View.GONE);
+            mActivity.findViewById(R.id.reuest_edit).setVisibility(View.VISIBLE);
+            confirm.setGravity(Gravity.CENTER);
+            confirm.setTextColor(Color.WHITE);
+            confirm.setBackgroundColor(Color.parseColor("#6200EE"));*/
+            Toast.makeText(mActivity, result.toString(),Toast.LENGTH_LONG).show();
+        }
+        else if(result.toString().equals("発注数をリセットしました。")){
+          /*  mActivity.findViewById(R.id.reuest_send).setVisibility(View.VISIBLE);
+            mActivity.findViewById(R.id.reuest_edit).setVisibility(View.GONE);
+            confirm.setText("未確定");
+            confirm.setGravity(Gravity.CENTER);
+            confirm.setTextColor(Color.WHITE);
+            confirm.setBackgroundColor(Color.RED);*/
+            Toast.makeText(mActivity, result.toString(),Toast.LENGTH_LONG).show();
+        }
     }
 
 }
