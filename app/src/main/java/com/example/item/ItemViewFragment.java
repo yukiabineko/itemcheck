@@ -153,7 +153,6 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         dialogtitle.setGravity(Gravity.CENTER);
 
 
-
         AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setCustomTitle(dialogtitle)
                 .setTitle(list.getMemo() + "詳細")
