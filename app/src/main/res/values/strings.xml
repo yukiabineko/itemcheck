@@ -27,5 +27,8 @@
     <string name="icon_new">&#xf067; 商品登録</string>
     <string name="icon_edit_page">&#xf044; 商品編集</string>
     <string name="shop_requeset_title">店舗問い合わせ</string>
+    <string name="icon_request_check">&#xf058; 確認</string>
+    <string name="icon_request_mail">&#xf0e0; メール</string>
+    <string name="icon_request_back">&#xf04a; 取り消し</string>
 
 </resources>

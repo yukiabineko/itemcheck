@@ -19,6 +19,7 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
     private  List<userRequestParams> mist;
     private LayoutInflater layoutInflater;
     private RequestListener listener;
+    Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fontawesome-webfont.ttf");
 
     public interface RequestListener{
         void confirmationView(int itemNumber);
@@ -32,9 +33,6 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
     public UserRequestList(Context context, int i, List<userRequestParams> list){
         super(context, i, list);
 
-
-
-        Typeface font = Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf");
         mist = list;
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -55,16 +53,23 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
         price.setText(list.getNumber());
 
 
+        TextView day = convertView.findViewById(R.id.request_day_cont);
+        day.setText(list.getDay());
+
+
         TextView confirm = convertView.findViewById(R.id.request_confirm_cont);
         String conf = list.getConfirm();
 
 
         Button confirmButton = convertView.findViewById(R.id.reuest_send);
+        confirmButton.setTypeface(font);
         confirmButton.setTag(position);
         Button backButton = convertView.findViewById(R.id.reuest_edit);
         backButton.setTag(position);
+        backButton.setTypeface(font);
         Button mailButton = convertView.findViewById(R.id.request_mail);
         mailButton.setTag(position);
+        mailButton.setTypeface(font);
 
 
         if(conf.equals("1")){
