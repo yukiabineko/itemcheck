@@ -1,13 +1,10 @@
 package com.example.item;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -40,6 +37,7 @@ public class ConfirmTask extends AsyncTask<String, Void, StringBuilder> {
         HttpURLConnection httpConn;
 
         String word = "id=" + params[0] + "&confirm=" + params[1];
+        System.out.println(word);
         StringBuilder sb = new StringBuilder();
 
         try {
@@ -92,7 +90,7 @@ public class ConfirmTask extends AsyncTask<String, Void, StringBuilder> {
             confirm.setGravity(Gravity.CENTER);
             confirm.setTextColor(Color.WHITE);
             confirm.setBackgroundColor(Color.parseColor("#6200EE"));*/
-            Toast.makeText(mActivity, result.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(mActivity, result.toString(),Toast.LENGTH_SHORT).show();
         }
         else if(result.toString().equals("発注数をリセットしました。")){
           /*  mActivity.findViewById(R.id.reuest_send).setVisibility(View.VISIBLE);
@@ -101,7 +99,7 @@ public class ConfirmTask extends AsyncTask<String, Void, StringBuilder> {
             confirm.setGravity(Gravity.CENTER);
             confirm.setTextColor(Color.WHITE);
             confirm.setBackgroundColor(Color.RED);*/
-            Toast.makeText(mActivity, result.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(mActivity, result.toString(),Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -38,6 +38,8 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fontawesome-webfont.ttf");
+
         LinearLayout mainContent = view.findViewById(R.id.request_content);
         mainContent.setVisibility(View.INVISIBLE);
         view.findViewById(R.id.not_request_title).setVisibility(View.VISIBLE);
@@ -50,6 +52,13 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 
         listView = view.findViewById(R.id.request_listView);
         listView.setAdapter(userRequestList);
+
+        Button updateButton = view.findViewById(R.id.request_up_button);
+        updateButton.setTypeface(font);
+
+        Button resetButton = view.findViewById(R.id.request_all_delete);
+        resetButton.setTypeface(font);
+
     }
     public void confirmationView(int i){
         final userRequestParams params = userRequestList.getItem(i);

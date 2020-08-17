@@ -34,7 +34,6 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
     public CustomList(Context context, int i, List<ViewItemParam> list){
         super(context, i, list);
 
-        Typeface font = Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf");
         mist = list;
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
