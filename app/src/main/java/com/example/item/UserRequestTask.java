@@ -81,6 +81,7 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
                     String day = jsonObject.getString("day");
                     String conf = jsonObject.getString("confirm");
                     String price = jsonObject.getString("price");
+                    String email = jsonObject.getString("email");
 
 
                     userRequestParams param = new userRequestParams();
@@ -92,6 +93,7 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
                     param.setDay(day);
                     param.setConfirm(conf);
                     param.setPrice(price);
+                    param.setMail(email);
                     list.add(param);
                     customList.notifyDataSetChanged();
                     ll.setVisibility(View.VISIBLE);

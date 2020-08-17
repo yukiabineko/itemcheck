@@ -3,8 +3,10 @@ package com.example.item;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -146,6 +148,16 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         confirm.setGravity(Gravity.CENTER);
         confirm.setTextColor(Color.WHITE);
         confirm.setBackgroundColor(Color.RED);
+    }
+    public void mailsend(int i){
+        final userRequestParams params = userRequestList.getItem(i);
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{params.getEmail()});
+        intent.putExtra(Intent.EXTRA_SUBJECT, params.getName() + "ついて。");
+
+        startActivity(intent);
+
     }
 
 }

@@ -24,6 +24,7 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
     public interface RequestListener{
         void confirmationView(int itemNumber);
         void backconfirm(int itemNumber);
+        void mailsend(int itemNumber);
     }
 
     public void setListener(RequestListener listener){
@@ -101,6 +102,13 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
             public void onClick(View view) {
                 int itemNumber = (int) view.getTag();
                 listener.backconfirm(itemNumber);
+            }
+        });
+        mailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int itemNumber = (int) view.getTag();
+                listener.mailsend(itemNumber);
             }
         });
 

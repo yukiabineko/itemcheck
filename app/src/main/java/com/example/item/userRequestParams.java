@@ -9,6 +9,7 @@ public class userRequestParams {
     private String day;
     private String confirm;
     private String price;
+    private String email;
 
 
     public void setId(int i){
@@ -23,6 +24,7 @@ public class userRequestParams {
     public void setDay(String day){this.day = day;}
     public void setConfirm(String confirm){this.confirm = confirm;}
     public void setPrice(String price){this.price = price;}
+    public void setMail(String mail){this.email = mail;}
 
     public int getId(){
         return id;
@@ -38,4 +40,5 @@ public class userRequestParams {
     public  String getDay(){return  day;}
     public String getConfirm(){return confirm;}
     public  String  getPrice(){return price;}
+    public  String getEmail(){return email;}
 }
