@@ -75,7 +75,7 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String id =   jsonObject.getString("id");
                     String name = jsonObject.getString("name");
-                    String shop = jsonObject.getString("shop"); String confirm = jsonObject.getString("confirm");
+                    String shop = jsonObject.getString("shop");
                     String number = jsonObject.getString("num");
                     String memo = jsonObject.getString("memo");
                     String day = jsonObject.getString("day");
@@ -98,6 +98,7 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
                     customList.notifyDataSetChanged();
                     ll.setVisibility(View.VISIBLE);
                     activity.findViewById(R.id.not_request_title).setVisibility(View.GONE);
+                    activity.findViewById(R.id.not_request_button).setVisibility(View.GONE);
 
                 }
             } catch (JSONException e) {
@@ -106,6 +107,7 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
         }else{
             ll.setVisibility(View.INVISIBLE);
             activity.findViewById(R.id.not_request_title).setVisibility(View.VISIBLE);
+            activity.findViewById(R.id.not_request_button).setVisibility(View.VISIBLE);
             Toast.makeText(activity, "データがありません。",Toast.LENGTH_LONG).show();
         }
     }

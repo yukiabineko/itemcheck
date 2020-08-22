@@ -77,7 +77,7 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
                     String path = jsonObject.getString("path");
                     String name = jsonObject.getString("name");
                     String price = jsonObject.getString("price");
-                    String memo = jsonObject.getString("memo");
+                    String memo = jsonObject.getString("info");
 
 
                     ViewItemParam param = new ViewItemParam();

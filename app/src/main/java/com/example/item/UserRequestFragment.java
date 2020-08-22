@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
@@ -45,6 +46,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         LinearLayout mainContent = view.findViewById(R.id.request_content);
         mainContent.setVisibility(View.INVISIBLE);
         view.findViewById(R.id.not_request_title).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.not_request_button).setVisibility(View.VISIBLE);
         userRequestList = new UserRequestList(getContext(),0,list);
         userRequestList.setListener(this);
 
@@ -57,6 +59,25 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 
         Button updateButton = view.findViewById(R.id.request_up_button);
         updateButton.setTypeface(font);
+
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list);
+                task.execute();
+
+            }
+        });
+        Button hiddenButton = view.findViewById(R.id.not_request_button);
+        hiddenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list);
+                task.execute();
+
+            }
+        });
 
         Button resetButton = view.findViewById(R.id.request_all_delete);
         resetButton.setTypeface(font);
