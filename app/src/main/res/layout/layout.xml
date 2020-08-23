@@ -5,8 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".ItemAdd">
-
+    <Button
+        android:id="@+id/back_intent"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="戻る"/>
     <TextView
+        android:id="@+id/add_edit_page_title"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
@@ -130,6 +137,15 @@
                 android:textSize="20sp"
                 android:background="@drawable/button_primary"
                 android:text="@string/icon_edit"/>
+            <Button
+                android:id="@+id/add_page_edit_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:background="@drawable/button_primary"
+                android:visibility="gone"
+                android:text="@string/icon_edit_page"/>
         </LinearLayout>
 
 

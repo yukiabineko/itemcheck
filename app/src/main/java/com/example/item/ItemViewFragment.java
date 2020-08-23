@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -50,6 +51,8 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         resetbutton.setTypeface(font);
         header = view.findViewById(R.id.table_header);
         textView = view.findViewById(R.id.not_data);
+
+
 
         customList = new CustomList(getContext(),0,list);
         customList.setListener(this);

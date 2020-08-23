@@ -1,6 +1,8 @@
 package com.example.item;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,7 +86,19 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
         Button editButton = convertView.findViewById(R.id.item_edit_page);
         editButton.setTag(position);
         editButton.setTypeface(font);
+        editButton.setPaintFlags(editButton.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        editButton.setPaintFlags(editButton.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
+
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext().getApplicationContext(), EditItem.class);
+                intent.putExtra("id", String.valueOf(list.getId()));
+                getContext().startActivity(intent);
+            }
+        });
 
         return  convertView;
     }
