@@ -73,7 +73,8 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
                 JSONArray jsonArray = new JSONArray(data);
                 for(int i=0; i<jsonArray.length();i++){
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String id =   jsonObject.getString("id");
+                    String userid = jsonObject.getString("user_id");
+                    String itemid = jsonObject.getString("item_id");
                     String name = jsonObject.getString("name");
                     String shop = jsonObject.getString("shop");
                     String number = jsonObject.getString("num");
@@ -85,7 +86,8 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
 
 
                     userRequestParams param = new userRequestParams();
-                    param.setId(Integer.parseInt(id));
+                    param.setUserid(Integer.parseInt(userid));
+                    param.setIemId(Integer.parseInt(itemid));
                     param.setName(name);
                     param.setShop(shop);
                     param.setNumber(number);

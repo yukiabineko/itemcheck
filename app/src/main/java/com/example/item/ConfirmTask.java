@@ -36,7 +36,7 @@ public class ConfirmTask extends AsyncTask<String, Void, StringBuilder> {
 
         HttpURLConnection httpConn;
 
-        String word = "id=" + params[0] + "&confirm=" + params[1];
+        String word = "user_id=" + params[0] + "&item_id=" + params[1] + "&confirm=" + params[2];
         System.out.println(word);
         StringBuilder sb = new StringBuilder();
 

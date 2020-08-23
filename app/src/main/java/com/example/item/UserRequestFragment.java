@@ -128,7 +128,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                        ConfirmTask task = new ConfirmTask(getActivity());
-                       task.execute(String.valueOf(params.getId()), params.getConfirm());
+                       task.execute(String.valueOf(params.getUserid()), String.valueOf(params.getItemId()), params.getConfirm());
 
                         TextView confirm = listView.findViewById(R.id.request_confirm_cont);
                         confirm.setText("確定");
@@ -160,8 +160,10 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
     }
     public  void backconfirm(int i){
         final userRequestParams params = userRequestList.getItem(i);
+
+
         ConfirmTask task = new ConfirmTask(getActivity());
-        task.execute(String.valueOf(params.getId()), params.getConfirm());
+        task.execute(String.valueOf(params.getUserid()),String.valueOf(params.getItemId()), params.getConfirm());
         listView.findViewById(R.id.reuest_send).setVisibility(View.VISIBLE);
         listView.findViewById(R.id.reuest_edit).setVisibility(View.GONE);
         TextView confirm = listView.findViewById(R.id.request_confirm_cont);

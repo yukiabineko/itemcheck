@@ -1,7 +1,10 @@
 package com.example.item;
 
+import android.content.ClipData;
+
 public class userRequestParams {
-    private int id;
+    private int userid;
+    private int itemid;
     private String name;
     private String shop;
     private String number;
@@ -11,9 +14,9 @@ public class userRequestParams {
     private String price;
     private String email;
 
-
-    public void setId(int i){
-        this.id = i;
+    public void setUserid(int i){this.userid = i;}
+    public void setIemId(int i){
+        this.itemid = i;
     }
     public void setName(String name) {
         this.name = name;
@@ -26,9 +29,8 @@ public class userRequestParams {
     public void setPrice(String price){this.price = price;}
     public void setMail(String mail){this.email = mail;}
 
-    public int getId(){
-        return id;
-    }
+    public int getUserid(){return  userid;}
+    public int getItemId(){ return itemid; }
     public String getName() {
         return name;
     }
