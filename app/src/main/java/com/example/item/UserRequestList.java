@@ -22,8 +22,8 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
     Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fontawesome-webfont.ttf");
 
     public interface RequestListener{
-        void confirmationView(int itemNumber);
-        void backconfirm(int itemNumber);
+        void confirmationView(int itemNumber, Button button, Button button2);  /*どのボタンか判別するため引数にボタン追加*/
+        void backconfirm(int itemNumber, Button button, Button button2);
         void mailsend(int itemNumber);
     }
 
@@ -62,12 +62,17 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
         String conf = list.getConfirm();
 
 
-        Button confirmButton = convertView.findViewById(R.id.reuest_send);
+        final Button confirmButton = convertView.findViewById(R.id.reuest_send);
         confirmButton.setTypeface(font);
         confirmButton.setTag(position);
-        Button backButton = convertView.findViewById(R.id.reuest_edit);
+
+
+
+        final Button backButton = convertView.findViewById(R.id.reuest_edit);
         backButton.setTag(position);
         backButton.setTypeface(font);
+
+
         Button mailButton = convertView.findViewById(R.id.request_mail);
         mailButton.setTag(position);
         mailButton.setTypeface(font);
@@ -93,7 +98,7 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
             @Override
             public void onClick(View view) {
                 int itemNumber = (int) view.getTag();
-                listener.confirmationView(itemNumber);
+                listener.confirmationView(itemNumber, confirmButton, backButton);
                 
             }
         });
@@ -101,7 +106,7 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
             @Override
             public void onClick(View view) {
                 int itemNumber = (int) view.getTag();
-                listener.backconfirm(itemNumber);
+                listener.backconfirm(itemNumber,confirmButton, backButton);
             }
         });
         mailButton.setOnClickListener(new View.OnClickListener() {

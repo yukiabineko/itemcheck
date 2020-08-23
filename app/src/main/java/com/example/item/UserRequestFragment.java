@@ -83,8 +83,9 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         resetButton.setTypeface(font);
 
     }
-    public void confirmationView(int i){
+    public void confirmationView(int i, final Button configButton, final Button backButton){
         final userRequestParams params = userRequestList.getItem(i);
+
 
         //ダイアログxml読み込み
         LayoutInflater layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -132,8 +133,10 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 
                         TextView confirm = listView.findViewById(R.id.request_confirm_cont);
                         confirm.setText("確定");
-                        listView.findViewById(R.id.reuest_send).setVisibility(View.GONE);
-                        listView.findViewById(R.id.reuest_edit).setVisibility(View.VISIBLE);
+                        Button send = listView.findViewById(R.id.reuest_send);
+
+                       configButton.setVisibility(View.GONE);
+                        backButton.setVisibility(View.VISIBLE);
                         confirm.setGravity(Gravity.CENTER);
                         confirm.setTextColor(Color.WHITE);
                         confirm.setBackgroundColor(Color.parseColor("#6200EE"));
@@ -158,14 +161,16 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 
 
     }
-    public  void backconfirm(int i){
+
+
+    public  void backconfirm(int i,  Button confButton, Button backButton){
         final userRequestParams params = userRequestList.getItem(i);
 
 
         ConfirmTask task = new ConfirmTask(getActivity());
         task.execute(String.valueOf(params.getUserid()),String.valueOf(params.getItemId()), params.getConfirm());
-        listView.findViewById(R.id.reuest_send).setVisibility(View.VISIBLE);
-        listView.findViewById(R.id.reuest_edit).setVisibility(View.GONE);
+        confButton.findViewById(R.id.reuest_send).setVisibility(View.VISIBLE);
+        backButton.findViewById(R.id.reuest_edit).setVisibility(View.GONE);
         TextView confirm = listView.findViewById(R.id.request_confirm_cont);
         confirm.setText("未確定");
         confirm.setGravity(Gravity.CENTER);

@@ -100,6 +100,7 @@ public class ConfirmTask extends AsyncTask<String, Void, StringBuilder> {
             confirm.setTextColor(Color.WHITE);
             confirm.setBackgroundColor(Color.RED);*/
             Toast.makeText(mActivity, result.toString(),Toast.LENGTH_SHORT).show();
+
         }
     }
 
