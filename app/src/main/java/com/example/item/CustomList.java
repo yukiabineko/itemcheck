@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomList extends ArrayAdapter<ViewItemParam>
@@ -27,6 +28,7 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
     public interface CustomListener{
         void deleteItem(int itemNumber);
         void showItem(int itemNumber);
+        void editPage(int itemId);
     }
 
     public void setListener(CustomListener listener){
@@ -42,6 +44,7 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
 
     public View getView(int position, View convertView, final ViewGroup parent) {
        final ViewItemParam list =  mist.get(position);
+
 
         if (convertView == null) {
            convertView = layoutInflater.inflate(R.layout.row,null);
@@ -94,9 +97,8 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext().getApplicationContext(), EditItem.class);
-                intent.putExtra("id", String.valueOf(list.getId()));
-                getContext().startActivity(intent);
+
+                listener.editPage(list.getId());
             }
         });
 

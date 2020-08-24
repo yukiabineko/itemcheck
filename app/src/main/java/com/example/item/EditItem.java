@@ -5,24 +5,44 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+import java.util.Timer;
 
 public class EditItem extends AppCompatActivity
 {
+    List<FindItemParams> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout);
 
+
         Typeface font = Typeface.createFromAsset(this.getAssets(), "fontawesome-webfont.ttf");
+        EditText nameInput = findViewById(R.id.name_edit);
 
         final Intent intent = getIntent();
-        String sendId = intent.getStringExtra("id");
-        Toast.makeText(this, sendId,Toast.LENGTH_LONG).show();
+        String obj = intent.getStringExtra("obj");
 
+        Toast.makeText(this,obj, Toast.LENGTH_LONG).show();
+        JSONObject jsonObject = new JSONObject(obj);
+
+
+
+
+
+
+/****************************view関連*************************************************/
         TextView title = findViewById(R.id.add_edit_page_title);
         title.setText("商品編集");
 

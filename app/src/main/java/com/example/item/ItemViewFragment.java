@@ -3,6 +3,7 @@ package com.example.item;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import com.squareup.picasso.Picasso;
 
@@ -27,11 +30,13 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
 
      CustomList customList;
      List<ViewItemParam> list =new ArrayList<>();
+
      Button getbutton,resetbutton;
      LinearLayout mainArea,header;
      private ListView listView;
      private TextView textView;
      View dialogLayout;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -172,6 +177,14 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         LinearLayout.LayoutParams positiveButtonLL = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
         positiveButtonLL.gravity = Gravity.LEFT;
         positiveButton.setLayoutParams(positiveButtonLL);
+
+
+
+    }
+    public void editPage(int id){
+
+        EditPageViewTask task = new EditPageViewTask(getActivity());
+        task.execute(String.valueOf(id));
 
 
 
