@@ -1,27 +1,32 @@
 package com.example.item;
 
 import android.content.Intent;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONArray;
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-import java.util.Timer;
+
 
 public class EditItem extends AppCompatActivity
 {
-    List<FindItemParams> list;
+    private String name;
+    private String price;
+    private  String info;
+    private  String path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,17 +35,33 @@ public class EditItem extends AppCompatActivity
 
         Typeface font = Typeface.createFromAsset(this.getAssets(), "fontawesome-webfont.ttf");
         EditText nameInput = findViewById(R.id.name_edit);
+        EditText priceInput = findViewById(R.id.price_edit);
+        EditText infoInput = findViewById(R.id.item_comment);
+        ImageView imageView = findViewById(R.id.show_image);
+
+
+
 
         final Intent intent = getIntent();
         String obj = intent.getStringExtra("obj");
 
-        Toast.makeText(this,obj, Toast.LENGTH_LONG).show();
-        JSONObject jsonObject = new JSONObject(obj);
+
+        try {
+            JSONObject jsonObject = new JSONObject(obj);
+            name = jsonObject.getString("name");
+            price = jsonObject.getString("price");
+            info = jsonObject.getString("info");
+            path = jsonObject.getString("path");
 
 
-
-
-
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        nameInput.setText(name);
+        priceInput.setText(price);
+        infoInput.setText(info);
+        String url = "http://yukiabineko.sakura.ne.jp/items/" + path;
+        Picasso.get().load(url).into(imageView);
 
 /****************************view関連*************************************************/
         TextView title = findViewById(R.id.add_edit_page_title);

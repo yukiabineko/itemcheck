@@ -31,7 +31,7 @@ public class EditPageViewTask extends AsyncTask<String, Void, String> {
 
     private  Activity  activity;
     private  CustomList customList;
-    private List<FindItemParams> list;
+
 
     public EditPageViewTask(Activity activity) {
         this.activity = activity;
