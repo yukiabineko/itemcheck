@@ -2,7 +2,6 @@ package com.example.item;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 
 import android.graphics.Typeface;
@@ -92,7 +91,7 @@ public class ItemAddFragment extends Fragment
                     task.execute(param0, param1,param2);
                 }
                 if(customise !=null){
-                    new PostBmpAsyncHttpRequest().execute(new Param("http://yukiabineko.sakura.ne.jp/items/imagePost.php", customise));
+                    new PostBmpAsyncHttpRequest().execute(new Param("http://yukiabineko.sakura.ne.jp/items/imagePost.php", customise, id));
                 }
 
 

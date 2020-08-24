@@ -1,14 +1,13 @@
 package com.example.item;
 
+
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
 import androidx.annotation.RequiresApi;
-
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,30 +19,27 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 
-public class EditPageViewTask extends AsyncTask<String, Void, String> {
+public class ItemUpdateTask extends AsyncTask<String, Void, StringBuilder> {
 
-    private  Activity  activity;
+    private Activity mActivity;
 
-
-
-    public EditPageViewTask(Activity activity) {
-        this.activity = activity;
+    public  ItemUpdateTask(Activity activity){
+        mActivity =activity;
     }
 
 
     // 非同期処理
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    protected String doInBackground(String... params) {
+    protected StringBuilder doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://yukiabineko.sakura.ne.jp/items/findItemJson.php";
+        String urlSt = "http://yukiabineko.sakura.ne.jp/items/textPost.php";
 
         HttpURLConnection httpConn;
 
-        String word = "id=" + params[0];
+        String word = "itemsName=" + params[0] + "&price=" + params[1] + "&memo=" + params[2] + "&id=" + params[3];
         StringBuilder sb = new StringBuilder();
-
 
         try {
             // URL設定
@@ -81,25 +77,16 @@ public class EditPageViewTask extends AsyncTask<String, Void, String> {
                 while ((line = reader.readLine()) != null)
                     sb.append(line);
                 is.close();
-            } catch (IOException e) {
-            }
-        } catch (IOException e) {
+            } catch (IOException e) {}
         }
-        return sb.toString();
+        catch (IOException e){}
+        return sb;
     }
-
     // 非同期処理が終了後、結果をメインスレッドに返す
-    public void onPostExecute(String result) {
+    public void onPostExecute(StringBuilder result){
 
-        if(result != null){
 
-            Intent intent = new Intent(activity, EditItem.class);
-            intent.putExtra("obj",result);
-            activity.startActivity(intent);
-            activity.finish();
 
-        }else{
-            Toast.makeText(activity, "失敗",Toast.LENGTH_LONG).show();
-        }
     }
+
 }
