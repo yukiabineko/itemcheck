@@ -16,10 +16,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         listView = view.findViewById(R.id.request_listView);
         listView.setAdapter(userRequestList);
 
+        /*更新ボタン処理　*/
         Button updateButton = view.findViewById(R.id.request_up_button);
         updateButton.setTypeface(font);
 
@@ -79,8 +81,31 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
             }
         });
 
+      /*オーダーリセットボタン処理　*/
         Button resetButton = view.findViewById(R.id.request_all_delete);
         resetButton.setTypeface(font);
+
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                        .setTitle("確認")
+                        .setView(dialogLayout)
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                OrderResetTask task = new OrderResetTask(getActivity());
+                                task.execute();
+                                UserRequestFragment itemAddFragment = new UserRequestFragment();
+                                FragmentTransaction fragmentTransaction =getActivity().getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.ll, itemAddFragment).commit();
+
+                            }
+                        })
+                        .setNegativeButton("キャンセル",null).show();
+            }
+        });
 
     }
     public void confirmationView(int i, final Button configButton, final Button backButton){
