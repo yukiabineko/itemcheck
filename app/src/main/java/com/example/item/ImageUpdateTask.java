@@ -1,8 +1,10 @@
 package com.example.item;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
+
 
 import androidx.annotation.RequiresApi;
 
@@ -15,17 +17,26 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
-public class ImageUpdateTask extends AsyncTask<Param, Void, StringBuilder> {
+
+public class ImageUpdateTask extends AsyncTask<UpdateImageParams, Void, StringBuilder> {
+    private  Activity activity;
+
+    public  ImageUpdateTask(Activity activity){
+        this.activity = activity;
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    protected StringBuilder doInBackground(Param... params) {
-        Param param = params[0];
+
+    protected StringBuilder doInBackground(UpdateImageParams... params) {
+        UpdateImageParams param = params[0];
+
         HttpURLConnection connection = null;
         StringBuilder sb = new StringBuilder();
+
+
 
         try {
             // 画像をjpeg形式でstreamに保存
@@ -34,7 +45,6 @@ public class ImageUpdateTask extends AsyncTask<Param, Void, StringBuilder> {
                 param.bmp.compress(Bitmap.CompressFormat.JPEG, 100, jpg);
             }
 
-            String word = "word=abi";
 
 
             URL url = new URL(param.uri);
@@ -53,8 +63,9 @@ public class ImageUpdateTask extends AsyncTask<Param, Void, StringBuilder> {
             // データを投げる
             OutputStream out = new BufferedOutputStream(connection.getOutputStream());
             out.write(jpg.toByteArray());
-            out.write(word.getBytes(StandardCharsets.UTF_8));
             out.flush();
+
+
 
             // データを受け取る
             InputStream is = connection.getInputStream();
@@ -70,6 +81,9 @@ public class ImageUpdateTask extends AsyncTask<Param, Void, StringBuilder> {
         }
         return sb;
     }
+
+
+
     public void onPostExecute(StringBuilder string) {
 
     }

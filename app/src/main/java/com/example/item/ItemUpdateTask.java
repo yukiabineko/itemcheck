@@ -5,7 +5,8 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-import android.view.View;
+import android.widget.Toast;
+
 
 import androidx.annotation.RequiresApi;
 
@@ -20,13 +21,11 @@ import java.nio.charset.StandardCharsets;
 
 
 public class ItemUpdateTask extends AsyncTask<String, Void, StringBuilder> {
+        private  Activity activity;
 
-    private Activity mActivity;
-
-    public  ItemUpdateTask(Activity activity){
-        mActivity =activity;
-    }
-
+        public ItemUpdateTask(Activity activity){
+            this.activity = activity;
+        }
 
     // 非同期処理
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -34,7 +33,7 @@ public class ItemUpdateTask extends AsyncTask<String, Void, StringBuilder> {
     protected StringBuilder doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://yukiabineko.sakura.ne.jp/items/textPost.php";
+        String urlSt = "http://yukiabineko.sakura.ne.jp/items/itemUpdate.php";
 
         HttpURLConnection httpConn;
 
@@ -85,8 +84,7 @@ public class ItemUpdateTask extends AsyncTask<String, Void, StringBuilder> {
     // 非同期処理が終了後、結果をメインスレッドに返す
     public void onPostExecute(StringBuilder result){
 
-
-
+        Toast.makeText(activity, result.toString(),Toast.LENGTH_LONG).show();
     }
 
 }

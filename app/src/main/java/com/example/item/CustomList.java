@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 
@@ -54,7 +56,11 @@ public class CustomList extends ArrayAdapter<ViewItemParam>
 
         ImageView imageView =convertView.findViewById(R.id.item_image);
         String url = "http://yukiabineko.sakura.ne.jp/items/" + list.getBitmap();
-        Picasso.get().load(url).into(imageView);
+        Picasso.get()
+                .load(url)
+                .memoryPolicy(MemoryPolicy.NO_CACHE.NO_CACHE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .into(imageView);
 
 
         TextView name = convertView.findViewById(R.id.name_cont);

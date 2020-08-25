@@ -137,11 +137,13 @@ public class EditItem extends AppCompatActivity
                 String param2 = infoInput.getText().toString();
 
                 if(param0.length() != 0){
-                    ItemUpdateTask task = new ItemUpdateTask(this);
+                    ItemUpdateTask task = new ItemUpdateTask(EditItem.this);
                     task.execute(param0, param1, param2, String.valueOf(id));
                 }
                 if(customise !=null){
-                    new ImageUpdateTask().execute(new Param("http://yukiabineko.sakura.ne.jp/items/imagePost.php", customise, id));
+
+                    new ImageUpdateTask(EditItem.this).execute(new UpdateImageParams("http://yukiabineko.sakura.ne.jp/items/imageUpdate.php?id=" + id, customise));
+
                 }
 
 

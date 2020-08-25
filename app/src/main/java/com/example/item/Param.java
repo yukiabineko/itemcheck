@@ -7,7 +7,7 @@ public class Param {
     public Bitmap bmp;
 
 
-    public Param(String uri, Bitmap bmp, int id) {
+    public Param(String uri, Bitmap bmp) {
         this.uri = uri;
         this.bmp = bmp;
 

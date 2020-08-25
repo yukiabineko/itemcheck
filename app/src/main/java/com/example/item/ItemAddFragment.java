@@ -23,12 +23,12 @@ import androidx.fragment.app.Fragment;
 import java.io.IOException;
 import java.util.Objects;
 
-public class ItemAddFragment extends Fragment
-{
+public class ItemAddFragment extends Fragment {
+
     private static final int READ_REQUEST_CODE = 42;
     ImageView imageView;
     private com.example.item.UploadTask task;
-    private  Bitmap customise;
+    private Bitmap customise;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class ItemAddFragment extends Fragment
 
         return inflater.inflate(R.layout.layout, container, false);
     }
+
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -53,7 +54,6 @@ public class ItemAddFragment extends Fragment
         final EditText editText3 = view.findViewById(R.id.item_comment);
 
 
-
         fileimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +63,6 @@ public class ItemAddFragment extends Fragment
                 intent.setType("image/*");
 
                 startActivityForResult(intent, READ_REQUEST_CODE);
-
-
 
 
             }
@@ -86,12 +84,13 @@ public class ItemAddFragment extends Fragment
                 String param0 = editText.getText().toString();
                 String param1 = editText2.getText().toString();
                 String param2 = editText3.getText().toString();
-                if(param0.length() != 0){
+                if (param0.length() != 0) {
                     task = new com.example.item.UploadTask(getActivity());
-                    task.execute(param0, param1,param2);
+                    task.execute(param0, param1, param2);
                 }
-                if(customise !=null){
-                    new PostBmpAsyncHttpRequest().execute(new Param("http://yukiabineko.sakura.ne.jp/items/imagePost.php", customise, id));
+                if (customise != null) {
+                    new PostBmpAsyncHttpRequest().execute(new Param("http://yukiabineko.sakura.ne.jp/items/imagePost.php", customise));
+
                 }
 
 
@@ -112,20 +111,19 @@ public class ItemAddFragment extends Fragment
         super.onActivityResult(requestCode, resultCode, resultData);
         if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Uri uri;
-            if(resultData.getExtras() != null &&
-            resultData.getExtras().get("data")!= null){
+            if (resultData.getExtras() != null &&
+                    resultData.getExtras().get("data") != null) {
                 Bitmap capturedImage
                         = (Bitmap) resultData.getExtras().get("data");
-                customise  = Bitmap.createScaledBitmap(capturedImage, capturedImage.getWidth()/3, capturedImage.getHeight()/3, true);
+                customise = Bitmap.createScaledBitmap(capturedImage, capturedImage.getWidth() / 3, capturedImage.getHeight() / 3, true);
                 imageView.setImageBitmap(customise);
                 imageView.setImageBitmap(capturedImage);
-            }
-            else {
+            } else {
                 uri = resultData.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), uri);
-                    if(bitmap != null){
-                        customise  = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth()/3, bitmap.getHeight()/3, true);
+                    if (bitmap != null) {
+                        customise = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 3, bitmap.getHeight() / 3, true);
                         imageView.setImageBitmap(customise);
                     }
 
