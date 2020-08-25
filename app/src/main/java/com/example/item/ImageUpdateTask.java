@@ -1,6 +1,7 @@
 package com.example.item;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -85,7 +86,9 @@ public class ImageUpdateTask extends AsyncTask<UpdateImageParams, Void, StringBu
 
 
     public void onPostExecute(StringBuilder string) {
-
+        Intent intent = new Intent(activity, MainActivity.class);
+        activity.startActivity(intent);
+        activity.finish();
     }
 
 

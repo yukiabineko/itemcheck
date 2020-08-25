@@ -33,7 +33,7 @@
             android:layout_height="55dp"
             android:background="@color/colorPrimary"
             android:textColor="#fff"
-            android:text="店舗発注状況"
+            android:text="@string/order_tag"
             />
 
     </LinearLayout>

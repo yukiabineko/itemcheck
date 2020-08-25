@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         final Button bt2 = findViewById(R.id.bt2);
         bt2.setTypeface(font);
         final Button bt3 = findViewById(R.id.bt3);
+        bt3.setTypeface(font);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

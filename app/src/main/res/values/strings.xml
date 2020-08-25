@@ -30,5 +30,6 @@
     <string name="icon_request_check">&#xf058; 確認</string>
     <string name="icon_request_mail">&#xf0e0; メール</string>
     <string name="icon_request_back">&#xf04a; 取り消し</string>
+    <string name="order_tag">&#xf07a; 店舗発注状況</string>
 
 </resources>
