@@ -19,6 +19,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -87,17 +88,15 @@ public class ItemAddFragment extends Fragment {
                 if (param0.length() != 0) {
                     task = new com.example.item.UploadTask(getActivity());
                     task.execute(param0, param1, param2);
+                    ItemViewFragment itemViewFragment = new ItemViewFragment();
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.ll, itemViewFragment).commit();
                 }
                 if (customise != null) {
                     new PostBmpAsyncHttpRequest().execute(new Param("http://yukiabineko.sakura.ne.jp/items/imagePost.php", customise));
 
                 }
 
-
-                editText.setText("");
-                editText2.setText("");
-                editText3.setText("");
-                imageView.setImageBitmap(null);
             }
         });
     }

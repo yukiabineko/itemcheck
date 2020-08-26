@@ -93,12 +93,14 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
                 if(jsonArray.length() == 0 || jsonArray==null){
                     customList.clear();
                     customList.notifyDataSetChanged();
-                    activity.findViewById(R.id.table_header).setVisibility(View.INVISIBLE);
-                    activity.findViewById(R.id.not_data).setVisibility(View.VISIBLE);
+                    activity.findViewById(R.id.item_list_area).setVisibility(View.GONE);
+                    activity.findViewById(R.id.not_list_item).setVisibility(View.VISIBLE);
+                    activity.findViewById(R.id.not_list_item_button).setVisibility(View.VISIBLE);
                 }
                 else {
-                    activity.findViewById(R.id.table_header).setVisibility(View.VISIBLE);
-                    activity.findViewById(R.id.not_data).setVisibility(View.INVISIBLE);
+                    activity.findViewById(R.id.item_list_area).setVisibility(View.VISIBLE);
+                    activity.findViewById(R.id.not_list_item).setVisibility(View.GONE);
+                    activity.findViewById(R.id.not_list_item_button).setVisibility(View.GONE);
                 }
 
             } catch (JSONException e) {

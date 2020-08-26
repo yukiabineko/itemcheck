@@ -29,7 +29,7 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
      CustomList customList;
      List<ViewItemParam> list =new ArrayList<>();
 
-     Button getbutton,resetbutton;
+     Button getbutton,resetbutton,viewButton;
      LinearLayout mainArea,header;
      private ListView listView;
      private TextView textView;
@@ -53,19 +53,14 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         resetbutton = view.findViewById(R.id.all_delete);
         resetbutton.setTypeface(font);
         header = view.findViewById(R.id.table_header);
-        textView = view.findViewById(R.id.not_data);
+        viewButton = view.findViewById(R.id.not_list_item_button);
 
 
 
         customList = new CustomList(getContext(),0,list);
         customList.setListener(this);
 
-        if(customList.isEmpty()){
-            header.setVisibility(View.INVISIBLE);
-            textView.setVisibility(View.VISIBLE);
-            textView.setY(650);
-            textView.setX(200);
-        }
+
 
         final ListgetData task = new ListgetData(getActivity(),customList,list);
         task.execute();
@@ -107,6 +102,13 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
                                  customList.notifyDataSetChanged();
                              }
                          }).setNegativeButton("キャンセル",null).show();
+             }
+         });
+         viewButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 ListgetData task = new ListgetData(getActivity(),customList,list);
+                 task.execute();
              }
          });
 

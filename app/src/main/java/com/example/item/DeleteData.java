@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -88,7 +89,9 @@ public class DeleteData extends AsyncTask<String, Void, StringBuilder> {
     public void onPostExecute(StringBuilder result){
 
         Toast.makeText(mActivity, result.toString(),Toast.LENGTH_LONG).show();
-
+        mActivity.findViewById(R.id.item_list_area).setVisibility(View.GONE);
+        mActivity.findViewById(R.id.not_list_item).setVisibility(View.VISIBLE);
+        mActivity.findViewById(R.id.not_list_item_button);
 
     }
 
