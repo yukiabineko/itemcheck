@@ -138,7 +138,7 @@ public class ItemAddFragment extends Fragment {
                     resultData.getExtras().get("data") != null) {
                 Bitmap capturedImage
                         = (Bitmap) resultData.getExtras().get("data");
-                customise = Bitmap.createScaledBitmap(capturedImage, capturedImage.getWidth() / 3, capturedImage.getHeight() / 3, true);
+                customise = Bitmap.createScaledBitmap(capturedImage, capturedImage.getWidth() / 1, capturedImage.getHeight() / 1, true);
                 imageView.setImageBitmap(customise);
                 imageView.setImageBitmap(capturedImage);
             } else {
@@ -146,7 +146,7 @@ public class ItemAddFragment extends Fragment {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), uri);
                     if (bitmap != null) {
-                        customise = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 3, bitmap.getHeight() / 3, true);
+                        customise = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 5, bitmap.getHeight() / 5, true);
                         imageView.setImageBitmap(customise);
                     }
 

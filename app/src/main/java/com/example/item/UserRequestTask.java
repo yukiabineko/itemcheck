@@ -2,6 +2,7 @@ package com.example.item;
 
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -22,6 +23,7 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
     private  UserRequestList customList;
     private List<userRequestParams> list;
     Activity activity;
+    private  Dialog dialog;
 
     public UserRequestTask(Activity activity,UserRequestList customList, List<userRequestParams> list){
         super();
@@ -30,12 +32,25 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
         this.list = list;
     }
 
-
+    @Override
+    protected void onPreExecute() {
+        dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.progress);
+        dialog.setCancelable(false);
+        dialog.setTitle("更新中");
+        dialog.show();
+    }
     @Override
     protected String doInBackground(Void ... v)
     {
         String line;
         StringBuilder sb = new StringBuilder();//追加
+        try {
+            Thread.sleep(1 * 1000); //10秒待機
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         try{
 
             URL url = new URL("http://yukiabineko.sakura.ne.jp/items/userRequestjson.php");
@@ -112,5 +127,6 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
             activity.findViewById(R.id.not_request_button).setVisibility(View.VISIBLE);
             Toast.makeText(activity, "データがありません。",Toast.LENGTH_LONG).show();
         }
+        dialog.dismiss();
     }
 }

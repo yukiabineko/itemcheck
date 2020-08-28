@@ -1,6 +1,7 @@
 package com.example.item;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +33,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
     List<userRequestParams> list = new ArrayList<>();
     ListView listView;
     View dialogLayout;
+
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -212,5 +214,6 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         startActivity(intent);
 
     }
+
 
 }
