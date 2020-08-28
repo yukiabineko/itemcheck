@@ -39,6 +39,18 @@
                 android:layout_marginTop="8dp"
                 android:textSize="20sp"
                 />
+            <TextView
+                android:id="@+id/name_validation"
+                android:text="(必須)商品名を入力ください。"
+                android:textColor="#fff"
+                android:background="#ff0000"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                android:paddingTop="5dp"
+                android:textSize="15sp"
+                />
             <EditText
                 android:id="@+id/name_edit"
                 android:hint="@string/add_edit"
@@ -55,6 +67,18 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="8dp"
                 android:textSize="20sp"
+                />
+            <TextView
+                android:id="@+id/price_validation"
+                android:text="(必須)価格を入力ください。"
+                android:textColor="#fff"
+                android:background="#ff0000"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:paddingTop="5dp"
+                android:visibility="gone"
+                android:textSize="15sp"
                 />
             <EditText
                 android:id="@+id/price_edit"

@@ -1,9 +1,12 @@
 package com.example.item;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Button;
+
 import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
@@ -82,7 +85,9 @@ public class UploadTask extends AsyncTask<String, Void, StringBuilder> {
     // 非同期処理が終了後、結果をメインスレッドに返す
     public void onPostExecute(StringBuilder result){
 
-
+         mActivity.findViewById(R.id.bt).setBackgroundColor(Color.parseColor("#6200EE"));
+         mActivity.findViewById(R.id.bt2).setBackgroundColor(Color.parseColor("#3700B3"));
+         mActivity.findViewById(R.id.bt3).setBackgroundColor(Color.parseColor("#6200EE"));
 
     }
 

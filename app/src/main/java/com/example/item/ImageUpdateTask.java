@@ -86,9 +86,9 @@ public class ImageUpdateTask extends AsyncTask<UpdateImageParams, Void, StringBu
 
 
     public void onPostExecute(StringBuilder string) {
-        Intent intent = new Intent(activity, MainActivity.class);
+        /*Intent intent = new Intent(activity, MainActivity.class);
         activity.startActivity(intent);
-        activity.finish();
+        activity.finish();*/
     }
 
 

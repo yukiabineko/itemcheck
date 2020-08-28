@@ -73,18 +73,9 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
              public void onClick(View view) {
                  header.setVisibility(View.INVISIBLE);
                  customList.clear();
-                 if(customList.isEmpty()){
 
-                     textView.setVisibility(View.VISIBLE);
-                     textView.setY(650);
-                     textView.setX(200);
-                 }
-                 else {
-                     textView.setVisibility(View.INVISIBLE);
-                 }
-
-                     ListgetData task = new ListgetData(getActivity(),customList,list);
-                     task.execute();
+                    ListgetData task = new ListgetData(getActivity(),customList,list);
+                    task.execute();
                  }
          });
          resetbutton.setOnClickListener(new View.OnClickListener() {

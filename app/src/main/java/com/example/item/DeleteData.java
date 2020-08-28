@@ -87,12 +87,7 @@ public class DeleteData extends AsyncTask<String, Void, StringBuilder> {
     }
     // 非同期処理が終了後、結果をメインスレッドに返す
     public void onPostExecute(StringBuilder result){
-
-        Toast.makeText(mActivity, result.toString(),Toast.LENGTH_LONG).show();
-        mActivity.findViewById(R.id.item_list_area).setVisibility(View.GONE);
-        mActivity.findViewById(R.id.not_list_item).setVisibility(View.VISIBLE);
-        mActivity.findViewById(R.id.not_list_item_button);
-
+        Toast.makeText(mActivity, "削除しました。",Toast.LENGTH_LONG).show();
     }
 
 }
