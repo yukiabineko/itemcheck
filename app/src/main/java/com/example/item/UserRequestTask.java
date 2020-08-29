@@ -24,12 +24,15 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
     private List<userRequestParams> list;
     Activity activity;
     private  Dialog dialog;
+    private  List<String> mailList;
 
-    public UserRequestTask(Activity activity,UserRequestList customList, List<userRequestParams> list){
+
+    public UserRequestTask(Activity activity,UserRequestList customList, List<userRequestParams> list,List<String> mails){
         super();
         this.activity =activity;
         this.customList = customList;
         this.list = list;
+        this.mailList = mails;
     }
 
     @Override
@@ -86,8 +89,16 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
 
             try {
                 JSONArray jsonArray = new JSONArray(data);
-                for(int i=0; i<jsonArray.length();i++){
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                JSONArray emails = (JSONArray) jsonArray.get(0);
+                for(int i=0; i<emails.length(); i++){
+                    JSONObject jsonObject = emails.getJSONObject(i);
+                    mailList.add(jsonObject.getString("email"));
+                }
+
+                JSONArray jsonData = (JSONArray) jsonArray.get(1);
+                for(int i=0; i<jsonData.length();i++){
+
+                    JSONObject jsonObject = jsonData.getJSONObject(i);
                     String userid = jsonObject.getString("user_id");
                     String itemid = jsonObject.getString("item_id");
                     String name = jsonObject.getString("name");
@@ -129,4 +140,5 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
         }
         dialog.dismiss();
     }
+
 }

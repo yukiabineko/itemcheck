@@ -1,7 +1,6 @@
 package com.example.item;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +17,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 {
     UserRequestList userRequestList;
     List<userRequestParams> list = new ArrayList<>();
+    List<String> mails = new ArrayList<>();
     ListView listView;
     View dialogLayout;
 
@@ -46,6 +48,8 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fontawesome-webfont.ttf");
 
+
+
         LinearLayout mainContent = view.findViewById(R.id.request_content);
         mainContent.setVisibility(View.INVISIBLE);
         view.findViewById(R.id.not_request_title).setVisibility(View.VISIBLE);
@@ -53,8 +57,9 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         userRequestList = new UserRequestList(getContext(),0,list);
         userRequestList.setListener(this);
 
-        final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list);
+        final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
         task.execute();
+
 
 
         listView = view.findViewById(R.id.request_listView);
@@ -68,8 +73,9 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list);
+                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
                 task.execute();
+                Toast.makeText(getActivity(), mails.toString(),Toast.LENGTH_LONG).show();
 
             }
         });
@@ -77,11 +83,26 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         hiddenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list);
+                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
                 task.execute();
+
+
 
             }
         });
+        Button allMail = view.findViewById(R.id.mail_all_button);
+        allMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] array = mails.toArray(new String[mails.size()]);
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, array);
+
+                startActivity(intent);
+            }
+        });
+
 
       /*オーダーリセットボタン処理　*/
         Button resetButton = view.findViewById(R.id.request_all_delete);
