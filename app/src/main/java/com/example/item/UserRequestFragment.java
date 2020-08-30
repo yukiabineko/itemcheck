@@ -91,6 +91,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
             }
         });
         Button allMail = view.findViewById(R.id.mail_all_button);
+        allMail.setTypeface(font);
         allMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

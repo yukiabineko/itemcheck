@@ -86,7 +86,7 @@
                      android:layout_height="60dp"
                      android:background="@drawable/button_primary"
                      android:textColor="#fff"
-                     android:text="全店送信"
+                     android:text="@string/mails"
                      android:layout_gravity="right"/>
 
                  <Button
