@@ -23,7 +23,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,7 +132,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         });
 
     }
-    public void confirmationView(int i, final Button configButton, final Button backButton){
+    public void confirmationView(int i, final Button configButton, final Button backButton, final TextView confirm){
         final userRequestParams params = userRequestList.getItem(i);
 
 
@@ -180,7 +180,6 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
                        ConfirmTask task = new ConfirmTask(getActivity());
                        task.execute(String.valueOf(params.getUserid()), String.valueOf(params.getItemId()), params.getConfirm());
 
-                        TextView confirm = listView.findViewById(R.id.request_confirm_cont);
                         confirm.setText("確定");
                         Button send = listView.findViewById(R.id.reuest_send);
 
@@ -212,7 +211,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
     }
 
 
-    public  void backconfirm(int i,  Button confButton, Button backButton){
+    public  void backconfirm(int i,  Button confButton, Button backButton, TextView confirm){
         final userRequestParams params = userRequestList.getItem(i);
 
 
@@ -220,7 +219,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         task.execute(String.valueOf(params.getUserid()),String.valueOf(params.getItemId()), params.getConfirm());
         confButton.findViewById(R.id.reuest_send).setVisibility(View.VISIBLE);
         backButton.findViewById(R.id.reuest_edit).setVisibility(View.GONE);
-        TextView confirm = listView.findViewById(R.id.request_confirm_cont);
+       
         confirm.setText("未確定");
         confirm.setGravity(Gravity.CENTER);
         confirm.setTextColor(Color.WHITE);

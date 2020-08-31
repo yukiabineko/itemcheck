@@ -16,6 +16,7 @@
         android:textColor="#000"
         android:textSize="36sp"
         android:gravity="center_horizontal" />
+
     <TextView
         android:id="@+id/not_request_title"
         android:layout_width="match_parent"
@@ -49,11 +50,18 @@
              android:layout_height="match_parent"
              android:orientation="vertical">
 
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="30dp"
+                 android:textColor="#000"
+                 android:layout_marginBottom="10sp"
+                 android:text="商品ごとに集計するには、商品名をタップしてください。"/>
+
 
              <ListView
                  android:id="@+id/request_listView"
                  android:layout_width="match_parent"
-                 android:layout_height="350dp"
+                 android:layout_height="360dp"
                  android:background="#fff">
 
 
@@ -63,7 +71,7 @@
                  android:layout_width="match_parent"
                  android:layout_height="60dp"
                  android:layout_marginBottom="5dp"
-                 android:layout_marginTop="50dp"
+                 android:layout_marginTop="5dp"
                  android:orientation="horizontal">
 
                  <Button
