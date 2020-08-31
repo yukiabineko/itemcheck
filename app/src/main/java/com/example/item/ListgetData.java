@@ -1,6 +1,7 @@
 package com.example.item;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.view.View;
 
@@ -20,6 +21,7 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
     private  Activity  activity;
     private  CustomList customList;
     private List<ViewItemParam> list;
+    private Dialog dialog;
 
 
     public ListgetData(Activity activity,CustomList customList, List<ViewItemParam> list){
@@ -28,12 +30,26 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
         this.customList = customList;
         this.list = list;
     }
+    @Override
+    protected void onPreExecute() {
+        dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.progress);
+        dialog.setCancelable(false);
+        dialog.setTitle("更新中");
+        dialog.show();
+    }
 
     @Override
     protected String doInBackground(Void ... v){
 
         String line;
         StringBuilder sb = new StringBuilder();//追加
+        try {
+            Thread.sleep(1 * 1000); //10秒待機
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         try{
             System.out.println("1");
 
@@ -93,12 +109,14 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
                 if(jsonArray.length() == 0 || jsonArray==null){
                     customList.clear();
                     customList.notifyDataSetChanged();
-                    activity.findViewById(R.id.table_header).setVisibility(View.INVISIBLE);
-                    activity.findViewById(R.id.not_data).setVisibility(View.VISIBLE);
+                    activity.findViewById(R.id.item_list_area).setVisibility(View.GONE);
+                    activity.findViewById(R.id.not_list_item).setVisibility(View.VISIBLE);
+                    activity.findViewById(R.id.not_list_item_button).setVisibility(View.VISIBLE);
                 }
                 else {
-                    activity.findViewById(R.id.table_header).setVisibility(View.VISIBLE);
-                    activity.findViewById(R.id.not_data).setVisibility(View.INVISIBLE);
+                    activity.findViewById(R.id.item_list_area).setVisibility(View.VISIBLE);
+                    activity.findViewById(R.id.not_list_item).setVisibility(View.GONE);
+                    activity.findViewById(R.id.not_list_item_button).setVisibility(View.GONE);
                 }
 
             } catch (JSONException e) {
@@ -108,6 +126,7 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
         }else{
            activity.findViewById(R.id.table_header).setVisibility(View.INVISIBLE);
         }
+        dialog.dismiss();
     }
 }
 

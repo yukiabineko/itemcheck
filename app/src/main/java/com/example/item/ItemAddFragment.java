@@ -9,16 +9,19 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -29,6 +32,7 @@ public class ItemAddFragment extends Fragment {
     ImageView imageView;
     private com.example.item.UploadTask task;
     private Bitmap customise;
+    private TextView nameValidation, priceValidation;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +55,10 @@ public class ItemAddFragment extends Fragment {
         imageView = view.findViewById(R.id.show_image);
         final EditText editText = view.findViewById(R.id.name_edit);
         final EditText editText2 = view.findViewById(R.id.price_edit);
+        editText2.setInputType(InputType.TYPE_CLASS_NUMBER);
         final EditText editText3 = view.findViewById(R.id.item_comment);
+        nameValidation = view.findViewById(R.id.name_validation);
+        priceValidation = view.findViewById(R.id.price_validation);
 
 
         fileimage.setOnClickListener(new View.OnClickListener() {
@@ -84,20 +91,36 @@ public class ItemAddFragment extends Fragment {
                 String param0 = editText.getText().toString();
                 String param1 = editText2.getText().toString();
                 String param2 = editText3.getText().toString();
-                if (param0.length() != 0) {
+                if ((param0.length() != 0) &&(param1.length() !=0)) {
                     task = new com.example.item.UploadTask(getActivity());
                     task.execute(param0, param1, param2);
+                    ItemViewFragment itemViewFragment = new ItemViewFragment();
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.ll, itemViewFragment).commit();
+                    nameValidation.setVisibility(View.GONE);
+                    priceValidation.setVisibility(View.GONE);
                 }
+                else if(param0.length() == 0 && param1.length() == 0){
+                    nameValidation.setVisibility(View.VISIBLE);
+                    priceValidation.setVisibility(View.VISIBLE);
+                }
+
+                else if(param0.length() == 0){
+                    nameValidation.setVisibility(View.VISIBLE);
+                    priceValidation.setVisibility(View.GONE);
+                }
+                else if(param1.length() == 0){
+                    priceValidation.setVisibility(View.VISIBLE);
+                    nameValidation.setVisibility(View.GONE);
+                }
+
+
+
                 if (customise != null) {
                     new PostBmpAsyncHttpRequest().execute(new Param("http://yukiabineko.sakura.ne.jp/items/imagePost.php", customise));
 
                 }
 
-
-                editText.setText("");
-                editText2.setText("");
-                editText3.setText("");
-                imageView.setImageBitmap(null);
             }
         });
     }
@@ -115,7 +138,7 @@ public class ItemAddFragment extends Fragment {
                     resultData.getExtras().get("data") != null) {
                 Bitmap capturedImage
                         = (Bitmap) resultData.getExtras().get("data");
-                customise = Bitmap.createScaledBitmap(capturedImage, capturedImage.getWidth() / 3, capturedImage.getHeight() / 3, true);
+                customise = Bitmap.createScaledBitmap(capturedImage, capturedImage.getWidth() / 1, capturedImage.getHeight() / 1, true);
                 imageView.setImageBitmap(customise);
                 imageView.setImageBitmap(capturedImage);
             } else {
@@ -123,7 +146,7 @@ public class ItemAddFragment extends Fragment {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), uri);
                     if (bitmap != null) {
-                        customise = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 3, bitmap.getHeight() / 3, true);
+                        customise = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 5, bitmap.getHeight() / 5, true);
                         imageView.setImageBitmap(customise);
                     }
 

@@ -1,7 +1,9 @@
 package com.example.item;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,8 +25,8 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
     Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fontawesome-webfont.ttf");
 
     public interface RequestListener{
-        void confirmationView(int itemNumber, Button button, Button button2);  /*どのボタンか判別するため引数にボタン追加*/
-        void backconfirm(int itemNumber, Button button, Button button2);
+        void confirmationView(int itemNumber, Button button, Button button2, TextView confirm);  /*どのボタンか判別するため引数にボタン追加*/
+        void backconfirm(int itemNumber, Button button, Button button2, TextView confirm);
         void mailsend(int itemNumber);
     }
 
@@ -46,6 +49,15 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
 
         TextView name = convertView.findViewById(R.id.request_name_cont);
         name.setText(list.getName());
+        name.setPaintFlags(name.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext().getApplicationContext(),ItemAggregate.class);
+                getContext().startActivity(intent);
+
+            }
+        });
 
         TextView shop = convertView.findViewById(R.id.request_shop_cont);
         shop.setText(list.getShop());
@@ -58,7 +70,7 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
         day.setText(list.getDay());
 
 
-        TextView confirm = convertView.findViewById(R.id.request_confirm_cont);
+        final TextView confirm = convertView.findViewById(R.id.request_confirm_cont);
         String conf = list.getConfirm();
 
 
@@ -98,7 +110,7 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
             @Override
             public void onClick(View view) {
                 int itemNumber = (int) view.getTag();
-                listener.confirmationView(itemNumber, confirmButton, backButton);
+                listener.confirmationView(itemNumber, confirmButton, backButton, confirm);
                 
             }
         });
@@ -106,7 +118,7 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
             @Override
             public void onClick(View view) {
                 int itemNumber = (int) view.getTag();
-                listener.backconfirm(itemNumber,confirmButton, backButton);
+                listener.backconfirm(itemNumber,confirmButton, backButton,confirm);
             }
         });
         mailButton.setOnClickListener(new View.OnClickListener() {

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -86,10 +87,7 @@ public class DeleteData extends AsyncTask<String, Void, StringBuilder> {
     }
     // 非同期処理が終了後、結果をメインスレッドに返す
     public void onPostExecute(StringBuilder result){
-
-        Toast.makeText(mActivity, result.toString(),Toast.LENGTH_LONG).show();
-
-
+        Toast.makeText(mActivity, "削除しました。",Toast.LENGTH_LONG).show();
     }
 
 }

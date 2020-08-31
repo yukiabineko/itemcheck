@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +41,7 @@ public class EditItem extends AppCompatActivity
     private  ImageView imageView;
     private  Bitmap customise;
     private static final int READ_REQUEST_CODE = 42;
+    private TextView nameValidation, priceValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +52,11 @@ public class EditItem extends AppCompatActivity
         Typeface font = Typeface.createFromAsset(this.getAssets(), "fontawesome-webfont.ttf");
         final EditText nameInput = findViewById(R.id.name_edit);
         final EditText priceInput = findViewById(R.id.price_edit);
+        priceInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         final EditText infoInput = findViewById(R.id.item_comment);
         imageView = findViewById(R.id.show_image);
-
+        nameValidation = findViewById(R.id.name_validation);
+        priceValidation = findViewById(R.id.price_validation);
 
 
 
@@ -79,6 +83,9 @@ public class EditItem extends AppCompatActivity
         Picasso.get().load(url).into(imageView);
 
         customise = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        if(customise !=null){
+            imageView.setImageBitmap(customise);
+        }
 
 
 /****************************view関連*************************************************/
@@ -135,11 +142,30 @@ public class EditItem extends AppCompatActivity
                 String param0 = nameInput.getText().toString();
                 String param1 = priceInput.getText().toString();
                 String param2 = infoInput.getText().toString();
+                nameValidation.setVisibility(View.GONE);
+                priceValidation.setVisibility(View.GONE);
 
-                if(param0.length() != 0){
+                if(param0.length() != 0 && param1.length() !=0){
                     ItemUpdateTask task = new ItemUpdateTask(EditItem.this);
                     task.execute(param0, param1, param2, String.valueOf(id));
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
+                else if(param0.length() == 0 && param1.length() == 0){
+                    nameValidation.setVisibility(View.VISIBLE);
+                    priceValidation.setVisibility(View.VISIBLE);
+                }
+
+                else if(param0.length() == 0){
+                    nameValidation.setVisibility(View.VISIBLE);
+                    priceValidation.setVisibility(View.GONE);
+                }
+                else if(param1.length() == 0){
+                    priceValidation.setVisibility(View.VISIBLE);
+                    nameValidation.setVisibility(View.GONE);
+                }
+
+
                 if(customise !=null){
 
                     new ImageUpdateTask(EditItem.this).execute(new UpdateImageParams("http://yukiabineko.sakura.ne.jp/items/imageUpdate.php?id=" + id, customise));

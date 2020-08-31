@@ -2,6 +2,7 @@ package com.example.item;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -61,6 +62,9 @@ public class Allreset extends AsyncTask<Void, Void, String > {
     protected void onPostExecute(String data){
         super.onPostExecute(data);
         Toast.makeText(activity,data,Toast.LENGTH_LONG).show();
+        activity.findViewById(R.id.item_list_area).setVisibility(View.GONE);
+        activity.findViewById(R.id.not_list_item).setVisibility(View.VISIBLE);
+        activity.findViewById(R.id.not_list_item_button);
 
     }
 }

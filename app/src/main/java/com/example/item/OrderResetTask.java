@@ -1,6 +1,7 @@
 package com.example.item;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -14,16 +15,19 @@ public class OrderResetTask extends AsyncTask<Void, Void, String > {
 
     private Activity activity;
 
+
     public OrderResetTask(Activity activity){
         super();
         this.activity = activity;
 
     }
+
     @Override
     protected String doInBackground(Void ... v){
 
         String line;
         StringBuilder sb = new StringBuilder();//追加
+
         try{
 
             URL url = new URL("http://yukiabineko.sakura.ne.jp/items/orderAllReset.php");
@@ -55,6 +59,7 @@ public class OrderResetTask extends AsyncTask<Void, Void, String > {
     protected void onPostExecute(String data){
         super.onPostExecute(data);
         Toast.makeText(activity, "削除しました。", Toast.LENGTH_LONG).show();
+
     }
 }
 

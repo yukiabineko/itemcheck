@@ -38,8 +38,8 @@
                     android:id="@+id/request_name_cont"
                     android:layout_width="150dp"
                     android:layout_height="30dp"
-                    android:textColor="#000"
-                    android:textSize="18sp"
+                    android:textColor="#0000bb"
+                    android:textSize="22sp"
                     />
 
                 <TextView

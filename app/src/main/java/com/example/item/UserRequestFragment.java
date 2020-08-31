@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +17,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +32,10 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 {
     UserRequestList userRequestList;
     List<userRequestParams> list = new ArrayList<>();
+    List<String> mails = new ArrayList<>();
     ListView listView;
     View dialogLayout;
+
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fontawesome-webfont.ttf");
 
+
+
         LinearLayout mainContent = view.findViewById(R.id.request_content);
         mainContent.setVisibility(View.INVISIBLE);
         view.findViewById(R.id.not_request_title).setVisibility(View.VISIBLE);
@@ -51,8 +57,9 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         userRequestList = new UserRequestList(getContext(),0,list);
         userRequestList.setListener(this);
 
-        final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list);
+        final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
         task.execute();
+
 
 
         listView = view.findViewById(R.id.request_listView);
@@ -66,8 +73,9 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list);
+                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
                 task.execute();
+                Toast.makeText(getActivity(), mails.toString(),Toast.LENGTH_LONG).show();
 
             }
         });
@@ -75,11 +83,27 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         hiddenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list);
+                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
                 task.execute();
+
+
 
             }
         });
+        Button allMail = view.findViewById(R.id.mail_all_button);
+        allMail.setTypeface(font);
+        allMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] array = mails.toArray(new String[mails.size()]);
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, array);
+
+                startActivity(intent);
+            }
+        });
+
 
       /*オーダーリセットボタン処理　*/
         Button resetButton = view.findViewById(R.id.request_all_delete);
@@ -108,7 +132,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         });
 
     }
-    public void confirmationView(int i, final Button configButton, final Button backButton){
+    public void confirmationView(int i, final Button configButton, final Button backButton, final TextView confirm){
         final userRequestParams params = userRequestList.getItem(i);
 
 
@@ -156,7 +180,6 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
                        ConfirmTask task = new ConfirmTask(getActivity());
                        task.execute(String.valueOf(params.getUserid()), String.valueOf(params.getItemId()), params.getConfirm());
 
-                        TextView confirm = listView.findViewById(R.id.request_confirm_cont);
                         confirm.setText("確定");
                         Button send = listView.findViewById(R.id.reuest_send);
 
@@ -188,7 +211,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
     }
 
 
-    public  void backconfirm(int i,  Button confButton, Button backButton){
+    public  void backconfirm(int i,  Button confButton, Button backButton, TextView confirm){
         final userRequestParams params = userRequestList.getItem(i);
 
 
@@ -196,7 +219,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         task.execute(String.valueOf(params.getUserid()),String.valueOf(params.getItemId()), params.getConfirm());
         confButton.findViewById(R.id.reuest_send).setVisibility(View.VISIBLE);
         backButton.findViewById(R.id.reuest_edit).setVisibility(View.GONE);
-        TextView confirm = listView.findViewById(R.id.request_confirm_cont);
+       
         confirm.setText("未確定");
         confirm.setGravity(Gravity.CENTER);
         confirm.setTextColor(Color.WHITE);
@@ -212,5 +235,6 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         startActivity(intent);
 
     }
+
 
 }

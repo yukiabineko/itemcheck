@@ -2,6 +2,7 @@ package com.example.item;
 
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -22,20 +23,37 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
     private  UserRequestList customList;
     private List<userRequestParams> list;
     Activity activity;
+    private  Dialog dialog;
+    private  List<String> mailList;
 
-    public UserRequestTask(Activity activity,UserRequestList customList, List<userRequestParams> list){
+
+    public UserRequestTask(Activity activity,UserRequestList customList, List<userRequestParams> list,List<String> mails){
         super();
         this.activity =activity;
         this.customList = customList;
         this.list = list;
+        this.mailList = mails;
     }
 
-
+    @Override
+    protected void onPreExecute() {
+        dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.progress);
+        dialog.setCancelable(false);
+        dialog.setTitle("更新中");
+        dialog.show();
+    }
     @Override
     protected String doInBackground(Void ... v)
     {
         String line;
         StringBuilder sb = new StringBuilder();//追加
+        try {
+            Thread.sleep(1 * 1000); //10秒待機
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         try{
 
             URL url = new URL("http://yukiabineko.sakura.ne.jp/items/userRequestjson.php");
@@ -71,8 +89,16 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
 
             try {
                 JSONArray jsonArray = new JSONArray(data);
-                for(int i=0; i<jsonArray.length();i++){
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                JSONArray emails = (JSONArray) jsonArray.get(0);
+                for(int i=0; i<emails.length(); i++){
+                    JSONObject jsonObject = emails.getJSONObject(i);
+                    mailList.add(jsonObject.getString("email"));
+                }
+
+                JSONArray jsonData = (JSONArray) jsonArray.get(1);
+                for(int i=0; i<jsonData.length();i++){
+
+                    JSONObject jsonObject = jsonData.getJSONObject(i);
                     String userid = jsonObject.getString("user_id");
                     String itemid = jsonObject.getString("item_id");
                     String name = jsonObject.getString("name");
@@ -112,5 +138,7 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
             activity.findViewById(R.id.not_request_button).setVisibility(View.VISIBLE);
             Toast.makeText(activity, "データがありません。",Toast.LENGTH_LONG).show();
         }
+        dialog.dismiss();
     }
+
 }
