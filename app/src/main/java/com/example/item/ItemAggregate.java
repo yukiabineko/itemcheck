@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class ItemAggregate extends AppCompatActivity {
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("itemId");
+        DivisionTask task = new DivisionTask(this,adapter,list);
+        task.execute(id);
 
         DivisionParams params =new DivisionParams();
         params.setPrice("100");
