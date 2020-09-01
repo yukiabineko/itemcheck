@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/request_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/order_division_main_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp"
+        android:text="sample"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="36sp"
+        android:gravity="center_horizontal" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_back"
+        android:text="戻る"/>
+
+    <TextView
+        android:id="@+id/not_division_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:textSize="18dp"
+        android:text="データを表示できません。"
+        android:visibility="gone"
+        android:gravity="center">
+
+    </TextView>
+    <Button
+        android:id="@+id/not_division_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="150dp"
+        android:textSize="18dp"
+        android:text="更新"
+        android:visibility="gone"
+        android:gravity="center"/>
+
+
+            <ListView
+                android:id="@+id/division_listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff">
+
+
+            </ListView>
+
+
+
+</LinearLayout>

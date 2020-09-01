@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
@@ -73,9 +71,10 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userRequestList.clear();
+                userRequestList.notifyDataSetChanged();
                 final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
                 task.execute();
-                Toast.makeText(getActivity(), mails.toString(),Toast.LENGTH_LONG).show();
 
             }
         });
