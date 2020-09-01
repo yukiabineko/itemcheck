@@ -1,7 +1,6 @@
 package com.example.item;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -16,8 +15,6 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomList extends ArrayAdapter<ViewItemParam>

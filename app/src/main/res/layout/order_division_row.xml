@@ -4,27 +4,57 @@
     android:layout_height="150dp"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/order_division_shop"
-        android:background="#000"
-        android:textColor="#fff"
-        android:layout_gravity="center"
-        android:text="店舗"
-        android:layout_width="150dp"
-        android:layout_height="150dp"/>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="horizontal">
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:background="#000"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/order_division_shop"
+            android:background="#000"
+            android:textColor="#fff"
+            android:layout_marginTop="55dp"
+            android:layout_marginLeft="14dp"
+            android:text="甲府店"
+            android:textSize="18sp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"/>
+    </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="vertical"
             >
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:text="発注数"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_weight="1"
+                    android:layout_height="20dp"
+                    android:background="#0000bb"
+                    android:textColor="#fff"
+                    android:text="発注数"/>
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_weight="1"
+                    android:layout_height="20dp"
+                    android:background="#0000bb"
+                    android:textColor="#fff"
+                    android:text="確定状況"/>
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_weight="1"
+                    android:layout_height="20dp"
+                    android:background="#0000bb"
+                    android:textColor="#fff"
+                    android:text="メール"/>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,41 +82,41 @@
                 <Button
                     android:id="@+id/item_show"
                     android:layout_width="1dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_primary"
                     android:text="@string/icon_show"
                     android:textColor="#fff" />
             </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal">
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:orientation="vertical">
                     <TextView
-                        android:layout_width="200dp"
+                        android:layout_width="80dp"
                         android:layout_height="20dp"
+                        android:background="#0000bb"
+                        android:textColor="#fff"
                         android:text="問い合わせ"/>
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/comment_border">
+                        <TextView
+                            android:id="@+id/price_cont"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:textColor="#ff0000"
+                            android:textSize="18sp" />
+                    </ScrollView>
 
-                    <TextView
-                        android:id="@+id/price_cont"
-                        android:layout_width="200dp"
-                        android:layout_height="60dp"
-                        android:textColor="#ff0000"
-                        android:textSize="18sp"
-                        />
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-        </LinearLayout>
 
-    </LinearLayout>
+
 
