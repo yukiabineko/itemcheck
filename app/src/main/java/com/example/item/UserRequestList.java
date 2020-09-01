@@ -53,7 +53,9 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int itemId = list.getItemId();
                 Intent intent = new Intent(getContext().getApplicationContext(),ItemAggregate.class);
+                intent.putExtra("itemId", itemId);
                 getContext().startActivity(intent);
 
             }
