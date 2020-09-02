@@ -44,12 +44,7 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
 
         String line;
         StringBuilder sb = new StringBuilder();//追加
-        try {
-            Thread.sleep(1 * 1000); //10秒待機
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         try{
             System.out.println("1");
 

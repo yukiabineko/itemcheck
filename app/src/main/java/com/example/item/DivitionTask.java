@@ -2,13 +2,10 @@ package com.example.item;
 
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
 
 import androidx.annotation.RequiresApi;
 
@@ -30,6 +27,7 @@ class DivisionTask extends AsyncTask<String, Void, StringBuilder> {
     private  Activity activity;
     private  OrderDvisionList adapter;
     private  List<DivisionParams> list;
+    private Dialog dialog;
 
     public DivisionTask(Activity activity, OrderDvisionList adapter, List<DivisionParams> list){
        this.activity = activity;
@@ -38,6 +36,16 @@ class DivisionTask extends AsyncTask<String, Void, StringBuilder> {
     }
 
     // 非同期処理
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
+    @Override
+    protected void onPreExecute() {
+        dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.progress);
+        dialog.setCancelable(false);
+        dialog.setTitle("更新中");
+        dialog.show();
+    }
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected StringBuilder doInBackground(String... params) {
@@ -94,23 +102,30 @@ class DivisionTask extends AsyncTask<String, Void, StringBuilder> {
     // 非同期処理が終了後、結果をメインスレッドに返す
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void onPostExecute(StringBuilder result){
-        Toast.makeText(activity,result.toString(),Toast.LENGTH_LONG).show();
+
         if(result !=null){
             try{
+
 
                 JSONArray jsonArray = new JSONArray(result.toString());
                 for(int i=0; i<jsonArray.length();i++){
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String id =   jsonObject.getString("id");
-                    String price = jsonObject.getString("price");
+                    String itemId = jsonObject.getString("item_id");
+                    String userId = jsonObject.getString("user_id");
+                    String price = jsonObject.getString("item_price");
                     String memo = jsonObject.getString("memo");
                     String confirm = jsonObject.getString("confirm");
+                    String number = jsonObject.getString("num");
 
                     DivisionParams params = new DivisionParams();
                     params.setId(Integer.parseInt(id));
+                    params.setItemId(Integer.parseInt(itemId));
+                    params.setUserId(Integer.parseInt(userId));
                     params.setPrice(price);
                     params.setConfirm(confirm);
                     params.setMemo(memo);
+                    params.setNumber(number);
                     list.add(params);
                     adapter.notifyDataSetChanged();
 
@@ -128,6 +143,7 @@ class DivisionTask extends AsyncTask<String, Void, StringBuilder> {
             }
             catch (Exception e){}
         }
+        dialog.dismiss();
     }
 
 }

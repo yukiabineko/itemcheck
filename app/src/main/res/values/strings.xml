@@ -33,5 +33,6 @@
     <string name="order_tag">&#xf07a; 店舗発注状況</string>
     <string name="wait_progress">　しばらくお待ちください。</string>
     <string name="mails">&#xf0e0;全店送信</string>
+    <string name="icon_division_check">&#xf058; 発注確定</string>
 
 </resources>
