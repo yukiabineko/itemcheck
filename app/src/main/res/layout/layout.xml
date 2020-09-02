@@ -57,6 +57,7 @@
                 android:textColor="#000"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:maxLength="10"
                 android:layout_marginTop="1dp"
                 android:textSize="20sp"/>
             <TextView
@@ -86,6 +87,7 @@
                 android:textColor="#000"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:maxLength="5"
                 android:layout_marginTop="1dp"
                 android:textSize="20sp"/>
             <ImageView

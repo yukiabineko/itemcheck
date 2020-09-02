@@ -241,6 +241,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         startActivity(intent);
 
     }
+    /*商品別集計フラグメント作成*/
     public  void createFragment(String id, String name){
         DivisionFragment fragment = new DivisionFragment();
         Bundle args = new Bundle();

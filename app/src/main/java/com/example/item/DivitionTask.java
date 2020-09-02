@@ -2,18 +2,11 @@ package com.example.item;
 
 
 import android.app.Activity;
-<<<<<<< HEAD
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
 
-=======
 import android.app.Dialog;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.util.Log;
->>>>>>> aea80f78ffc81438cfd80361bdb10622c212880a
 
 import androidx.annotation.RequiresApi;
 

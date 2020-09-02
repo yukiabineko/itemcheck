@@ -22,6 +22,7 @@ public class OrderDvisionList extends ArrayAdapter<DivisionParams>
 
     public interface  OrderDivisionListener{
         void confirmationView(int itemNumber, Button button, Button button2, TextView confirm);  /*どのボタンか判別するため引数にボタン追加*/
+        void deleteConfirm(int itemNumber);
     }
     public  void setListener(OrderDivisionListener listener){
         this.listener = listener;
@@ -59,10 +60,14 @@ public class OrderDvisionList extends ArrayAdapter<DivisionParams>
         if(f.equals("0")){
            conf.setText("未確定");
            conf.setTextColor(Color.RED);
+           confirmButton.setVisibility(View.VISIBLE);
+           backButton.setVisibility(View.GONE);
         }
         else {
             conf.setText("確定");
             conf.setTextColor(Color.BLUE);
+            confirmButton.setVisibility(View.GONE);
+            backButton.setVisibility(View.VISIBLE);
         }
         conf.setTypeface(null,Typeface.BOLD);
 
@@ -73,6 +78,13 @@ public class OrderDvisionList extends ArrayAdapter<DivisionParams>
             public void onClick(View view) {
                 int itemNumber = (int) view.getTag();
                 listener.confirmationView(itemNumber, confirmButton, backButton, conf);
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int itemNumber = (int) view.getTag();
+                listener.deleteConfirm(itemNumber);
             }
         });
 

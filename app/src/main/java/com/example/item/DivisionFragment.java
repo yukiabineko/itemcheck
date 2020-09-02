@@ -30,6 +30,7 @@ public class DivisionFragment extends Fragment implements OrderDvisionList.Order
      private ListView listView;
      private  OrderDvisionList adapter;
      private List<DivisionParams> list = new ArrayList<>();
+     private String name,id;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,8 +42,8 @@ public class DivisionFragment extends Fragment implements OrderDvisionList.Order
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle args = getArguments();
-        String name = args.getString("name");
-        String id = args.getString("id");
+        name = args.getString("name");
+        id = args.getString("id");
 
         listView = view.findViewById(R.id.division_listView);
         TextView titleItem = view.findViewById(R.id.order_division_main_title);
@@ -73,7 +74,29 @@ public class DivisionFragment extends Fragment implements OrderDvisionList.Order
         ConfirmTask task = new ConfirmTask(getActivity());
         task.execute(String.valueOf(params.getUserId()), String.valueOf(params.getItemId()), params.getConfirm());
 
-        conf.setText("確定済み");
+        DivisionFragment fragment = new DivisionFragment();
+        Bundle args = new Bundle();
+        args.putString("id", id);
+        args.putString("name", name);
+        fragment.setArguments(args);
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.ll, fragment).commit();
     }
+    public void deleteConfirm(int itemNumber){
+        DivisionParams params = list.get(itemNumber);
+        ConfirmTask task = new ConfirmTask(getActivity());
+        task.execute(String.valueOf(params.getUserId()), String.valueOf(params.getItemId()), params.getConfirm());
+
+        DivisionFragment fragment = new DivisionFragment();
+        Bundle args = new Bundle();
+        args.putString("id", id);
+        args.putString("name", name);
+        fragment.setArguments(args);
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.ll, fragment).commit();
+    }
+
 
 }

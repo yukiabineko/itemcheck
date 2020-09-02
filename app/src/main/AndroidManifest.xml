@@ -21,7 +21,6 @@
         <activity android:name=".EditItem"
             android:windowSoftInputMode="stateAlwaysHidden"
             />
-        <activity android:name=".ItemAggregate"/>
     </application>
 
 </manifest>
