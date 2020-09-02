@@ -3,6 +3,7 @@ package com.example.item;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,16 +18,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Typeface font = Typeface.createFromAsset(getBaseContext().getAssets(), "fontawesome-webfont.ttf");
-
-        ItemViewFragment itemViewFragment = new ItemViewFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.ll, itemViewFragment).commit();
-
         final Button bt = findViewById(R.id.bt);
         bt.setTypeface(font);
         final Button bt2 = findViewById(R.id.bt2);
         bt2.setTypeface(font);
         final Button bt3 = findViewById(R.id.bt3);
+
+
+
+        ItemViewFragment itemViewFragment = new ItemViewFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.ll, itemViewFragment).commit();
+
+
         bt3.setTypeface(font);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override

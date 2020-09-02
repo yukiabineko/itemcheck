@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import androidx.fragment.app.FragmentTransaction;
+
 import java.util.List;
 
 public class UserRequestList extends ArrayAdapter<userRequestParams>
@@ -28,6 +30,7 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
         void confirmationView(int itemNumber, Button button, Button button2, TextView confirm);  /*どのボタンか判別するため引数にボタン追加*/
         void backconfirm(int itemNumber, Button button, Button button2, TextView confirm);
         void mailsend(int itemNumber);
+        void createFragment(String id, String name);
     }
 
     public void setListener(RequestListener listener){
@@ -54,9 +57,12 @@ public class UserRequestList extends ArrayAdapter<userRequestParams>
             @Override
             public void onClick(View view) {
                 String itemId = String.valueOf(list.getItemId());
-                Intent intent = new Intent(getContext().getApplicationContext(),ItemAggregate.class);
+                String name = String.valueOf(list.getName());
+                listener.createFragment(itemId, name);
+                /*Intent intent = new Intent(getContext().getApplicationContext(),ItemAggregate.class);
                 intent.putExtra("itemId", itemId);
-                getContext().startActivity(intent);
+                intent.putExtra("name",name);
+                getContext().startActivity(intent);*/
 
             }
         });

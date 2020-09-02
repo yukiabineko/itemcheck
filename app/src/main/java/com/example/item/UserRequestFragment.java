@@ -182,11 +182,15 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
                         confirm.setText("確定");
                         Button send = listView.findViewById(R.id.reuest_send);
 
-                       configButton.setVisibility(View.GONE);
+                        UserRequestFragment itemAddFragment = new UserRequestFragment();
+                        FragmentTransaction fragmentTransaction =getActivity().getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.ll, itemAddFragment).commit();
+
+                       /*configButton.setVisibility(View.GONE);
                         backButton.setVisibility(View.VISIBLE);
                         confirm.setGravity(Gravity.CENTER);
                         confirm.setTextColor(Color.WHITE);
-                        confirm.setBackgroundColor(Color.parseColor("#6200EE"));
+                        confirm.setBackgroundColor(Color.parseColor("#6200EE"));*/
 
                     }
                 })
@@ -216,8 +220,11 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 
         ConfirmTask task = new ConfirmTask(getActivity());
         task.execute(String.valueOf(params.getUserid()),String.valueOf(params.getItemId()), params.getConfirm());
-        confButton.findViewById(R.id.reuest_send).setVisibility(View.VISIBLE);
-        backButton.findViewById(R.id.reuest_edit).setVisibility(View.GONE);
+        /*confButton.findViewById(R.id.reuest_send).setVisibility(View.VISIBLE);
+        backButton.findViewById(R.id.reuest_edit).setVisibility(View.GONE);*/
+        UserRequestFragment itemAddFragment = new UserRequestFragment();
+        FragmentTransaction fragmentTransaction =getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.ll, itemAddFragment).commit();
        
         confirm.setText("未確定");
         confirm.setGravity(Gravity.CENTER);
@@ -233,6 +240,16 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 
         startActivity(intent);
 
+    }
+    public  void createFragment(String id, String name){
+        DivisionFragment fragment = new DivisionFragment();
+        Bundle args = new Bundle();
+        args.putString("id", id);
+        args.putString("name", name);
+        fragment.setArguments(args);
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.ll, fragment).commit();
     }
 
 

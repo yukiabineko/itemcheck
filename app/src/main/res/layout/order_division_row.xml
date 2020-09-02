@@ -51,6 +51,13 @@
                     android:layout_height="20dp"
                     android:background="#0000bb"
                     android:textColor="#fff"
+                    android:text="申請処理"/>
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_weight="1"
+                    android:layout_height="20dp"
+                    android:background="#0000bb"
+                    android:textColor="#fff"
                     android:text="メール"/>
 
             </LinearLayout>
@@ -80,14 +87,36 @@
                     android:textSize="18sp"
                     />
                 <Button
-                    android:id="@+id/item_show"
+                    android:id="@+id/division_confirm_button"
                     android:layout_width="1dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_primary"
+                    android:text="@string/icon_division_check"
+                    android:textColor="#fff" />
+                <Button
+                    android:id="@+id/division_confirm_back"
+                    android:layout_width="1dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:background="@drawable/button_delete"
+                    android:text="@string/icon_request_back"
+                    android:textColor="#fff" />
+                <Button
+                    android:id="@+id/division_confirm_mail"
+                    android:layout_width="1dp"
+                    android:layout_height="35dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_primary"
-                    android:text="@string/icon_show"
+                    android:text="@string/icon_request_mail"
                     android:textColor="#fff" />
+
             </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
