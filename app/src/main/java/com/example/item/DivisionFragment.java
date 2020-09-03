@@ -97,6 +97,8 @@ public class DivisionFragment extends Fragment implements OrderDvisionList.Order
 
         fragmentTransaction.replace(R.id.ll, fragment).commit();
     }
+    public void mailSend(int i){
 
+    }
 
 }

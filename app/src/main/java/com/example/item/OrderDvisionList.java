@@ -19,10 +19,12 @@ public class OrderDvisionList extends ArrayAdapter<DivisionParams>
     private  LayoutInflater layoutInflater;
     private  List<DivisionParams> orderList;
     private OrderDivisionListener listener;
+    Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fontawesome-webfont.ttf");
 
     public interface  OrderDivisionListener{
         void confirmationView(int itemNumber, Button button, Button button2, TextView confirm);  /*どのボタンか判別するため引数にボタン追加*/
         void deleteConfirm(int itemNumber);
+        void mailSend(int itemNO);
     }
     public  void setListener(OrderDivisionListener listener){
         this.listener = listener;
@@ -52,8 +54,14 @@ public class OrderDvisionList extends ArrayAdapter<DivisionParams>
 
         final Button confirmButton = convertView.findViewById(R.id.division_confirm_button);
         confirmButton.setTag(position);
+        confirmButton.setTypeface(font);
         final Button backButton = convertView.findViewById(R.id.division_confirm_back);
+        backButton.setTypeface(font);
         backButton.setTag(position);
+
+        final  Button mailButton = convertView.findViewById(R.id.division_confirm_mail);
+        mailButton.setTypeface(font);
+        mailButton.setTag(position);
 
         /*発注確定か判別*/
 
@@ -87,7 +95,13 @@ public class OrderDvisionList extends ArrayAdapter<DivisionParams>
                 listener.deleteConfirm(itemNumber);
             }
         });
-
+        mailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int itemNumber = (int) view.getTag();
+                listener.mailSend(itemNumber);
+            }
+        });
 
 
 
