@@ -13,7 +13,8 @@
         android:background="@color/colorPrimary">
         <Button
             android:id="@+id/bt2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="55dp"
             android:background="@color/colorPrimaryDark"
             android:textColor="#fff"
@@ -21,7 +22,8 @@
             />
         <Button
             android:id="@+id/bt"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="55dp"
             android:background="@color/colorPrimary"
             android:textColor="#fff"
@@ -29,11 +31,21 @@
             />
         <Button
             android:id="@+id/bt3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="55dp"
             android:background="@color/colorPrimary"
             android:textColor="#fff"
             android:text="@string/order_tag"
+            />
+        <Button
+            android:id="@+id/bt4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="55dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"
+            android:text="店舗管理"
             />
 
     </LinearLayout>
