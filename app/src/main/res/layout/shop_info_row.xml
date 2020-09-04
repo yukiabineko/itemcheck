@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:orientation="vertical">
+
+    <!--１行目-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="名称"
+            android:background="@drawable/title_area">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#fff"
+                android:text="名称"
+                android:textAlignment="center"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:background="@drawable/comment_border">
+            <TextView
+                android:id="@+id/shop_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="qqq"
+                android:textColor="#000"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- /１行目-->
+    <!--2行目-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/title_area">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#fff"
+                android:text="メールアドレス"
+                android:textAlignment="center"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:background="@drawable/comment_border">
+            <TextView
+                android:id="@+id/shop_mail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="qqq"
+                android:textColor="#000"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- /2行目-->
+    <!--3行目-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/title_area">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#fff"
+                android:text="電話番号"
+                android:textAlignment="center"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:background="@drawable/comment_border">
+            <TextView
+                android:id="@+id/shop_pass"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="qqq"
+                android:textColor="#000"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- /3行目-->
+    <!--ボタンエリア-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10sp"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="編集"
+            android:textColor="#fff"
+            android:background="@drawable/button_primary"
+            android:layout_marginRight="3dp"
+            android:layout_height="50dp"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="削除"
+            android:textColor="#fff"
+            android:background="@drawable/button_delete"
+            android:layout_height="50dp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:visibility="invisible"/>
+
+
+    </LinearLayout>
+    <!--/ボタンエリア-->
+
+
+</LinearLayout>

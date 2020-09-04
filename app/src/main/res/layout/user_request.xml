@@ -39,10 +39,7 @@
         android:visibility="gone"
         android:gravity="center"/>
         />
-     <ScrollView
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         >
+
 
          <LinearLayout
              android:id="@+id/request_content"
@@ -61,7 +58,8 @@
              <ListView
                  android:id="@+id/request_listView"
                  android:layout_width="match_parent"
-                 android:layout_height="360dp"
+                 android:layout_height="0dp"
+                 android:layout_weight="6"
                  android:background="#fff">
 
 
@@ -69,7 +67,8 @@
 
              <LinearLayout
                  android:layout_width="match_parent"
-                 android:layout_height="60dp"
+                 android:layout_height="0dp"
+                 android:layout_weight="1"
                  android:layout_marginBottom="5dp"
                  android:layout_marginTop="5dp"
                  android:orientation="horizontal">
@@ -80,7 +79,7 @@
                      android:layout_marginRight="10dp"
                      android:layout_width="0dip"
                      android:layout_weight="1"
-                     android:layout_height="60dp"
+                     android:layout_height="match_parent"
                      android:background="@drawable/button_primary"
                      android:textColor="#fff"
                      android:text="@string/icon_update"
@@ -91,7 +90,7 @@
                      android:layout_marginRight="10dp"
                      android:layout_width="0dip"
                      android:layout_weight="1"
-                     android:layout_height="60dp"
+                     android:layout_height="match_parent"
                      android:background="@drawable/button_primary"
                      android:textColor="#fff"
                      android:text="@string/mails"
@@ -101,7 +100,7 @@
                      android:id="@+id/request_all_delete"
                      android:layout_width="0dip"
                      android:layout_weight="1"
-                     android:layout_height="60dp"
+                     android:layout_height="match_parent"
                      android:layout_marginTop="10dp"
                      android:background="@drawable/button_delete"
                      android:text="@string/icon_reset"
@@ -111,6 +110,6 @@
              </LinearLayout>
 
          </LinearLayout>
-     </ScrollView>
+
 
 </LinearLayout>

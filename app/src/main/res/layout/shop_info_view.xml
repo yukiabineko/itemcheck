@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/shop_info_title"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="36sp"
+        android:gravity="center_horizontal" />
+
+    <LinearLayout
+        android:id="@+id/item_list_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/new_shop_button"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:background="@drawable/button_primary"
+                android:textColor="#fff"
+                android:text="@string/new_shop_button"
+                android:layout_gravity="right"/>
+
+
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/shop_listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            >
+        </ListView>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/not_list_shop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:textSize="18dp"
+        android:text="データを表示できません。"
+        android:gravity="center"/>
+    <Button
+        android:id="@+id/not_list_shop_button"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="170dp"
+        android:textSize="18dp"
+        android:text="更新"
+        android:gravity="center"/>
+
+
+</LinearLayout>
