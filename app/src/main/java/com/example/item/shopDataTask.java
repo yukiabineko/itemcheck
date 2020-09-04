@@ -52,6 +52,8 @@ public class shopDataTask extends AsyncTask<Void, Void, String > {
             URL url = new URL("http://yukiabineko.sakura.ne.jp/items/shopJson.php");
             HttpURLConnection http = (HttpURLConnection)url.openConnection();
             http.setRequestMethod("GET");
+            http.setReadTimeout(6000);
+            http.setConnectTimeout(5000);
             http.connect();
 
 
@@ -88,7 +90,7 @@ public class shopDataTask extends AsyncTask<Void, Void, String > {
 
 
 
-                    Toast.makeText(activity,name,Toast.LENGTH_LONG).show();
+
                     ShopDataParams param = new ShopDataParams();
                     param.setId(Integer.parseInt(id));
                     param.setName(name);

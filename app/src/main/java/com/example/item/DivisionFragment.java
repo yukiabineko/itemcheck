@@ -92,11 +92,11 @@ public class DivisionFragment extends Fragment implements OrderDvisionList.Order
         fragmentTransaction.replace(R.id.ll, fragment).commit();
     }
     public void mailSend(int i){
-         DivisionParams params = list.get(i);
+        DivisionParams params = list.get(i);
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
-        /*intent.putExtra(Intent.EXTRA_EMAIL, new String[]{params.getEmail()});
-        intent.putExtra(Intent.EXTRA_SUBJECT, params.getName() + "ついて。");*/
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{params.getEmail()});
+        intent.putExtra(Intent.EXTRA_SUBJECT, params.getName() + "ついて。");
 
         startActivity(intent);
     }

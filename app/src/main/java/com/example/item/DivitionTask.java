@@ -76,8 +76,8 @@ class DivisionTask extends AsyncTask<String, Void, StringBuilder> {
             httpConn.setDoOutput(true);
 
             // 時間制限
-            httpConn.setReadTimeout(10000);
-            httpConn.setConnectTimeout(20000);
+            httpConn.setReadTimeout(6000);
+            httpConn.setConnectTimeout(5000);
 
             // 接続
             httpConn.connect();
@@ -106,8 +106,6 @@ class DivisionTask extends AsyncTask<String, Void, StringBuilder> {
 
         if(result !=null){
             try{
-
-
                 JSONArray jsonArray = new JSONArray(result.toString());
                 for(int i=0; i<jsonArray.length();i++){
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -118,6 +116,8 @@ class DivisionTask extends AsyncTask<String, Void, StringBuilder> {
                     String memo = jsonObject.getString("memo");
                     String confirm = jsonObject.getString("confirm");
                     String number = jsonObject.getString("num");
+                    String email = jsonObject.getString("email");
+                    String name = jsonObject.getString("item_name");
 
                     DivisionParams params = new DivisionParams();
                     params.setId(Integer.parseInt(id));
@@ -127,6 +127,8 @@ class DivisionTask extends AsyncTask<String, Void, StringBuilder> {
                     params.setConfirm(confirm);
                     params.setMemo(memo);
                     params.setNumber(number);
+                    params.setEmail(email);
+                    params.setName(name);
                     list.add(params);
                     adapter.notifyDataSetChanged();
 

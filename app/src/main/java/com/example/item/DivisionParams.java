@@ -8,6 +8,8 @@ public class DivisionParams {
       private String confirm;
       private String memo;
       private String number;
+      private String name;
+      private String email;
 
 
       public void setId(int id){
@@ -25,23 +27,15 @@ public class DivisionParams {
           this.memo = memo;
       }
       public void setNumber(String num){this.number = num;}
-
-      public int getId(){
-          return id;
-      }
+      public void setEmail(String email) { this.email = email; }
+      public void setName(String name) { this.name = name; }
+      public int getId(){ return id; }
       public int getItemId(){return  itemId;}
       public int getUserId(){return  userId;}
-      public String getPrice(){
-          return price;
-      }
-      public  String getConfirm(){
-          return confirm;
-      }
-      public String getMemo(){
-          return memo;
-      }
+      public String getPrice(){ return price; }
+      public  String getConfirm(){ return confirm; }
+      public String getMemo(){ return memo; }
       public String getNumber(){return  number;}
-
-
-
+      public String getEmail() { return email; }
+      public String getName() { return name; }
 }

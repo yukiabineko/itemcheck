@@ -54,6 +54,8 @@ public class UserRequestTask extends AsyncTask<Void, Void, String >
             URL url = new URL("http://yukiabineko.sakura.ne.jp/items/userRequestjson.php");
             HttpURLConnection http = (HttpURLConnection)url.openConnection();
             http.setRequestMethod("GET");
+            http.setReadTimeout(6000);
+            http.setConnectTimeout(5000);
             http.connect();
 
 

@@ -57,8 +57,8 @@ public class ConfirmTask extends AsyncTask<String, Void, StringBuilder> {
             httpConn.setDoOutput(true);
 
             // 時間制限
-            httpConn.setReadTimeout(10000);
-            httpConn.setConnectTimeout(20000);
+            httpConn.setReadTimeout(6000);
+            httpConn.setConnectTimeout(5000);
 
             // 接続
             httpConn.connect();
