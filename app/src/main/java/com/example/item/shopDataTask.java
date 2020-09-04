@@ -58,8 +58,6 @@ public class shopDataTask extends AsyncTask<Void, Void, String > {
             InputStreamReader in = new InputStreamReader(http.getInputStream(), "UTF-8");
             BufferedReader br = new BufferedReader(in);
 
-            System.out.println("3");
-
             while((line = br.readLine()) != null){
                 System.out.println(line);
                 if(sb.length() > 0) sb.append('\n');//追加
@@ -78,30 +76,29 @@ public class shopDataTask extends AsyncTask<Void, Void, String > {
 
     protected void onPostExecute(String data){
         super.onPostExecute(data);
-        Toast.makeText(activity,data,Toast.LENGTH_LONG).show();
+
         if(data != null){
             try {
                 JSONArray jsonArray = new JSONArray(data);
                 for(int i=0; i<jsonArray.length();i++){
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String id =   jsonObject.getString("id");
-                    String name = jsonObject.getString("name");
+                    String name = jsonObject.getString("shop");
                     String email = jsonObject.getString("email");
-                    String tel = jsonObject.getString("tel");
 
 
 
+                    Toast.makeText(activity,name,Toast.LENGTH_LONG).show();
                     ShopDataParams param = new ShopDataParams();
                     param.setId(Integer.parseInt(id));
                     param.setName(name);
                     param.setEmail(email);
-                    param.setTel(tel);
                     list.add(param);
 
                     customList.notifyDataSetChanged();
                 }
 
-                    activity.findViewById(R.id.item_list_area).setVisibility(View.VISIBLE);
+                    activity.findViewById(R.id.shop_list_area).setVisibility(View.VISIBLE);
                     activity.findViewById(R.id.not_list_shop).setVisibility(View.GONE);
                     activity.findViewById(R.id.not_list_shop_button).setVisibility(View.GONE);
 

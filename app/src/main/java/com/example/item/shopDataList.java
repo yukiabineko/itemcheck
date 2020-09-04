@@ -1,6 +1,7 @@
 package com.example.item;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +27,16 @@ class ShopDataList extends ArrayAdapter<ShopDataParams>
         final ShopDataParams params =  mist.get(position);
 
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.row,null);
+            convertView = layoutInflater.inflate(R.layout.shop_info_row,null);
         }
 
         TextView name = convertView.findViewById(R.id.shop_name);
         name.setText(params.getName());
+        name.setTypeface(null, Typeface.BOLD);
 
         TextView mail = convertView.findViewById(R.id.shop_mail);
-        mail.setText(params.getName());
+        mail.setText(params.getEmail());
+        name.setTypeface(null, Typeface.BOLD);
 
 
         return  convertView;
