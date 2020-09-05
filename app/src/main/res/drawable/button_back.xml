@@ -10,7 +10,7 @@
                 android:topLeftRadius="5dp"
                 />
             <solid
-                android:color="#F0F0F0"
+                android:color="#c0c0c0"
                 />
         </shape>
     </item>
@@ -24,7 +24,7 @@
                 android:topLeftRadius="5dp"
                 />
             <solid
-                android:color="#DD0000"
+                android:color="#f0f0f0"
                 />
         </shape>
     </item>

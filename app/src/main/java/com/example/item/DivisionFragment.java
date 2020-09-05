@@ -53,6 +53,8 @@ public class DivisionFragment extends Fragment implements OrderDvisionList.Order
                 fragmentTransaction.replace(R.id.ll, itemAddFragment).commit();
             }
         });
+
+
         adapter = new OrderDvisionList(getActivity(), 0, list);
         adapter.setListener(this);
         listView.setAdapter(adapter);
