@@ -24,7 +24,6 @@
             android:paddingBottom="20dp"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/add_name"
                 android:text="店舗名"
                 android:textColor="#000"
                 android:layout_marginTop="20dp"
@@ -35,19 +34,17 @@
                 />
             <TextView
                 android:id="@+id/shop_name_validation"
-                android:text="(必須)商品名を入力ください。"
+                android:text="(必須)店舗名を入力ください。"
                 android:textColor="#fff"
-                android:background="#0000"
+                android:background="#ff0000"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:visibility="gone"
-                android:paddingTop="5dp"
-                android:layout_marginTop="-2dp"
                 android:textSize="15sp"
                 />
             <EditText
-                android:id="@+id/name_edit"
+                android:id="@+id/shop_name_edit"
                 android:hint="５文字以内でお願いします。"
                 android:textColor="#000"
                 android:layout_width="match_parent"
@@ -56,7 +53,6 @@
                 android:background="@drawable/edit_text_cusrom"
                 android:textSize="20sp"/>
             <TextView
-                android:id="@+id/add_price"
                 android:text="メールアドレス"
                 android:textColor="#000"
                 android:layout_width="match_parent"
@@ -66,7 +62,7 @@
                 />
             <TextView
                 android:id="@+id/shop_mail_validation"
-                android:text="(必須)価格を入力ください。"
+                android:text="(必須)メールアドレスを入力ください。"
                 android:textColor="#fff"
                 android:background="#ff0000"
                 android:layout_width="match_parent"
@@ -94,6 +90,17 @@
                 android:layout_weight="1"
                 android:textSize="16sp"
                 />
+            <TextView
+                android:id="@+id/shop_pass_validation"
+                android:text="(必須)パスワードを入力ください。"
+                android:textColor="#fff"
+                android:background="#ff0000"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:textSize="15sp"
+                />
 
             <EditText
                 android:id="@+id/add_shop_pass"
@@ -112,6 +119,17 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:textSize="16sp"
+                />
+            <TextView
+                android:id="@+id/shop_conf_validation"
+                android:text="(必須)入力してください。"
+                android:textColor="#fff"
+                android:background="#ff0000"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:textSize="15sp"
                 />
 
             <EditText
