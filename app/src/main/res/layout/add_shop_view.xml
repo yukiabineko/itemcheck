@@ -74,7 +74,7 @@
                 />
             <EditText
                 android:id="@+id/add_shop_mail"
-                android:hint="メールアドレスを入力ください。"
+                android:hint="(例)sample@example.com"
                 android:background="@drawable/edit_text_cusrom"
                 android:textColor="#000"
                 android:layout_width="match_parent"
@@ -152,10 +152,22 @@
                 android:layout_weight="1"
                 android:textSize="16sp"
                 />
+            <TextView
+                android:id="@+id/shop_tel_validation"
+                android:text="入力が間違ってます。"
+                android:textColor="#fff"
+                android:background="#ff0000"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:textSize="15sp"
+                />
+
 
             <EditText
                 android:id="@+id/add_shop_tel"
-                android:hint="ハイフン無し。"
+                android:hint="(例)090-xxxx-yyyy"
                 android:background="@drawable/edit_text_cusrom"
                 android:textColor="#000"
                 android:layout_width="match_parent"
@@ -175,7 +187,7 @@
                 android:textSize="20sp"
                 android:background="@drawable/button_primary"
                 android:layout_marginBottom="10dp"
-                android:text="@string/icon_edit"/>
+                android:text="@string/add_shop_button"/>
             <Button
                 android:id="@+id/back_add_shop_button"
                 android:layout_width="match_parent"
@@ -184,7 +196,7 @@
                 android:textColor="#fff"
                 android:textSize="20sp"
                 android:background="@drawable/button_back"
-                android:text="戻る"/>
+                android:text="@string/add_shop_back"/>
 
         </LinearLayout>
 

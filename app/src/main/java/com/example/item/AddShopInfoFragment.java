@@ -1,5 +1,6 @@
 package com.example.item;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class AddShopInfoFragment extends Fragment{
      private EditText shopInput, emailInput, passwordInput, passwordConfirmationInput, telInput;
-     private TextView shopError, emailError, passwordError, confirmationError;
+     private TextView shopError, emailError, passwordError, confirmationError, telError;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -28,6 +28,7 @@ public class AddShopInfoFragment extends Fragment{
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fontawesome-webfont.ttf");
 
         /*editText一覧*/
 
@@ -42,9 +43,11 @@ public class AddShopInfoFragment extends Fragment{
         emailError = view.findViewById(R.id.shop_mail_validation);
         passwordError = view.findViewById(R.id.shop_pass_validation);
         confirmationError = view.findViewById(R.id.shop_conf_validation);
+        telError = view.findViewById(R.id.shop_tel_validation);
 
         /* 登録作業*/
         Button shopAdd = view.findViewById(R.id.add_shop_button);
+        shopAdd.setTypeface(font);
         shopAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,8 +59,11 @@ public class AddShopInfoFragment extends Fragment{
 
                 /*各種ERROR対応または通信*/
 
-                String pattern = "^([a-zA-Z0-9])+([a-zA-Z0-9\\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\\._-]+)+$";
+                String pattern = "^([a-zA-Z0-9])+([a-zA-Z0-9\\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\\._-]+)+$"; /*メールパターン*/
                 Pattern p = Pattern.compile(pattern);
+
+                String telPattern = "^\\d{2,4}-\\d{2,4}-\\d{4}$";                                            /*電話パターン*/
+                Pattern p2 = Pattern.compile(telPattern);
 
                 if(shop.equals("")){ shopError.setVisibility(View.VISIBLE); }
                 else{shopError.setVisibility(View.GONE);}
@@ -72,6 +78,11 @@ public class AddShopInfoFragment extends Fragment{
                     emailError.setVisibility(View.VISIBLE);
                 }
                 else{ emailError.setVisibility(View.GONE);}
+
+                if(!p2.matcher(tel).find() && !tel.equals("")){
+                    telError.setVisibility(View.VISIBLE);
+                }
+                else {telError.setVisibility(View.GONE);}
 
 
 
@@ -106,9 +117,13 @@ public class AddShopInfoFragment extends Fragment{
                 if(password.equals(passwordConfirmation)
                     && p.matcher(email).find()
                     &&  !shop.equals("") && !email.equals("") && !password.equals("") && !passwordConfirmation.equals("")
+                    && p2.matcher(tel).find() && !tel.equals("")
                 ){
                     AddShopTask task = new AddShopTask(getActivity());
                     task.execute(shop, email, password,tel);
+                    ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.ll, shopInfoFragment).commit();
                 }
 
                /*
@@ -133,10 +148,9 @@ public class AddShopInfoFragment extends Fragment{
         });
 
 
-
-
         /*店舗一覧に戻る*/
         Button back = view.findViewById(R.id.back_add_shop_button);
+        back.setTypeface(font);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

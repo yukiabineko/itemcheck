@@ -1,4 +1,6 @@
 package com.example.item;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ShopInfoFragment extends Fragment
+public class ShopInfoFragment extends Fragment implements ShopDataList.shopListener
 {
     private ListView listView;
      List<ShopDataParams> list = new ArrayList<>();
@@ -29,6 +31,7 @@ public class ShopInfoFragment extends Fragment
 
 
         adapter = new ShopDataList(getContext(),0, list);
+        adapter.setListener(this);
         shopDataTask task = new shopDataTask(getActivity(),adapter,list);
         task.execute();
         listView = view.findViewById(R.id.shop_listView);
@@ -50,5 +53,17 @@ public class ShopInfoFragment extends Fragment
     }
 
 
+    @Override
+    public void deleteShop(int shopNO) {
+        new AlertDialog.Builder(getActivity())
+                .setTitle("削除確認")
+                .setMessage("削除しますか？")
+                .setPositiveButton("削除する", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
+                    }
+                })
+                .setNeutralButton("閉じる",null).show();
+    }
 }
