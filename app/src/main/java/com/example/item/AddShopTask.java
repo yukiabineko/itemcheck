@@ -1,8 +1,10 @@
 package com.example.item;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -17,7 +19,10 @@ import java.nio.charset.StandardCharsets;
 
 public class AddShopTask extends AsyncTask<String, Void, StringBuilder> {
 
-
+     Activity activity;
+     public  AddShopTask(Activity activity){
+         this.activity = activity;
+     }
     // 非同期処理
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -28,7 +33,7 @@ public class AddShopTask extends AsyncTask<String, Void, StringBuilder> {
 
         HttpURLConnection httpConn;
 
-        String word = "user_id=" + params[0] + "&item_id=" + params[1] + "&confirm=" + params[2];
+        String word = "shop=" + params[0] + "&email=" + params[1] + "&password=" + params[2] + "&tel=" + params[3];
         System.out.println(word);
         StringBuilder sb = new StringBuilder();
 
@@ -75,8 +80,7 @@ public class AddShopTask extends AsyncTask<String, Void, StringBuilder> {
     }
     // 非同期処理が終了後、結果をメインスレッドに返す
     public void onPostExecute(StringBuilder result){
-
-
+        Toast.makeText(activity, result.toString(),Toast.LENGTH_LONG).show();
     }
 
 }

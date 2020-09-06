@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import java.util.regex.Pattern;
 
 
 public class AddShopInfoFragment extends Fragment{
@@ -49,25 +52,72 @@ public class AddShopInfoFragment extends Fragment{
                 String email = emailInput.getText().toString();                                   /*email書き込み内容*/
                 String password = passwordInput.getText().toString();                            /*password書き込み内容*/
                 String passwordConfirmation = passwordConfirmationInput.getText().toString();    /*passwordConfirmation書き込み内容*/
+                String tel = telInput.getText().toString();
 
                 /*各種ERROR対応または通信*/
+
+                String pattern = "^([a-zA-Z0-9])+([a-zA-Z0-9\\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\\._-]+)+$";
+                Pattern p = Pattern.compile(pattern);
 
                 if(shop.equals("")){ shopError.setVisibility(View.VISIBLE); }
                 else{shopError.setVisibility(View.GONE);}
 
 
-                if(email.equals("")){ emailError.setVisibility(View.VISIBLE); }
+                if(email.equals("")){
+                    emailError.setText("(必須)メールアドレスを入力ください。");
+                    emailError.setVisibility(View.VISIBLE);
+                }
+                else if(!p.matcher(email).find()){
+                    emailError.setText("メールアドレスが正しくありません。");
+                    emailError.setVisibility(View.VISIBLE);
+                }
                 else{ emailError.setVisibility(View.GONE);}
 
 
 
+                if(password.equals(passwordConfirmation) && !password.equals("") && !passwordConfirmation.equals("")){
+                    passwordError.setVisibility(View.GONE);
+                    confirmationError.setVisibility(View.GONE);
+                }
+                else if(!password.equals("") && passwordConfirmation.equals("")) {
+                    confirmationError.setText("(必須)パスワードを入力ください。");
+                    confirmationError.setVisibility(View.VISIBLE);
+                    passwordError.setVisibility(View.GONE);
+                }
+                else if(password.equals("") && !passwordConfirmation.equals("")) {
+                    passwordError.setText("(必須)パスワードを入力ください。");
+                    passwordError.setVisibility(View.VISIBLE);
+                    confirmationError.setVisibility(View.GONE);
+                }
+                else if(password.equals("") && passwordConfirmation.equals("")) {
+                    passwordError.setText("(必須)パスワードを入力ください。");
+                    passwordError.setVisibility(View.VISIBLE);
+
+                    confirmationError.setText("(必須)パスワードを入力ください。");
+                    confirmationError.setVisibility(View.VISIBLE);
+                }
+                else if(!password.equals(passwordConfirmation)){
+                    passwordError.setText("パスワードが異なります。");
+                    passwordError.setVisibility(View.VISIBLE);
+
+                    confirmationError.setText("パスワードが異なります。");
+                    confirmationError.setVisibility(View.VISIBLE);
+                }
+                if(password.equals(passwordConfirmation)
+                    && p.matcher(email).find()
+                    &&  !shop.equals("") && !email.equals("") && !password.equals("") && !passwordConfirmation.equals("")
+                ){
+                    AddShopTask task = new AddShopTask(getActivity());
+                    task.execute(shop, email, password,tel);
+                }
+
+               /*
                 if(password.equals("")){
                     passwordError.setText("(必須)パスワードを入力ください。");
                     passwordError.setVisibility(View.VISIBLE);
                 }
                 else{ passwordError.setVisibility(View.GONE);}
-
-                if(passwordConfirmation.equals("")){
+               if(passwordConfirmation.equals("")){
                     confirmationError.setText("(必須)パスワードを入力ください。");
                     confirmationError.setVisibility(View.VISIBLE);
                 }
@@ -76,7 +126,7 @@ public class AddShopInfoFragment extends Fragment{
                 if(!password.equals("") && !password.equals("")){
                     passwordError.setVisibility(View.GONE);
                     confirmationError.setVisibility(View.GONE);
-                }
+                }*/
 
 
             }
