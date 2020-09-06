@@ -135,7 +135,7 @@
             android:id="@+id/shop_data_delete"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="削除"
+            android:text="@string/shop_delete"
             android:textColor="#fff"
             android:background="@drawable/button_delete"
             android:layout_height="60dp"/>

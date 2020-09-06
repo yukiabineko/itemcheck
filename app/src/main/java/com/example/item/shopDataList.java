@@ -17,6 +17,7 @@ class ShopDataList extends ArrayAdapter<ShopDataParams>
     private  LayoutInflater layoutInflater;
     private  List<ShopDataParams> mist;
     private  shopListener listener;
+    Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fontawesome-webfont.ttf");
 
     public interface shopListener{
         void deleteShop(int shopNO);
@@ -50,6 +51,7 @@ class ShopDataList extends ArrayAdapter<ShopDataParams>
 
         Button delete = convertView.findViewById(R.id.shop_data_delete);
         delete.setTag(position);
+        delete.setTypeface(font);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

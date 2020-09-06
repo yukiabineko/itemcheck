@@ -35,8 +35,9 @@
     <string name="mails">&#xf0e0;全店送信</string>
     <string name="icon_division_check">&#xf058; 発注確定</string>
     <string name="shop_info_title">店舗情報一覧</string>
-    <string name="new_shop_button">新規登録</string>
+    <string name="new_shop_button">&#xf055; 新規登録</string>
     <string name="add_shop_button">&#xf055;登録</string>
     <string name="add_shop_back">&#xf0a8;戻る</string>
+    <string name="shop_delete">&#xf1f8;　削除</string>
 
 </resources>
