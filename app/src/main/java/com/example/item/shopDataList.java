@@ -21,6 +21,7 @@ class ShopDataList extends ArrayAdapter<ShopDataParams>
 
     public interface shopListener{
         void deleteShop(int shopNO);
+        void updateShop(int shopNO);
     }
     public void setListener(shopListener listener){
         this.listener = listener;
@@ -57,6 +58,16 @@ class ShopDataList extends ArrayAdapter<ShopDataParams>
             public void onClick(View view) {
                 int shopNO = (int) view.getTag();
                 listener.deleteShop(shopNO);
+            }
+        });
+        Button update = convertView.findViewById(R.id.shop_update);
+        update.setTag(position);
+        update.setTypeface(font);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int shopNO = (int) view.getTag();
+                listener.updateShop(shopNO);
             }
         });
 

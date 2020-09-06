@@ -124,9 +124,10 @@
         android:paddingBottom="5dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/shop_update"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="編集"
+            android:text="@string/shop_update"
             android:textColor="#fff"
             android:background="@drawable/button_primary"
             android:layout_marginRight="3dp"

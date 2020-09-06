@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -54,13 +54,11 @@ public class ShopInfoFragment extends Fragment implements ShopDataList.shopListe
 
 
     }
-
-
     @Override
     public void deleteShop(int shopNO) {
         ShopDataParams params = list.get(shopNO);
         final int id = params.getId();
-        Toast.makeText(getActivity(),String.valueOf(id),Toast.LENGTH_LONG).show();
+
         new AlertDialog.Builder(getActivity())
                 .setTitle("削除確認")
                 .setMessage("削除しますか？")
@@ -76,5 +74,18 @@ public class ShopInfoFragment extends Fragment implements ShopDataList.shopListe
                     }
                 })
                 .setNeutralButton("閉じる",null).show();
+    }
+
+    @Override
+    public void updateShop(int shopNO) {
+        ShopDataParams params = list.get(shopNO);
+        final int id = params.getId();
+
+        ShopUpdateFragment fragment = new ShopUpdateFragment();
+        Bundle args = new Bundle();
+        args.putString("id", String.valueOf(id));
+        fragment.setArguments(args);
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.ll, fragment).commit();
     }
 }

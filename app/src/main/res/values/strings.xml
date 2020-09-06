@@ -39,5 +39,7 @@
     <string name="add_shop_button">&#xf055;登録</string>
     <string name="add_shop_back">&#xf0a8;戻る</string>
     <string name="shop_delete">&#xf1f8;　削除</string>
+    <string name="shop_edit_button">&#xf01e; 編集</string>
+    <string name="shop_update">&#xf01e; 編集</string>
 
 </resources>
