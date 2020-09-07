@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
@@ -80,12 +81,9 @@ public class ShopInfoFragment extends Fragment implements ShopDataList.shopListe
     public void updateShop(int shopNO) {
         ShopDataParams params = list.get(shopNO);
         final int id = params.getId();
+        /*Toast.makeText(getActivity(), String.valueOf(id),Toast.LENGTH_LONG).show();*/
+       ShopFindTask task = new ShopFindTask(getActivity());
+        task.execute(String.valueOf(id));
 
-        ShopUpdateFragment fragment = new ShopUpdateFragment();
-        Bundle args = new Bundle();
-        args.putString("id", String.valueOf(id));
-        fragment.setArguments(args);
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.ll, fragment).commit();
     }
 }

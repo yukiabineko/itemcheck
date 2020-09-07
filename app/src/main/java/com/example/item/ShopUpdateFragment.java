@@ -9,18 +9,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
 
 public class ShopUpdateFragment extends Fragment{
     private EditText shopInput, emailInput, passwordInput, passwordConfirmationInput, telInput;
-    private TextView shopError, emailError, passwordError, confirmationError, telError;
-    private String id;
+    private TextView shopError, emailError, passwordError, confirmationError, telError, title;
+    private String data;
+    private  String  id;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -32,7 +37,14 @@ public class ShopUpdateFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fontawesome-webfont.ttf");
         Bundle args = getArguments();
-        id = args.getString("id");
+        TextView textView =view.findViewById(R.id.add_edit_page_title);
+        textView.setText("店舗編集");
+        data = args.getString("data");
+        if(data == null){
+            ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.ll, shopInfoFragment).commit();
+        }
 
         Button newButton = view.findViewById(R.id.add_shop_button);
         newButton.setVisibility(View.GONE);
@@ -54,6 +66,31 @@ public class ShopUpdateFragment extends Fragment{
         passwordError = view.findViewById(R.id.shop_pass_validation);
         confirmationError = view.findViewById(R.id.shop_conf_validation);
         telError = view.findViewById(R.id.shop_tel_validation);
+
+
+        /*データ格納*/
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            String name = jsonObject.getString("shop");
+            String email = jsonObject.getString("email");
+            String tel = jsonObject.getString("tel");
+            id = jsonObject.getString("id");
+
+            textView =view.findViewById(R.id.add_edit_page_title);
+            textView.setText(name +"情報編集");
+            shopInput.setText(name);
+            emailInput.setText(email);
+            telInput.setText(tel);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
 
         /* 登録作業*/
         Button shopAdd = view.findViewById(R.id.add_shop_button);
