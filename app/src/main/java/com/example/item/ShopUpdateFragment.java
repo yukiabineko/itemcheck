@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -86,11 +85,6 @@ public class ShopUpdateFragment extends Fragment{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
-
-
 
         /* 登録作業*/
         Button shopAdd = view.findViewById(R.id.add_shop_button);
