@@ -19,23 +19,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class AddShopTask extends AsyncTask<String, Void, StringBuilder> {
+public class ShopUpdataTask extends AsyncTask<String, Void, StringBuilder> {
 
-     Activity activity;
-     public  AddShopTask(Activity activity){
-         this.activity = activity;
-     }
+    Activity activity;
+    public  ShopUpdataTask(Activity activity){
+        this.activity = activity;
+    }
     // 非同期処理
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected StringBuilder doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://yukiabineko.sakura.ne.jp/items/shopAdd.php";
+        String urlSt = "http://yukiabineko.sakura.ne.jp/items/shopUpdate.php";
 
         HttpURLConnection httpConn;
 
-        String word = "shop=" + params[0] + "&email=" + params[1] + "&password=" + params[2] + "&tel=" + params[3];
+        String word = "shop=" + params[0] + "&email=" + params[1] + "&password=" + params[2] + "&tel=" + params[3] + "&id=" +params[4];
         System.out.println(word);
         StringBuilder sb = new StringBuilder();
 
@@ -89,7 +89,7 @@ public class AddShopTask extends AsyncTask<String, Void, StringBuilder> {
     }
 
     private FragmentActivity getActivity() {
-         return (FragmentActivity) activity;
+        return (FragmentActivity) activity;
     }
 
 }

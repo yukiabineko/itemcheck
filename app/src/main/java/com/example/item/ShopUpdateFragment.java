@@ -129,11 +129,9 @@ public class ShopUpdateFragment extends Fragment{
                         &&  !shop.equals("") && !email.equals("") && !password.equals("") && !passwordConfirmation.equals("")
                         && p2.matcher(tel).find() && !tel.equals("")
                 ){
-                    AddShopTask task = new AddShopTask(getActivity());
-                    task.execute(shop, email, password,tel);
-                    ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.ll, shopInfoFragment).commit();
+                    ShopUpdataTask task = new ShopUpdataTask(getActivity());
+                    task.execute(shop, email, password,tel,id);
+
                 }
 
                /*

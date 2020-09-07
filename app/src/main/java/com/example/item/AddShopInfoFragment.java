@@ -20,6 +20,7 @@ public class AddShopInfoFragment extends Fragment{
      private EditText shopInput, emailInput, passwordInput, passwordConfirmationInput, telInput;
      private TextView shopError, emailError, passwordError, confirmationError, telError;
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
@@ -121,13 +122,12 @@ public class AddShopInfoFragment extends Fragment{
                 ){
                     AddShopTask task = new AddShopTask(getActivity());
                     task.execute(shop, email, password,tel);
-                    ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.ll, shopInfoFragment).commit();
+
                 }
 
                /*
                 if(password.equals("")){
+
                     passwordError.setText("(必須)パスワードを入力ください。");
                     passwordError.setVisibility(View.VISIBLE);
                 }
