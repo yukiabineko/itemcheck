@@ -1,7 +1,10 @@
 package com.example.item;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +51,31 @@ class ShopDataList extends ArrayAdapter<ShopDataParams>
 
         TextView mail = convertView.findViewById(R.id.shop_mail);
         mail.setText(params.getEmail());
-        name.setTypeface(null, Typeface.BOLD);
+        mail.setTag(position);
+        mail.setPaintFlags(mail.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mail.setTypeface(null, Typeface.BOLD);
+
+        /*メールアプリ起動*/
+        mail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{params.getEmail()});
+                getContext().startActivity(intent);
+            }
+        });
+
+
+
+
+
+
+
+        TextView tel = convertView.findViewById(R.id.shop_tel);
+        tel.setText(params.getTel());
+        tel.setPaintFlags(tel.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        tel.setTypeface(font);
 
         Button delete = convertView.findViewById(R.id.shop_data_delete);
         delete.setTag(position);

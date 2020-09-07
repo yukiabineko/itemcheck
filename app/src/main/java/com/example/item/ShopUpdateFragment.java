@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -93,9 +93,9 @@ public class ShopUpdateFragment extends Fragment{
 
 
         /* 登録作業*/
-        Button shopAdd = view.findViewById(R.id.add_shop_button);
-        shopAdd.setTypeface(font);
-        shopAdd.setOnClickListener(new View.OnClickListener() {
+        Button shopUpdate = view.findViewById(R.id.add_edit_button);
+        shopUpdate.setTypeface(font);
+        shopUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String shop = shopInput.getText().toString();                                     /*店舗書き込み内容*/
