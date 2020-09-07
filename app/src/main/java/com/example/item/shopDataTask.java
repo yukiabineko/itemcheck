@@ -87,7 +87,7 @@ public class shopDataTask extends AsyncTask<Void, Void, String > {
                     String id =   jsonObject.getString("id");
                     String name = jsonObject.getString("shop");
                     String email = jsonObject.getString("email");
-
+                    String tel = jsonObject.getString("tel");
 
 
 
@@ -95,6 +95,7 @@ public class shopDataTask extends AsyncTask<Void, Void, String > {
                     param.setId(Integer.parseInt(id));
                     param.setName(name);
                     param.setEmail(email);
+                    param.setTel(tel);
                     list.add(param);
 
                     customList.notifyDataSetChanged();

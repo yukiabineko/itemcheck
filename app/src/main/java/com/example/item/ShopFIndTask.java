@@ -97,9 +97,9 @@ class ShopFindTask extends AsyncTask<String, Void, StringBuilder> {
         }
         else{
             Toast.makeText(activity, "編集失敗",Toast.LENGTH_LONG).show();
-            /*ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
+            ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.ll, shopInfoFragment).commit();*/
+            fragmentTransaction.replace(R.id.ll, shopInfoFragment).commit();
         }
 
     }

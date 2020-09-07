@@ -17,10 +17,12 @@
             android:text="名称"
             android:background="@drawable/title_area">
             <TextView
+                android:id="@+id/shop_name_header"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textColor="#fff"
-                android:text="名称"
+                android:textSize="20dp"
+                android:text="@string/shop_name_header"
                 android:textAlignment="center"
                 android:gravity="center_vertical" />
         </LinearLayout>
@@ -54,10 +56,12 @@
             android:layout_weight="1"
             android:background="@drawable/title_area">
             <TextView
+                android:id="@+id/shop_email_header"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textColor="#fff"
-                android:text="メールアドレス"
+                android:textSize="16dp"
+                android:text="@string/shop_email_header"
                 android:textAlignment="center"
                 android:gravity="center_vertical" />
         </LinearLayout>
@@ -71,9 +75,8 @@
                 android:id="@+id/shop_mail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="qqq"
                 android:textSize="18dp"
-                android:textColor="#000"
+                android:textColor="@color/alertBlue"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -91,10 +94,12 @@
             android:layout_weight="1"
             android:background="@drawable/title_area">
             <TextView
+                android:id="@+id/shop_tel_header"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textColor="#fff"
-                android:text="電話番号"
+                android:textSize="20dp"
+                android:text="@string/shop_tel_header"
                 android:textAlignment="center"
                 android:gravity="center_vertical" />
         </LinearLayout>
@@ -105,10 +110,9 @@
             android:layout_weight="2"
             android:background="@drawable/comment_border">
             <TextView
-                android:id="@+id/shop_pass"
+                android:id="@+id/shop_tel"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="qqq"
                 android:textSize="18dp"
                 android:textColor="#000"
                 android:layout_marginTop="5dp"
