@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -94,12 +95,12 @@ class ShopFindTask extends AsyncTask<String, Void, StringBuilder> {
             fragment.setArguments(args);
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.ll, fragment).commit();
+
+
         }
-        else{
+        else if(result ==null || result.toString().equals("")){
             Toast.makeText(activity, "編集失敗",Toast.LENGTH_LONG).show();
-            ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.ll, shopInfoFragment).commit();
+            activity.findViewById(R.id.update_shop_main).setVisibility(View.GONE);
         }
 
     }

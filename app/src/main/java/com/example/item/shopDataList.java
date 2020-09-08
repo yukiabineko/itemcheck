@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -13,9 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.RequiresApi;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
 
@@ -29,6 +34,7 @@ class ShopDataList extends ArrayAdapter<ShopDataParams>
     public interface shopListener{
         void deleteShop(int shopNO);
         void updateShop(int shopNO);
+        void shopList();
     }
     public void setListener(shopListener listener){
         this.listener = listener;
@@ -44,6 +50,9 @@ class ShopDataList extends ArrayAdapter<ShopDataParams>
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public View getView(int position, View convertView, final ViewGroup parent) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+
         final ShopDataParams params =  mist.get(position);
 
         if (convertView == null) {
@@ -113,8 +122,14 @@ class ShopDataList extends ArrayAdapter<ShopDataParams>
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int shopNO = (int) view.getTag();
-                listener.updateShop(shopNO);
+                if(info !=null && info.isAvailable()){
+                    int shopNO = (int) view.getTag();
+                    listener.updateShop(shopNO);
+                }
+                else{
+                   listener.shopList();
+                }
+
             }
         });
 
@@ -122,6 +137,9 @@ class ShopDataList extends ArrayAdapter<ShopDataParams>
 
         return  convertView;
     }
+
+
+
     public static boolean isTablet(Context context) {
         return context.getResources().getConfiguration().smallestScreenWidthDp >= 600;
     }

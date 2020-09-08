@@ -29,20 +29,23 @@ public class ShopUpdateFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        return inflater.inflate(R.layout.add_shop_view, container, false);
+        return inflater.inflate(R.layout.shop_update_view, container, false);
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fontawesome-webfont.ttf");
         Bundle args = getArguments();
-        TextView textView =view.findViewById(R.id.add_edit_page_title);
+        TextView textView =view.findViewById(R.id.up_edit_page_title);
         textView.setText("店舗編集");
         data = args.getString("data");
         if(data == null){
-            ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.ll, shopInfoFragment).commit();
+            view.findViewById(R.id.update_shop_main).setVisibility(View.GONE);
+            textView.setVisibility(View.GONE);
+        }
+        else {
+            view.findViewById(R.id.update_shop_main).setVisibility(View.VISIBLE);
+            textView.setVisibility(View.VISIBLE);
         }
 
         Button newButton = view.findViewById(R.id.add_shop_button);
@@ -75,7 +78,7 @@ public class ShopUpdateFragment extends Fragment{
             String tel = jsonObject.getString("tel");
             id = jsonObject.getString("id");
 
-            textView =view.findViewById(R.id.add_edit_page_title);
+            textView =view.findViewById(R.id.up_edit_page_title);
             textView.setText(name +"情報編集");
             shopInput.setText(name);
             emailInput.setText(email);

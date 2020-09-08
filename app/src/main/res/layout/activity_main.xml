@@ -45,7 +45,7 @@
             android:layout_height="55dp"
             android:background="@color/colorPrimary"
             android:textColor="#fff"
-            android:text="店舗管理"
+            android:text="@string/shop_header_tag"
             />
 
     </LinearLayout>

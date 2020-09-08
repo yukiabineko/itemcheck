@@ -1,7 +1,10 @@
 package com.example.item;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +26,7 @@ public class ShopInfoFragment extends Fragment implements ShopDataList.shopListe
     private ListView listView;
      List<ShopDataParams> list = new ArrayList<>();
      ShopDataList adapter;
+     NetworkInfo info;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -31,6 +35,10 @@ public class ShopInfoFragment extends Fragment implements ShopDataList.shopListe
     }
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        info = connectivityManager.getActiveNetworkInfo();
+
 
         Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fontawesome-webfont.ttf");
         adapter = new ShopDataList(getContext(),0, list);
@@ -50,6 +58,14 @@ public class ShopInfoFragment extends Fragment implements ShopDataList.shopListe
                 AddShopInfoFragment fragment = new AddShopInfoFragment();
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.ll, fragment).commit();
+            }
+        });
+        Button notButton = view.findViewById(R.id.not_list_shop_button);
+        notButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shopDataTask task = new shopDataTask(getActivity(),adapter,list);
+                task.execute();
             }
         });
 
@@ -82,8 +98,18 @@ public class ShopInfoFragment extends Fragment implements ShopDataList.shopListe
         ShopDataParams params = list.get(shopNO);
         final int id = params.getId();
         /*Toast.makeText(getActivity(), String.valueOf(id),Toast.LENGTH_LONG).show();*/
-       ShopFindTask task = new ShopFindTask(getActivity());
-        task.execute(String.valueOf(id));
+       if(info != null && info.isAvailable()){
+           ShopFindTask task = new ShopFindTask(getActivity());
+           task.execute(String.valueOf(id));
+       }
 
+    }
+
+    @Override
+    public void shopList() {
+        Toast.makeText(getActivity(), "編集失敗",Toast.LENGTH_LONG).show();
+        ShopInfoFragment shopInfoFragment = new ShopInfoFragment();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.ll, shopInfoFragment).commit();
     }
 }

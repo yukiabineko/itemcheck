@@ -38,11 +38,12 @@
     <string name="new_shop_button">&#xf055; 新規登録</string>
     <string name="add_shop_button">&#xf055;登録</string>
     <string name="add_shop_back">&#xf0a8;戻る</string>
-    <string name="shop_delete">&#xf1f8;　削除</string>
+    <string name="shop_delete">&#xf1f8;削除</string>
     <string name="shop_edit_button">&#xf01e; 編集</string>
     <string name="shop_update">&#xf01e; 編集</string>
     <string name="shop_name_header">&#xf015; 名称</string>
     <string name="shop_email_header">&#xf0e0;メールアドレス</string>
     <string name="shop_tel_header">&#xf098; 電話番号</string>
+    <string name="shop_header_tag">&#xf015;店舗管理</string>
 
 </resources>

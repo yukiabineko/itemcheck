@@ -14,7 +14,7 @@
         android:text="@string/shop_requeset_title"
         android:textAlignment="center"
         android:textColor="#000"
-        android:textSize="36sp"
+        android:textSize="32sp"
         android:gravity="center_horizontal" />
 
     <TextView
@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:layout_marginBottom="50dp"
         android:textSize="18dp"
         android:text="データを表示できません。"
         android:visibility="gone"
@@ -32,12 +33,10 @@
         android:id="@+id/not_request_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
-        android:layout_marginLeft="150dp"
         android:textSize="18dp"
         android:text="更新"
         android:visibility="gone"
-        android:gravity="center"/>
+        android:layout_gravity="center"/>
         />
 
 
