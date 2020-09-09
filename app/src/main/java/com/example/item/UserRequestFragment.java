@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -199,16 +198,19 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         // ボタン
         Button positiveButton =dialog.getButton(AlertDialog.BUTTON_POSITIVE);
         positiveButton.setTextColor(Color.WHITE);
+        positiveButton.setTextSize(12);
         positiveButton.setBackgroundColor(getResources().getColor(R.color.alertBlue));
         ViewGroup.LayoutParams lp = positiveButton.getLayoutParams();
         ViewGroup.MarginLayoutParams mp =(ViewGroup.MarginLayoutParams)lp;
-        mp.setMargins(40,0,30,0);
+        mp.setMargins(0,0,0,10);
 
 
         Button nagativeButton =dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
         nagativeButton.setTextColor(Color.WHITE);
-        nagativeButton.setPadding(30,0,30,0);
         nagativeButton.setBackgroundColor(Color.RED);
+        ViewGroup.LayoutParams lp2 = nagativeButton.getLayoutParams();
+        ViewGroup.MarginLayoutParams mp2 =(ViewGroup.MarginLayoutParams)lp2;
+        mp2.setMargins(0,0,20,10);
 
 
     }

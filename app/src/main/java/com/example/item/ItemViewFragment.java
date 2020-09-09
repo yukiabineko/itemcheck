@@ -167,6 +167,7 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
 
         LinearLayout.LayoutParams positiveButtonLL = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
         positiveButtonLL.gravity = Gravity.LEFT;
+        positiveButtonLL.setMargins(0,0,0,40);
         positiveButton.setLayoutParams(positiveButtonLL);
 
 
