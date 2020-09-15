@@ -120,6 +120,7 @@ public class ListgetData extends AsyncTask<Void, Void, String > {
 
         }else{
            activity.findViewById(R.id.table_header).setVisibility(View.INVISIBLE);
+           activity.findViewById(R.id.item_list_area).setVisibility(View.GONE);
         }
         dialog.dismiss();
     }

@@ -82,10 +82,10 @@ public class EditItem extends AppCompatActivity
         String url = "http://yukiabineko.sakura.ne.jp/items/" + path;
         Picasso.get().load(url).into(imageView);
 
-        customise = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        /*customise = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
         if(customise !=null){
             imageView.setImageBitmap(customise);
-        }
+        }]*/
 
 
 /****************************view関連*************************************************/

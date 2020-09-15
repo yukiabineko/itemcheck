@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -30,9 +32,9 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
      List<ViewItemParam> list =new ArrayList<>();
 
      Button getbutton,resetbutton,viewButton;
-     LinearLayout mainArea,header;
+     LinearLayout mainArea,header,listArea;
      private ListView listView;
-     private TextView textView;
+     private TextView textView, notText;
      View dialogLayout;
 
 
@@ -44,6 +46,7 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mainArea = view.findViewById(R.id.main);
+        listArea =  view.findViewById(R.id.item_list_area);
 
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fontawesome-webfont.ttf");
 
@@ -54,7 +57,7 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
         resetbutton.setTypeface(font);
         header = view.findViewById(R.id.table_header);
         viewButton = view.findViewById(R.id.not_list_item_button);
-
+        notText = view.findViewById(R.id.not_list_item);
 
 
         customList = new CustomList(getContext(),0,list);
@@ -71,11 +74,21 @@ public class ItemViewFragment extends Fragment implements CustomList.CustomListe
          getbutton.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 header.setVisibility(View.INVISIBLE);
-                 customList.clear();
+                 ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                 NetworkInfo info = cm.getActiveNetworkInfo();
+                 if(info == null){
+                     listArea.setVisibility(View.GONE);
+                     viewButton.setVisibility(View.VISIBLE);
+                     notText.setVisibility(View.VISIBLE);
 
-                    ListgetData task = new ListgetData(getActivity(),customList,list);
-                    task.execute();
+                 }
+                 else{
+                     header.setVisibility(View.INVISIBLE);
+                     customList.clear();
+
+                     ListgetData task = new ListgetData(getActivity(),customList,list);
+                     task.execute();
+                 }
                  }
          });
          resetbutton.setOnClickListener(new View.OnClickListener() {
