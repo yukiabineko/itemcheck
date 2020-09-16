@@ -7,6 +7,7 @@ import android.os.Build;
 import android.util.Log;
 
 import android.app.Dialog;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -118,6 +119,8 @@ class DivisionTask extends AsyncTask<String, Void, StringBuilder> {
                     String number = jsonObject.getString("num");
                     String email = jsonObject.getString("email");
                     String name = jsonObject.getString("item_name");
+                    String shop = jsonObject.getString("shop");
+
 
                     DivisionParams params = new DivisionParams();
                     params.setId(Integer.parseInt(id));
@@ -129,6 +132,7 @@ class DivisionTask extends AsyncTask<String, Void, StringBuilder> {
                     params.setNumber(number);
                     params.setEmail(email);
                     params.setName(name);
+                    params.setShop(shop);
                     list.add(params);
                     adapter.notifyDataSetChanged();
 

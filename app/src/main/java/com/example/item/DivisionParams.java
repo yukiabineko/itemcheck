@@ -10,6 +10,7 @@ public class DivisionParams {
       private String number;
       private String name;
       private String email;
+      private String shop;
 
 
       public void setId(int id){
@@ -29,6 +30,8 @@ public class DivisionParams {
       public void setNumber(String num){this.number = num;}
       public void setEmail(String email) { this.email = email; }
       public void setName(String name) { this.name = name; }
+      public void setShop(String shop) { this.shop = shop;}
+
       public int getId(){ return id; }
       public int getItemId(){return  itemId;}
       public int getUserId(){return  userId;}
@@ -38,4 +41,5 @@ public class DivisionParams {
       public String getNumber(){return  number;}
       public String getEmail() { return email; }
       public String getName() { return name; }
+      public String getShop(){ return  shop;}
 }

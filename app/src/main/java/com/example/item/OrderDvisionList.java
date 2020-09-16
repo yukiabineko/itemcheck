@@ -43,6 +43,11 @@ public class OrderDvisionList extends ArrayAdapter<DivisionParams>
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.order_division_row,null);
         }
+        //店舗名
+        TextView shop = convertView.findViewById(R.id.order_division_shop);
+        shop.setText(params.getShop());
+
+
         TextView price = convertView.findViewById(R.id.division_price);
         price.setTypeface(null, Typeface.BOLD);
         price.setGravity(Gravity.CENTER);

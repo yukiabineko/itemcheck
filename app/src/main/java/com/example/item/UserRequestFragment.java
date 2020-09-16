@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -32,6 +34,9 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
     List<String> mails = new ArrayList<>();
     ListView listView;
     View dialogLayout;
+    private  TextView notDataText;
+    private  Button notDataButton;
+    private  LinearLayout mainContent;
 
 
 
@@ -47,10 +52,12 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
 
 
 
-        LinearLayout mainContent = view.findViewById(R.id.request_content);
+        mainContent = view.findViewById(R.id.request_content);
         mainContent.setVisibility(View.INVISIBLE);
-        view.findViewById(R.id.not_request_title).setVisibility(View.VISIBLE);
-        view.findViewById(R.id.not_request_button).setVisibility(View.VISIBLE);
+        notDataText = view.findViewById(R.id.not_request_title);
+        notDataText.setVisibility(View.VISIBLE);
+        notDataButton= view.findViewById(R.id.not_request_button);
+        notDataButton.setVisibility(View.VISIBLE);
         userRequestList = new UserRequestList(getContext(),0,list);
         userRequestList.setListener(this);
 
@@ -70,10 +77,23 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userRequestList.clear();
-                userRequestList.notifyDataSetChanged();
-                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
-                task.execute();
+                ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo info = cm.getActiveNetworkInfo();
+                if(info == null){
+                    mainContent.setVisibility(View.GONE);
+                    notDataText.setVisibility(View.VISIBLE);
+                    notDataButton.setVisibility(View.VISIBLE);
+                }
+                else{
+                    mainContent.setVisibility(View.VISIBLE);
+                    notDataText.setVisibility(View.GONE);
+                    notDataButton.setVisibility(View.GONE);
+                    userRequestList.clear();
+                    userRequestList.notifyDataSetChanged();
+                    final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
+                    task.execute();
+                }
+
 
             }
         });
@@ -81,11 +101,18 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
         hiddenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
-                task.execute();
+
+                ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo info = cm.getActiveNetworkInfo();
+                if(info == null){
 
 
+                }
+                else{
 
+                    final UserRequestTask task = new UserRequestTask(getActivity(),userRequestList, list,mails);
+                    task.execute();
+                }
             }
         });
         Button allMail = view.findViewById(R.id.mail_all_button);
@@ -112,6 +139,7 @@ public class UserRequestFragment extends Fragment implements UserRequestList.Req
             public void onClick(View view) {
                 AlertDialog dialog = new AlertDialog.Builder(getActivity())
                         .setTitle("確認")
+                        .setMessage("すべて削除しますか？")
                         .setView(dialogLayout)
                         .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                             @Override
