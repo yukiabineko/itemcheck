@@ -3,7 +3,7 @@
 バイヤー操作側(Androidアプリ)
 
 ## 使用技術
-言語 Java8, XML
+言語 Java, XML
 環境Android studio 3.6.3
 
 ## 機能一覧
